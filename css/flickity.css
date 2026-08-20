@@ -1,0 +1,229 @@
+/*! Flickity v2.3.0
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button.previous { left: 10px; }
+.flickity-prev-next-button.next { right: 10px; }
+/* right to left */
+.flickity-rtl .flickity-prev-next-button.previous {
+  left: auto;
+  right: 10px;
+}
+.flickity-rtl .flickity-prev-next-button.next {
+  right: auto;
+  left: 10px;
+}
+.flickity-prev-next-button .flickity-button-icon {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  height: 60%;
+}
+
+/* ==========================================================================
+   Carousel Buttons
+   ========================================================================== */
+
+.flickity-button {
+  background: none;
+}
+
+.flickity-button:disabled {
+    opacity: 0;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.flickity-button-icon {
+    fill: currentColor;
+}
+
+.flickity-prev-next-button {
+    border-radius: 50%;    
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transform: translateY(-50%);
+    transition: background var(--2s-ease),
+                opacity var(--4s-ease),
+                transform var(--2s-ease);
+}
+
+.flickity-prev-next-button svg.flickity-button-icon {
+    display: none;
+}
+
+.flickity-prev-next-button .flickity-button-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.flickity-prev-next-button:after {
+    content: "\e902";    
+    font-family: 'icomoon' !important;
+    font-size: 24px;
+    color: var(--base-darker);
+    position: absolute;    
+    transition: color var(--1s-ease);
+}
+
+.flickity-prev-next-button.previous:after {
+    content: "\e901";
+}
+
+.flickity-prev-next-button:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--white);
+    position: absolute;
+    opacity: 1;
+    transform: scale(.8);
+    transform-origin: center;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: opacity .35s 0s var(--bez-curve),
+                transform .35s .05s var(--bez-curve);
+}
+
+.flickity-prev-next-button:hover:before {
+    background: var(--white);    
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity .2s 0s var(--bez-curve),
+                transform .2s 0s var(--bez-curve);
+}
+
+.flickity-prev-next-button:hover:after {
+        color: var(--primary);  
+}
+
+/* ==========================================================================
+   Pagination Dots
+   ========================================================================== */
+
+.flickity-page-dots {
+    width: fit-content;  
+    height: 60px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    margin: 20px auto;    
+    padding: 20px;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;    
+}
+
+.dots-wrapper .flickity-page-dots {
+    background: var(--white);
+}
+
+.flickity-rtl .flickity-page-dots { direction: rtl; }
+
+.flickity-page-dots .dot {
+  display: inline-flex;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.flickity-page-dots .dot.is-selected {
+  opacity: 1;
+}
+
+.dot {
+    height: 30px;
+    padding: 10px 8px;    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transform-origin: left;    
+    transition: width var(--bez-curve-dots) .5s;     
+    cursor: pointer;    
+}
+
+.dot:last-of-type {
+    justify-content: flex-end;
+    transform-origin: right;       
+}
+
+.dot:after {
+    content: '';
+    background: var(--base-darkest);
+    width: 6px;
+    height: 6px;
+    border-radius: 8px;
+    opacity: .2;
+    position: relative;
+    transition: width cubic-bezier(0.33,0,0.67,1) .3s;
+}
+
+.dot:hover:after {
+    background: var(--primary);
+    opacity: 1;    
+}
+
+.dot.is-selected { 
+
+}
+
+.dot.is-selected:after {
+    background: var(--primary);    
+    width: 30px;
+    height: 6px;
+    opacity: 1;    
+}
