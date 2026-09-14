@@ -1,0 +1,63 @@
+
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
+:root {
+	--white: #fff;
+}
+
+
+/* ==========================================================================
+   Icons
+   ========================================================================== */
+
+.icon {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.icon-fast-backward:before { content: "\e905"; }
+.icon-fast-forward:before { content: "\e936"; }
+.icon-jump-to-start:before { content: "\e937"; }
+.icon-next:before { content: "\e938"; }
+.icon-pause:before { content: "\e939"; }
+.icon-play:before { content: "\e93a"; }
+.icon-stop:before { content: "\e93c"; }
+
+.icon-volume-off:before { content: "\f026"; }
+.icon-volume-down:before { content: "\f027"; }
+.icon-volume-up:before { content: "\f028"; }
+
+.icon-arrow-left:before { content: "\f060"; }
+.icon-arrow-right:before { content: "\f061"; }
+.icon-arrow-up:before { content: "\f062"; }
+.icon-arrow-down:before { content: "\f063"; }
+.icon-spotify:before { content: "\f1bc"; }
+
+.icon-cw:before { content: "\e993"; }
+.icon-repeat:before { content: "\e994"; }
+.icon-shuffle:before { content: "\e900"; }
+.icon-heart-outlined:before { content: "\e9b8"; }
+.icon-heart:before { content: "\e9b9"; }
+.icon-list:before { content: "\e896"; }
+.icon-close:before { content: "\e5cd"; }
+
+.icon-chevron-left2:before { content: "\f053"; }
+.icon-chevron-right2:before { content: "\f054"; }
+.icon-chevron-down:before { content: "\e924"; }
+.icon-chevron-left:before { content: "\e925"; }
+.icon-chevron-right:before { content: "\e926"; }
+.icon-chevron-small-down:before { content: "\e927"; }
+.icon-chevron-small-left:before { content: "\e928"; }
+.icon-chevron-small-right:before { content: "\e929"; }
+.icon-chevron-small-up:before { content: "\e92a"; }
+.icon-chevron-thin-down:before { content: "\e92b"; }
+.icon-chevron-thin-left:before { content: "\e92c"; }
+.icon-chevron-thin-right:before { content: "\e92d"; }
+.icon-chevron-thin-up:before { content: "\e92e"; }
+.icon-chevron-up:before { content: "\e930"; }
+
+.icon-instagram:before { content: "\e901"; }
