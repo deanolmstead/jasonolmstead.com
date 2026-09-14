@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Worlds — Knowledge Graph Anatomy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Variables ──────────────────────────────────────────────────────────── */
+:root {
+    --ink:       #1a1a18;
+    --ink-mid:   #4a4a44;
+    --ink-light: #8a8a80;
+    --ink-faint: #d4d4cc;
+    --paper:     #f2efe6;
+    --paper-dark:#e8e4d8;
+    --accent:    #1a1a18;
+
+    --serif: 'DM Sans', sans-serif;
+    --mono:  'IBM Plex Mono', 'Courier New', monospace;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+}
+
+body {
+    padding: 60px 48px 80px;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 48px;
+}
+
+.doc-header__title {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+.doc-header__title strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin-top: 4px;
+    line-height: 1;
+}
+
+.doc-header__meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    line-height: 2;
+    letter-spacing: .08em;
+}
+
+/* ── Figure caption ─────────────────────────────────────────────────────── */
+.figure-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 32px;
+}
+
+/* ── Main diagram ───────────────────────────────────────────────────────── */
+.diagram {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+svg.diagram-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* ── Node styles (SVG) ──────────────────────────────────────────────────── */
+
+/* ── Legend ─────────────────────────────────────────────────────────────── */
+.legend {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink-faint);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+
+.legend-swatch {
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid var(--ink);
+    flex-shrink: 0;
+}
+
+.legend-swatch.orbit-0 { background: var(--ink); }
+.legend-swatch.orbit-1 { background: var(--paper-dark); }
+.legend-swatch.orbit-2 { background: var(--paper); }
+.legend-swatch.orbit-3 { background: var(--paper); border-style: dashed; }
+
+.legend-swatch.type-artist  { border-radius: 50%; background: var(--ink); }
+.legend-swatch.type-label   { border-radius: 0; background: var(--paper-dark); }
+.legend-swatch.type-studio  { clip-path: polygon(50% 0%, 100% 100%, 0% 100%); background: var(--ink-mid); border: none; }
+.legend-swatch.type-collab  { border-radius: 3px; background: var(--paper); }
+
+/* ── Annotations ────────────────────────────────────────────────────────── */
+.annotations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--ink-faint);
+}
+
+.annotation {
+    display: flex;
+    gap: 16px;
+}
+
+.annotation__num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-light);
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: .05em;
+}
+
+.annotation__body {}
+
+.annotation__title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.annotation__text {
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    font-weight: 500;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.doc-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: .1em;
+}
+
+/* ── Animation ──────────────────────────────────────────────────────────── */
+.diagram-svg .node-group {
+    opacity: 0;
+    animation: fadein .4s ease forwards;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: scale(.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.node-group:nth-child(1)  { animation-delay: .1s; }
+.node-group:nth-child(2)  { animation-delay: .2s; }
+.node-group:nth-child(3)  { animation-delay: .3s; }
+.node-group:nth-child(4)  { animation-delay: .35s; }
+.node-group:nth-child(5)  { animation-delay: .4s; }
+.node-group:nth-child(6)  { animation-delay: .45s; }
+.node-group:nth-child(7)  { animation-delay: .5s; }
+.node-group:nth-child(8)  { animation-delay: .55s; }
+.node-group:nth-child(9)  { animation-delay: .6s; }
+.node-group:nth-child(10) { animation-delay: .65s; }
+.node-group:nth-child(11) { animation-delay: .7s; }
+.node-group:nth-child(12) { animation-delay: .75s; }
+
+.leader-line {
+    opacity: 0;
+    animation: linein .6s ease forwards;
+    animation-delay: .8s;
+}
+
+@keyframes linein {
+    from { opacity: 0; stroke-dashoffset: 200; }
+    to   { opacity: 1; stroke-dashoffset: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="doc-header">
+    <div class="doc-header__title">
+        Technical Reference — Structural Anatomy
+        <strong>New Worlds</strong>
+    </div>
+    <div class="doc-header__meta">
+        FIG. 01 — KNOWLEDGE GRAPH<br>
+        EXPLODED VIEW<br>
+        SCALE: SCHEMATIC<br>
+        REV. A
+    </div>
+</header>
+
+<p class="figure-label">Fig. 1 — Knowledge Graph Node Architecture &amp; Orbital Relationship System</p>
+
+<!-- Main SVG Diagram -->
+<div class="diagram">
+<svg class="diagram-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg"
+     font-family="'DM Sans', sans-serif">
+
+    <defs>
+        <!-- Hatching for orbit rings -->
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#c8c4b8" stroke-width=".5"/>
+        </pattern>
+
+        <!-- Arrow marker -->
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#4a4a44"/>
+        </marker>
+        <marker id="arrow-light" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#8a8a80"/>
+        </marker>
+
+        <!-- Dotted leader line style -->
+        <style>
+            .leader { stroke: #4a4a44; stroke-width: 1; fill: none; stroke-dasharray: 3,3; }
+            .leader-solid { stroke: #4a4a44; stroke-width: 1; fill: none; }
+            .orbit-ring { fill: none; stroke: #c8c4b8; stroke-width: 1; stroke-dasharray: 4,4; }
+            .edge { stroke: #c8c4b8; stroke-width: 1.5; fill: none; }
+            .edge-strong { stroke: #4a4a44; stroke-width: 2; fill: none; }
+            .label-sm { font-size: 9px; fill: #4a4a44; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+            .label-md { font-size: 11px; fill: #1a1a18; letter-spacing: .04em; font-weight: 700; }
+            .label-lg { font-size: 13px; fill: #1a1a18; font-weight: 800; letter-spacing: .02em; }
+            .label-dim { font-size: 9px; fill: #8a8a80; letter-spacing: .08em; font-weight: 600; }
+            .callout-line { stroke: #4a4a44; stroke-width: .75; fill: none; }
+        </style>
+    </defs>
+
+    <!-- ── Orbit rings ─────────────────────────────────────────────────── -->
+    <circle cx="420" cy="310" r="70"  class="orbit-ring" opacity=".4"/>
+    <circle cx="420" cy="310" r="140" class="orbit-ring" opacity=".6"/>
+    <circle cx="420" cy="310" r="220" class="orbit-ring" opacity=".8"/>
+    <circle cx="420" cy="310" r="300" class="orbit-ring"/>
+
+    <!-- Orbit labels -->
+    <text x="424" y="244" class="label-dim" text-anchor="middle">ORBIT 1</text>
+    <text x="424" y="174" class="label-dim" text-anchor="middle">ORBIT 2</text>
+    <text x="424" y="94"  class="label-dim" text-anchor="middle">ORBIT 3</text>
+
+    <!-- ── Edges ───────────────────────────────────────────────────────── -->
+    <!-- Center to Orbit 1 -->
+    <line x1="420" y1="310" x2="420" y2="242" class="edge-strong"/>
+    <line x1="420" y1="310" x2="350" y2="270" class="edge-strong"/>
+    <line x1="420" y1="310" x2="490" y2="270" class="edge-strong"/>
+    <line x1="420" y1="310" x2="380" y2="380" class="edge-strong"/>
+    <line x1="420" y1="310" x2="460" y2="380" class="edge-strong"/>
+    <line x1="420" y1="310" x2="330" y2="330" class="edge-strong"/>
+    <line x1="420" y1="310" x2="510" y2="330" class="edge-strong"/>
+
+    <!-- Orbit 1 to Orbit 2 -->
+    <line x1="420" y1="242" x2="380" y2="174" class="edge"/>
+    <line x1="420" y1="242" x2="460" y2="170" class="edge"/>
+    <line x1="350" y1="270" x2="290" y2="210" class="edge"/>
+    <line x1="490" y1="270" x2="560" y2="210" class="edge"/>
+    <line x1="330" y1="330" x2="240" y2="310" class="edge"/>
+    <line x1="510" y1="330" x2="600" y2="300" class="edge"/>
+    <line x1="380" y1="380" x2="330" y2="440" class="edge"/>
+    <line x1="460" y1="380" x2="510" y2="440" class="edge"/>
+
+    <!-- Orbit 2 to Orbit 3 (select) -->
+    <line x1="380" y1="174" x2="340" y2="110" class="edge" stroke-dasharray="3,3"/>
+    <line x1="240" y1="310" x2="180" y2="270" class="edge" stroke-dasharray="3,3"/>
+    <line x1="600" y1="300" x2="670" y2="260" class="edge" stroke-dasharray="3,3"/>
+    <line x1="330" y1="440" x2="290" y2="500" class="edge" stroke-dasharray="3,3"/>
+
+    <!-- ── ORBIT 0 — Center node: Ty Segall ───────────────────────────── -->
+    <g class="node-group" transform="translate(420,310)">
+        <circle r="36" fill="#1a1a18"/>
+        <circle r="36" fill="none" stroke="#1a1a18" stroke-width="2"/>
+        <text y="-4" text-anchor="middle" font-size="10" fill="#f2efe6" letter-spacing=".06em" font-family="'DM Sans',sans-serif" font-weight="800">TY</text>
+        <text y="8" text-anchor="middle" font-size="10" fill="#f2efe6" letter-spacing=".06em" font-family="'DM Sans',sans-serif" font-weight="800">SEGALL</text>
+        <text y="52" text-anchor="middle" class="label-sm" fill="#1a1a18">ARTIST — CENTER NODE</text>
+    </g>
+
+    <!-- ── ORBIT 1 nodes ──────────────────────────────────────────────── -->
+
+    <!-- Fuzz (band) -->
+    <g class="node-group" transform="translate(420,242)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="4" class="label-md">FUZZ</text>
+        <text text-anchor="middle" y="-30" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Mikal Cronin -->
+    <g class="node-group" transform="translate(350,270)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-4" class="label-sm">MIKAL</text>
+        <text text-anchor="middle" y="6" class="label-sm">CRONIN</text>
+        <text text-anchor="middle" y="-34" class="label-dim">COLLABORATOR</text>
+    </g>
+
+    <!-- White Fence -->
+    <g class="node-group" transform="translate(490,270)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-4" class="label-sm">WHITE</text>
+        <text text-anchor="middle" y="6" class="label-sm">FENCE</text>
+        <text text-anchor="middle" y="-34" class="label-dim">COLLABORATOR</text>
+    </g>
+
+    <!-- Drag City (label — square) -->
+    <g class="node-group" transform="translate(330,330)">
+        <rect x="-20" y="-20" width="40" height="40" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-4" class="label-sm">DRAG</text>
+        <text text-anchor="middle" y="6" class="label-sm">CITY</text>
+        <text text-anchor="middle" y="32" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- In The Red (label — square) -->
+    <g class="node-group" transform="translate(510,330)">
+        <rect x="-20" y="-20" width="40" height="40" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-4" class="label-sm">IN THE</text>
+        <text text-anchor="middle" y="6" class="label-sm">RED</text>
+        <text text-anchor="middle" y="32" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- GØGGS -->
+    <g class="node-group" transform="translate(380,380)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="4" class="label-md">GØGGS</text>
+        <text text-anchor="middle" y="32" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Castle Face Records -->
+    <g class="node-group" transform="translate(460,380)">
+        <rect x="-22" y="-20" width="44" height="40" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-4" class="label-sm">CASTLE</text>
+        <text text-anchor="middle" y="6" class="label-sm">FACE</text>
+        <text text-anchor="middle" y="32" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- ── ORBIT 2 nodes ──────────────────────────────────────────────── -->
+
+    <!-- Thee Oh Sees -->
+    <g class="node-group" transform="translate(380,174)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-4" class="label-sm" font-size="8">THEE</text>
+        <text text-anchor="middle" y="5" class="label-sm" font-size="8">OH SEES</text>
+        <text text-anchor="middle" y="-28" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Steve Albini -->
+    <g class="node-group" transform="translate(460,170)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">STEVE</text>
+        <text text-anchor="middle" y="6" class="label-sm" font-size="8">ALBINI</text>
+        <text text-anchor="middle" y="-28" class="label-dim">PRODUCER</text>
+    </g>
+
+    <!-- Electrical Audio (studio — triangle) -->
+    <g class="node-group" transform="translate(290,210)">
+        <polygon points="0,-18 18,14 -18,14" fill="#d4d4cc" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-24" class="label-sm" font-size="8">ELEC.</text>
+        <text text-anchor="middle" y="-14" class="label-sm" font-size="8">AUDIO</text>
+        <text text-anchor="middle" y="30" class="label-dim">STUDIO</text>
+    </g>
+
+    <!-- Osees / John Dwyer -->
+    <g class="node-group" transform="translate(560,210)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">JOHN</text>
+        <text text-anchor="middle" y="6" class="label-sm" font-size="8">DWYER</text>
+        <text text-anchor="middle" y="-28" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Drag City Web -->
+    <g class="node-group" transform="translate(240,310)">
+        <rect x="-18" y="-16" width="36" height="32" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-2" class="label-sm" font-size="8">DRAG</text>
+        <text text-anchor="middle" y="7" class="label-sm" font-size="8">CITY WEB</text>
+        <text text-anchor="middle" y="28" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- Sub Pop -->
+    <g class="node-group" transform="translate(600,300)">
+        <rect x="-18" y="-16" width="36" height="32" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-2" class="label-sm" font-size="8">SUB</text>
+        <text text-anchor="middle" y="7" class="label-sm" font-size="8">POP</text>
+        <text text-anchor="middle" y="28" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- King Tuff -->
+    <g class="node-group" transform="translate(330,440)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">KING</text>
+        <text text-anchor="middle" y="6" class="label-sm" font-size="8">TUFF</text>
+        <text text-anchor="middle" y="-28" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Osees Records -->
+    <g class="node-group" transform="translate(510,440)">
+        <rect x="-18" y="-16" width="36" height="32" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-2" class="label-sm" font-size="8">CASTLE</text>
+        <text text-anchor="middle" y="7" class="label-sm" font-size="8">WEB</text>
+        <text text-anchor="middle" y="28" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- ── ORBIT 3 nodes (sparse, dashed) ─────────────────────────────── -->
+
+    <!-- Pixies -->
+    <g class="node-group" transform="translate(340,110)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="4" class="label-sm" font-size="8">PIXIES</text>
+        <text text-anchor="middle" y="-22" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Nirvana -->
+    <g class="node-group" transform="translate(180,270)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="4" class="label-sm" font-size="8">NIRVANA</text>
+        <text text-anchor="middle" y="-22" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- PJ Harvey -->
+    <g class="node-group" transform="translate(670,260)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">PJ</text>
+        <text text-anchor="middle" y="6" class="label-sm" font-size="8">HARVEY</text>
+        <text text-anchor="middle" y="-22" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Jesus Lizard -->
+    <g class="node-group" transform="translate(290,500)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">JESUS</text>
+        <text text-anchor="middle" y="6" class="label-sm" font-size="7">LIZARD</text>
+        <text text-anchor="middle" y="-22" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- ── Callout leader lines (right side annotations) ──────────────── -->
+
+    <!-- Expansion callout -->
+    <line x1="690" y1="310" x2="780" y2="310" class="callout-line leader" marker-end="url(#arrow)"/>
+    <text x="790" y="306" class="label-sm">① EXPANSION</text>
+    <text x="790" y="320" class="label-dim">TAP NODE → BECOMES CENTER</text>
+    <text x="790" y="332" class="label-dim">MAP REORIENTS AROUND IT</text>
+
+    <!-- Orbit depth callout -->
+    <line x1="420" y1="10"  x2="420" y2="40" class="callout-line" marker-end="url(#arrow)"/>
+    <line x1="420" y1="10"  x2="780" y2="10" class="callout-line"/>
+    <text x="790" y="6"  class="label-sm">② ORBIT DEPTH</text>
+    <text x="790" y="20" class="label-dim">INNER = RICH DETAIL</text>
+    <text x="790" y="32" class="label-dim">OUTER = INCREASINGLY SPARSE</text>
+
+    <!-- Node type callout -->
+    <line x1="560" y1="440" x2="780" y2="440" class="callout-line leader" marker-end="url(#arrow)"/>
+    <text x="790" y="436" class="label-sm">③ NODE TYPES</text>
+    <text x="790" y="450" class="label-dim">CIRCLE=ARTIST  SQUARE=LABEL</text>
+    <text x="790" y="462" class="label-dim">TRIANGLE=STUDIO/VENUE</text>
+
+    <!-- Dashed edge callout -->
+    <line x1="310" y1="118" x2="100" y2="80" class="callout-line leader"/>
+    <text x="10"  y="76" class="label-sm">④ EDGE WEIGHT</text>
+    <text x="10"  y="90" class="label-dim">SOLID = DIRECT LINK</text>
+    <text x="10"  y="102" class="label-dim">DASHED = INDIRECT</text>
+
+    <!-- History trail callout -->
+    <line x1="200" y1="380" x2="100" y2="380" class="callout-line leader"/>
+    <text x="10" y="376" class="label-sm">⑤ HISTORY TRAIL</text>
+    <text x="10" y="390" class="label-dim">BREADCRUMB OF</text>
+    <text x="10" y="402" class="label-dim">EXPANSION PATH</text>
+
+    <!-- Seed node callout -->
+    <line x1="456" y1="310" x2="100" y2="500" class="callout-line leader"/>
+    <text x="10" y="496" class="label-sm">⑥ SEED NODE</text>
+    <text x="10" y="510" class="label-dim">MANUALLY CURATED</text>
+    <text x="10" y="522" class="label-dim">STARTING POINT</text>
+
+</svg>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+    <div class="legend-item">
+        <div class="legend-swatch type-artist"></div>
+        Artist / Band
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch type-label"></div>
+        Record Label
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch type-studio"></div>
+        Studio / Venue
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch orbit-0"></div>
+        Center Node (active)
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch orbit-3"></div>
+        Orbit 3+ (sparse)
+    </div>
+</div>
+
+<!-- Numbered annotations -->
+<div class="annotations">
+    <div class="annotation">
+        <span class="annotation__num">①</span>
+        <div class="annotation__body">
+            <div class="annotation__title">EXPANSION</div>
+            <div class="annotation__text">The core interaction. Selecting any node pulls it to center, reorienting the entire map around it. The previous center becomes a first-orbit node. This is how you follow the rabbit hole.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">②</span>
+        <div class="annotation__body">
+            <div class="annotation__title">ORBIT DEPTH &amp; INFORMATION DENSITY</div>
+            <div class="annotation__text">Inner orbits display rich contextual data — releases, dates, collaborators, liner notes. Outer orbits show only enough to invite curiosity. Detail rewards proximity.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">③</span>
+        <div class="annotation__body">
+            <div class="annotation__title">NODE TAXONOMY</div>
+            <div class="annotation__text">Shape communicates type at a glance. Artists and bands are circles. Labels are squares. Studios and venues are triangles. Each type carries different contextual data.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">④</span>
+        <div class="annotation__body">
+            <div class="annotation__title">EDGE WEIGHT</div>
+            <div class="annotation__text">Solid edges indicate direct relationships — shared recordings, co-releases, formal collaboration. Dashed edges are indirect — shared influence, geographic proximity, label overlap.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">⑤</span>
+        <div class="annotation__body">
+            <div class="annotation__title">HISTORY TRAIL</div>
+            <div class="annotation__text">Every expansion is recorded as a breadcrumb. The trail shows where you've been — and makes the rabbit hole navigable. You can always step back.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">⑥</span>
+        <div class="annotation__body">
+            <div class="annotation__title">MANUAL CURATION</div>
+            <div class="annotation__text">The graph is hand-built, not algorithmically generated. Every edge is a considered decision. This is the argument against the black box — human context, made visible.</div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="doc-footer">
+    <span>NEW WORLDS — KNOWLEDGE GRAPH SYSTEM</span>
+    <span>FOLLOW THE MUSIC, NOT THE ALGORITHM</span>
+    <span>FIG. 01 / REV. A</span>
+</footer>
+
+</body>
+</html>

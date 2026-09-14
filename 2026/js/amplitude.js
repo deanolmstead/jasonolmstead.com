@@ -1,79 +1,79 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("Amplitude", [], factory);
-	else if(typeof exports === 'object')
-		exports["Amplitude"] = factory();
-	else
-		root["Amplitude"] = factory();
+  if(typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if(typeof define === 'function' && define.amd)
+    define("Amplitude", [], factory);
+  else if(typeof exports === 'object')
+    exports["Amplitude"] = factory();
+  else
+    root["Amplitude"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+/******/  // The module cache
+/******/  var installedModules = {};
 /******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+/******/  // The require function
+/******/  function __webpack_require__(moduleId) {
 /******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
+/******/    // Check if module is in cache
+/******/    if(installedModules[moduleId]) {
+/******/      return installedModules[moduleId].exports;
+/******/    }
+/******/    // Create a new module (and put it into the cache)
+/******/    var module = installedModules[moduleId] = {
+/******/      i: moduleId,
+/******/      l: false,
+/******/      exports: {}
+/******/    };
 /******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/    // Execute the module function
+/******/    modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
+/******/    // Flag the module as loaded
+/******/    module.l = true;
 /******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+/******/    // Return the exports of the module
+/******/    return module.exports;
+/******/  }
 /******/
 /******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
+/******/  // expose the modules object (__webpack_modules__)
+/******/  __webpack_require__.m = modules;
 /******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
+/******/  // expose the module cache
+/******/  __webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/  // identity function for calling harmony imports with the correct context
+/******/  __webpack_require__.i = function(value) { return value; };
 /******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
+/******/  // define getter function for harmony exports
+/******/  __webpack_require__.d = function(exports, name, getter) {
+/******/    if(!__webpack_require__.o(exports, name)) {
+/******/      Object.defineProperty(exports, name, {
+/******/        configurable: false,
+/******/        enumerable: true,
+/******/        get: getter
+/******/      });
+/******/    }
+/******/  };
 /******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
+/******/  // getDefaultExport function for compatibility with non-harmony modules
+/******/  __webpack_require__.n = function(module) {
+/******/    var getter = module && module.__esModule ?
+/******/      function getDefault() { return module['default']; } :
+/******/      function getModuleExports() { return module; };
+/******/    __webpack_require__.d(getter, 'a', getter);
+/******/    return getter;
+/******/  };
 /******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/  // Object.prototype.hasOwnProperty.call
+/******/  __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/  // __webpack_public_path__
+/******/  __webpack_require__.p = "";
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/  // Load entry module and return exports
+/******/  return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -186,44 +186,44 @@ module.exports = {
     *
     * @module config
     * @type {object}
-    * @property {string}  	config.version          				- The current version of AmplitudeJS.
-    * @property {object} 	config.audio 		 								-	Handles all of the audio.
-    * @property {object} 	config.active_metadata					- Contains the active metadata for the song.
-    * @property {string} 	config.active_album							- Holds the active album name. Used to check and see if the album changed and run the album changed callback.
-    * @property {number} 	config.active_index							- Contains the index of the actively playing song.
-    * @property {string} 	config.active_playlist					- Contains the key to the active playlist index.
-    * @property {number} 	config.playback_speed						- Sets the initial playback speed of the song. The values for this can be 1.0, 1.5, 2.0
-    * @property {object} 	config.callbacks								- The user can pass a JSON object with a key => value store of callbacks to be run at certain events.
-    * @property {array} 		config.songs										- Contains all of the songs the user has passed to Amplitude to use.
-    * @property {object} 	config.playlists								- Contains all of the playlists the user created.
-    * @property {object} 	config.start_song 							- The index of the song that AmplitudeJS should start with.
-    * @property {string} 	config.starting_playlist 				- The starting playlist the player will intiialize to.
-    * @property {string} 	config.starting_playlist_song 	- The index of the song in the playlist that should be started.
-    * @property {boolean} 	config.repeat 									- When repeat is on, when the song ends the song will replay itself.
-    * @property {object} 	config.shuffle_list							- When shuffled, gets populated with the songs the user provided in a random order.
-    * @property {boolean} 	config.shuffle_on								- When on, gets set to true so when traversing through songs, AmplitudeJS knows whether or not to use the songs object or the shuffle_list
-    * @property {string}		config.default_album_art 				- The user can set default album art to be displayed if the song they set doesn't contain album art.
-    * @property {string} 	config.default_playlist_art 		- The user can set default playlist art to be displayed if the playlist they are setting meta data for doesn't contain an art picture.
-    * @property {boolean} 	config.debug										- When set to true, AmplitudeJS will print to the console any errors providing helpful feedback to the user.
-    * @property {number} 	config.volume 									- The user can set the initial volume to a number between 0 and 1 over-riding the default of .5
-    * @property {number} 	config.pre_mute_volume 					- This is set on mute so that when a user un-mutes AmplitudeJS knows what to restore the volume to.
-    * @property {number}		config.volume_increment 				- The default values are an integer between 1 and 100 for how much the volume should increase when the user presses the volume up button.
-    * @property {number}		config.volume_decrement 				- The default values are an integer between 1 and 100 for how much the volume should decrease when the user presses the volume down button.
-    * @property {string} 	config.soundcloud_client 				- When using SoundCloud, the user will have to provide their API Client ID
-    * @property {boolean} 	config.soundcloud_use_art 			- The user can set this to true and AmplitudeJS will use the album art for the song returned from the Soundcloud API
-    * @property {number} 	config.soundcloud_song_count 		- Used on config to count how many songs are from Soundcloud and compare it to how many are ready for when to move to the rest of the configuration
-    * @property {number} 	config.soundcloud_songs_ready 	- Used on config to count how many songs are ready so when we get all of the data from the SoundCloud API that we need this should match the SoundCloud song count meaning we can move to the rest of the config.
-    * @property {integer}	config.is_touch_moving 					- Flag for if the user is moving the screen.
-    * @property {boolean}	config.buffered									- How much of the song is buffered.
-    * @property {object} 	config.bindings									- Array of bindings to certain key events.
-    * @property {boolean} 	config.continue_next 						- Determines when a song ends, we should continue to the next song.
-    * @property {number}   config.delay 										- Sets the delay between songs in MS.
-    * @property {boolean}  config.use_web_audio_api 				- Flag that determines if the user wants to use Web Audio API Components.
+    * @property {string}    config.version                  - The current version of AmplitudeJS.
+    * @property {object}  config.audio                    - Handles all of the audio.
+    * @property {object}  config.active_metadata          - Contains the active metadata for the song.
+    * @property {string}  config.active_album             - Holds the active album name. Used to check and see if the album changed and run the album changed callback.
+    * @property {number}  config.active_index             - Contains the index of the actively playing song.
+    * @property {string}  config.active_playlist          - Contains the key to the active playlist index.
+    * @property {number}  config.playback_speed           - Sets the initial playback speed of the song. The values for this can be 1.0, 1.5, 2.0
+    * @property {object}  config.callbacks                - The user can pass a JSON object with a key => value store of callbacks to be run at certain events.
+    * @property {array}     config.songs                    - Contains all of the songs the user has passed to Amplitude to use.
+    * @property {object}  config.playlists                - Contains all of the playlists the user created.
+    * @property {object}  config.start_song               - The index of the song that AmplitudeJS should start with.
+    * @property {string}  config.starting_playlist        - The starting playlist the player will intiialize to.
+    * @property {string}  config.starting_playlist_song   - The index of the song in the playlist that should be started.
+    * @property {boolean}   config.repeat                   - When repeat is on, when the song ends the song will replay itself.
+    * @property {object}  config.shuffle_list             - When shuffled, gets populated with the songs the user provided in a random order.
+    * @property {boolean}   config.shuffle_on               - When on, gets set to true so when traversing through songs, AmplitudeJS knows whether or not to use the songs object or the shuffle_list
+    * @property {string}    config.default_album_art        - The user can set default album art to be displayed if the song they set doesn't contain album art.
+    * @property {string}  config.default_playlist_art     - The user can set default playlist art to be displayed if the playlist they are setting meta data for doesn't contain an art picture.
+    * @property {boolean}   config.debug                    - When set to true, AmplitudeJS will print to the console any errors providing helpful feedback to the user.
+    * @property {number}  config.volume                   - The user can set the initial volume to a number between 0 and 1 over-riding the default of .5
+    * @property {number}  config.pre_mute_volume          - This is set on mute so that when a user un-mutes AmplitudeJS knows what to restore the volume to.
+    * @property {number}    config.volume_increment         - The default values are an integer between 1 and 100 for how much the volume should increase when the user presses the volume up button.
+    * @property {number}    config.volume_decrement         - The default values are an integer between 1 and 100 for how much the volume should decrease when the user presses the volume down button.
+    * @property {string}  config.soundcloud_client        - When using SoundCloud, the user will have to provide their API Client ID
+    * @property {boolean}   config.soundcloud_use_art       - The user can set this to true and AmplitudeJS will use the album art for the song returned from the Soundcloud API
+    * @property {number}  config.soundcloud_song_count    - Used on config to count how many songs are from Soundcloud and compare it to how many are ready for when to move to the rest of the configuration
+    * @property {number}  config.soundcloud_songs_ready   - Used on config to count how many songs are ready so when we get all of the data from the SoundCloud API that we need this should match the SoundCloud song count meaning we can move to the rest of the config.
+    * @property {integer} config.is_touch_moving          - Flag for if the user is moving the screen.
+    * @property {boolean} config.buffered                 - How much of the song is buffered.
+    * @property {object}  config.bindings                 - Array of bindings to certain key events.
+    * @property {boolean}   config.continue_next            - Determines when a song ends, we should continue to the next song.
+    * @property {number}   config.delay                     - Sets the delay between songs in MS.
+    * @property {boolean}  config.use_web_audio_api         - Flag that determines if the user wants to use Web Audio API Components.
     * @property {boolean}  config.web_audio_api_available  - Flag that determines if the Web Audio API is available.
-    * @property {object}  	config.context 									- Web Audio API Context
-    * @property {object}		config.source 									- Web Audio API Source
-    * @property {object} 	config.analyser 								- Web Audio API Analyser
-    * @property {string}		config.player_state 						- The current state of the player.
+    * @property {object}    config.context                  - Web Audio API Context
+    * @property {object}    config.source                   - Web Audio API Source
+    * @property {object}  config.analyser                 - Web Audio API Analyser
+    * @property {string}    config.player_state             - The current state of the player.
     */
 
 /***/ }),
@@ -253,11 +253,11 @@ var _playPauseElements = __webpack_require__(2);
 
 var _playPauseElements2 = _interopRequireDefault(_playPauseElements);
 
-var _metaDataElements = __webpack_require__(8);
+var _metaDataElements = __webpack_require__(7);
 
 var _metaDataElements2 = _interopRequireDefault(_metaDataElements);
 
-var _callbacks = __webpack_require__(7);
+var _callbacks = __webpack_require__(9);
 
 var _callbacks2 = _interopRequireDefault(_callbacks);
 
@@ -268,6 +268,10 @@ var _debug2 = _interopRequireDefault(_debug);
 var _visualizations = __webpack_require__(16);
 
 var _visualizations2 = _interopRequireDefault(_visualizations);
+
+var _configState = __webpack_require__(6);
+
+var _configState2 = _interopRequireDefault(_configState);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -283,24 +287,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 /**
- * Imports AmplitudeJS Debug Utility
- * @module utilities/debug
+ * Import the Visualizations from the FX module.
+ * @module fx/visualizations
  */
 
 
 /**
- * Imports the Meta Data Visual Elements module.
- * @module visual/metaDataElements
+ * Imports AmplitudeJS Callback Utility
+ * @module utilities/callbacks
  */
 
 
 /**
- * Imports the Audio Navigation module.
- * @module utilities/audioNavigation
+ * Imports the Play/Pause Visual Elements module.
+ * @module visual/playPauseElements
  */
+
+
 /**
- * Imports the config module
- * @module config
+ * Imports the Checks module.
+ * @module utilities/checks
  */
 var Core = function () {
   /**
@@ -344,6 +350,11 @@ var Core = function () {
     }
     _config2.default.audio.play();
     _config2.default.audio.playbackRate = _config2.default.playback_speed;
+
+    /*
+      Sets the state of the player.
+    */
+    _configState2.default.setPlayerState();
   }
 
   /**
@@ -373,6 +384,11 @@ var Core = function () {
     if (_config2.default.active_metadata.live) {
       disconnectStream();
     }
+
+    /*
+      Sets the state of the player.
+    */
+    _configState2.default.setPlayerState();
   }
 
   /**
@@ -405,6 +421,11 @@ var Core = function () {
     if (_config2.default.active_metadata.live) {
       disconnectStream();
     }
+
+    /*
+      Sets the state of the player.
+    */
+    _configState2.default.setPlayerState();
 
     /*
     Run the stop callback
@@ -548,26 +569,30 @@ var Core = function () {
 }();
 
 /**
- * Import the Visualizations from the FX module.
- * @module fx/visualizations
+ * Import the Config State module.
+ * @module utilities/configState
  */
 
 
 /**
- * Imports AmplitudeJS Callback Utility
- * @module utilities/callbacks
+ * Imports AmplitudeJS Debug Utility
+ * @module utilities/debug
  */
 
 
 /**
- * Imports the Play/Pause Visual Elements module.
- * @module visual/playPauseElements
+ * Imports the Meta Data Visual Elements module.
+ * @module visual/metaDataElements
  */
 
 
 /**
- * Imports the Checks module.
- * @module utilities/checks
+ * Imports the Audio Navigation module.
+ * @module utilities/audioNavigation
+ */
+/**
+ * Imports the config module
+ * @module config
  */
 exports.default = Core;
 module.exports = exports["default"];
@@ -804,7 +829,7 @@ var PlayPauseElements = function () {
    * and adding the 'amplitude-playing' class
    *
    * @access public
-   * @param {element} element 	- The element getting the playing class added.
+   * @param {element} element   - The element getting the playing class added.
    */
   function setElementPlay(element) {
     element.classList.add("amplitude-playing");
@@ -816,7 +841,7 @@ var PlayPauseElements = function () {
    * and removing the 'amplitude-playing' class
    *
    * @access public
-   * @param {element} element 	- The element getting the paused class added.
+   * @param {element} element   - The element getting the paused class added.
    */
   function setElementPause(element) {
     element.classList.remove("amplitude-playing");
@@ -860,7 +885,7 @@ var _core = __webpack_require__(1);
 
 var _core2 = _interopRequireDefault(_core);
 
-var _callbacks = __webpack_require__(7);
+var _callbacks = __webpack_require__(9);
 
 var _callbacks2 = _interopRequireDefault(_callbacks);
 
@@ -884,7 +909,7 @@ var _timeElements = __webpack_require__(15);
 
 var _timeElements2 = _interopRequireDefault(_timeElements);
 
-var _metaDataElements = __webpack_require__(8);
+var _metaDataElements = __webpack_require__(7);
 
 var _metaDataElements2 = _interopRequireDefault(_metaDataElements);
 
@@ -1017,7 +1042,7 @@ var AudioNavigation = function () {
     changeSong(nextSong, nextIndex);
 
     /*
-    	If it's the end of the list and repeat is not on, do nothing.
+      If it's the end of the list and repeat is not on, do nothing.
     */
     if (endOfList && !_config2.default.repeat) {} else {
       /*
@@ -1317,8 +1342,12 @@ var AudioNavigation = function () {
    * @access private
    * @prop {object} song  - The song we are changing to.
    * @prop {number} index - The index we are changing to.
+   * @prop {boolean} direct - Determines if it was a direct click on the song.
+   * We then don't care if shuffle is on or not.
    */
   function changeSong(song, index) {
+    var direct = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
     /*
       Prepare the song change.
     */
@@ -1336,7 +1365,7 @@ var AudioNavigation = function () {
     /*
       Set new information now that the song has changed.
     */
-    afterSongChange();
+    afterSongChange(direct);
   }
 
   /**
@@ -1346,8 +1375,12 @@ var AudioNavigation = function () {
    * @prop {string} playlist - The playlist we are changing the song on.
    * @prop {object} song     - The song we are changing to in the playlist.
    * @prop {number} index    - The inded of the song we are changing to in the playlist.
+   * @prop {boolean} direct  - Determines if it was a direct click on the song. We
+   * then don't care if shuffle is on or not
    */
   function changeSongPlaylist(playlist, song, index) {
+    var direct = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
     /*
       Prepare the song change.
     */
@@ -1366,7 +1399,7 @@ var AudioNavigation = function () {
     /*
       Set new information now that the song has changed.
     */
-    afterSongChange();
+    afterSongChange(direct);
   }
 
   /**
@@ -1400,11 +1433,14 @@ var AudioNavigation = function () {
   /**
    * Updates data on the display after a song has changed.
    *
+   * @prop {boolean} direct - Determines if it was a direct click on the song.
+   * We then don't care if shuffle is on or not.
+   *
    * @access private
    */
-  function afterSongChange() {
+  function afterSongChange(direct) {
     _metaDataElements2.default.displayMetaData();
-    _containerElements2.default.setActive();
+    _containerElements2.default.setActive(direct);
     _timeElements2.default.resetDurationTimes();
 
     /*
@@ -1808,6 +1844,449 @@ var _config = __webpack_require__(0);
 
 var _config2 = _interopRequireDefault(_config);
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * These methods help display the audio's meta data
+ *
+ * @module visual/MetaDataElements
+ */
+var MetaDataElements = function () {
+  /**
+   * Displays the active song's metadata. This is called after a song has
+   * been changed. This method takes the active song and displays the
+   * metadata. So once the new active song is set, we update all of the
+   * screen elements.
+   *
+   * @access public
+   */
+  function displayMetaData() {
+    /*
+    Define the image meta data keys. These are managed separately
+    since we aren't actually changing the inner HTML of these elements.
+    */
+    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
+
+    /*
+    Get all of the song info elements
+    */
+    var songInfoElements = document.querySelectorAll("[data-amplitude-song-info]");
+
+    /*
+    Iterate over all of the song info elements. We will either
+    set these to the new values, or clear them if the active song
+    doesn't have the info set.
+    */
+    for (var i = 0; i < songInfoElements.length; i++) {
+      /*
+      Get the info so we can check if the active meta data has the
+      key.
+      */
+      var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
+
+      /*
+      Grab the playlist and song index.
+      */
+      var playlist = songInfoElements[i].getAttribute("data-amplitude-playlist");
+      var songIndex = songInfoElements[i].getAttribute("data-amplitude-song-index");
+
+      /*
+      Ensure that we don't set any individual elements now. We set this with the
+      sync meta data method. The reason we don't set them here is because
+      all individual songs would get the now playing artwork. If the playlists
+      match or the element is a main element meaning it doesn't
+      belong to a playlist or a song, then we set the song info.
+      */
+      if (songIndex == null && (_config2.default.active_playlist == playlist || playlist == null && songIndex == null)) {
+        /*
+        If the active metadata has the key, then we set it,
+        otherwise we clear it. If it's an image element then
+        we default it to the default info if needed.
+        */
+        var val = _config2.default.active_metadata[info] != undefined ? _config2.default.active_metadata[info] : null;
+        if (imageMetaDataKeys.indexOf(info) >= 0) {
+          val = val || _config2.default.default_album_art;
+          songInfoElements[i].setAttribute("src", val);
+        } else {
+          val = val || "";
+          songInfoElements[i].innerHTML = val;
+        }
+      }
+    }
+  }
+
+  /**
+   * Displays the playlist meta data.
+   */
+  function displayPlaylistMetaData() {
+    /*
+    Define the image meta data keys. These are managed separately
+    since we aren't actually changing the inner HTML of these elements.
+    */
+    var imageMetaDataKeys = ["image_url"];
+
+    /*
+    Get all of the playlist info elements
+    */
+    var playlistInfoElements = document.querySelectorAll("[data-amplitude-playlist-info]");
+
+    /*
+    Iterate over all of the playlist info elements. We will either
+    set these to the new values, or clear them if the active song
+    doesn't have the info set.
+    */
+    for (var i = 0; i < playlistInfoElements.length; i++) {
+      /*
+      Get the info so we can check if the active meta data has the
+      key.
+      */
+      var info = playlistInfoElements[i].getAttribute("data-amplitude-playlist-info");
+      var playlist = playlistInfoElements[i].getAttribute("data-amplitude-playlist");
+
+      if (_config2.default.playlists[playlist][info] != undefined) {
+        if (imageMetaDataKeys.indexOf(info) >= 0) {
+          playlistInfoElements[i].setAttribute("src", _config2.default.playlists[playlist][info]);
+        } else {
+          playlistInfoElements[i].innerHTML = _config2.default.playlists[playlist][info];
+        }
+      } else {
+        /*
+        We look for the default album art because
+        the actual key didn't exist. If the default album
+        art doesn't exist then we set the src attribute
+        to null.
+        */
+        if (imageMetaDataKeys.indexOf(info) >= 0) {
+          if (_config2.default.default_playlist_art != "") {
+            playlistInfoElements[i].setAttribute("src", _config2.default.default_playlist_art);
+          } else {
+            playlistInfoElements[i].setAttribute("src", "");
+          }
+        } else {
+          playlistInfoElements[i].innerHTML = "";
+        }
+      }
+    }
+  }
+
+  /**
+   * Sets the first song in the playlist. This is used to fill in the meta
+   * data in the playlist
+   *
+   * @param {object} song       - The song we are setting to be the first song in the playlist
+   * @param {string} playlist   - Key of the playlist we are setting the first song in
+   */
+  function setFirstSongInPlaylist(song, playlist) {
+    /*
+      Define the image meta data keys. These are managed separately
+      since we aren't actually changing the inner HTML of these elements.
+    */
+    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
+
+    /*
+      Get all of the song info elements
+    */
+    var songInfoElements = document.querySelectorAll('[data-amplitude-song-info][data-amplitude-playlist="' + playlist + '"]');
+
+    /*
+      Iterate over all of the song info elements. We will either
+      set these to the new values, or clear them if the active song
+      doesn't have the info set.
+    */
+    for (var i = 0; i < songInfoElements.length; i++) {
+      /*
+        Get the info so we can check if the active meta data has the
+        key.
+      */
+      var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
+
+      /*
+        Get the song info element playlist.
+      */
+      var elementPlaylist = songInfoElements[i].getAttribute("data-amplitude-playlist");
+
+      /*
+        If the playlists match or the element is a main element, then
+        we set the song info.
+      */
+      if (elementPlaylist == playlist) {
+        /*
+          If the active metadata has the key, then we set it,
+          otherwise we clear it. If it's an image element then
+          we default it to the default info if needed.
+        */
+        if (song[info] != undefined) {
+          if (imageMetaDataKeys.indexOf(info) >= 0) {
+            songInfoElements[i].setAttribute("src", song[info]);
+          } else {
+            songInfoElements[i].innerHTML = song[info];
+          }
+        } else {
+          /*
+            We look for the default album art because
+            the actual key didn't exist. If the default album
+            art doesn't exist then we set the src attribute
+            to null.
+          */
+          if (imageMetaDataKeys.indexOf(info) >= 0) {
+            if (song.default_album_art != "") {
+              songInfoElements[i].setAttribute("src", song.default_album_art);
+            } else {
+              songInfoElements[i].setAttribute("src", "");
+            }
+          } else {
+            songInfoElements[i].innerHTML = "";
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Sets the meta data for songs loaded in the songs array
+   */
+  function syncMetaData() {
+    /*
+    Define the image meta data keys. These are managed separately
+    since we aren't actually changing the inner HTML of these elements.
+    */
+    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
+
+    /*
+    Get all of the song info elements
+    */
+    var songInfoElements = document.querySelectorAll("[data-amplitude-song-info]");
+
+    /*
+    Iterate over all of the song info elements. We will either
+    set these to the new values, or clear them if the active song
+    doesn't have the info set.
+    */
+    for (var i = 0; i < songInfoElements.length; i++) {
+      var songIndex = songInfoElements[i].getAttribute("data-amplitude-song-index");
+      var playlist = songInfoElements[i].getAttribute("data-amplitude-playlist");
+
+      if (songIndex != null && playlist == null) {
+        var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
+
+        /*
+         Get the song info value referenced on the element.  Depending on the type of
+         element, we may need to fallback to another value when the direct value
+         we want isn't found.
+         i.e.
+            data-amplitude-song-info="cover_art_url" defaults to using the value
+            of "default_album_art" when "cover_art_url" is missing on the song.
+        */
+        var val = _config2.default.songs[songIndex][info] != undefined ? _config2.default.songs[songIndex][info] : null;
+        /*
+         If it's an image meta data key, then we set the src attribute of
+         the element. Otherwise we set the inner HTML of the element.
+        */
+        if (imageMetaDataKeys.indexOf(info) >= 0) {
+          /*
+           If this is an image meta data key and the individual song doesn't
+           have the key, use the default_album_art
+           */
+          val = val || _config2.default.default_album_art;
+          songInfoElements[i].setAttribute("src", val);
+        } else {
+          songInfoElements[i].innerHTML = val;
+        }
+      }
+
+      /*
+        If the song index and playlist are not null, continue.
+      */
+      if (songIndex != null && playlist != null) {
+        /*
+          Get the info we are displaying.
+        */
+        var _info = songInfoElements[i].getAttribute("data-amplitude-song-info");
+
+        /*
+          Set the meta data accordingly.
+        */
+        if (_config2.default.playlists[playlist].songs[songIndex][_info] != undefined) {
+          if (imageMetaDataKeys.indexOf(_info) >= 0) {
+            songInfoElements[i].setAttribute("src", _config2.default.playlists[playlist].songs[songIndex][_info]);
+          } else {
+            songInfoElements[i].innerHTML = _config2.default.playlists[playlist].songs[songIndex][_info];
+          }
+        }
+      }
+    }
+
+    /*
+      Display the playlist meta data.
+    */
+    displayPlaylistMetaData();
+  }
+
+  /**
+   * Returns publically facing methods
+   */
+  return {
+    displayMetaData: displayMetaData,
+    setFirstSongInPlaylist: setFirstSongInPlaylist,
+    syncMetaData: syncMetaData,
+    displayPlaylistMetaData: displayPlaylistMetaData
+  };
+}(); /**
+      * Imports the config module
+      * @module config
+      */
+exports.default = MetaDataElements;
+module.exports = exports["default"];
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _config = __webpack_require__(0);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Handles all of the visual syncing to the state of the config for the repeat
+ * elements.
+ *
+ * @module visual/RepeatElements
+ */
+var RepeatElements = function () {
+  /**
+   * Syncs repeat for all of the repeat buttons. Users
+   * can apply styles to the 'amplitude-repeat-on' and
+   * 'amplitude-repeat-off' classes. They represent the state
+   * of the player.
+   */
+  function syncRepeat() {
+    /*
+    Gets all of the repeat classes
+    */
+    var repeatClasses = document.getElementsByClassName("amplitude-repeat");
+
+    /*
+    Iterate over all of the repeat classes. If repeat is on,
+    then add the 'amplitude-repeat-on' class and remove the
+    'amplitude-repeat-off' class. If it's off, then do the
+    opposite.
+    */
+    for (var i = 0; i < repeatClasses.length; i++) {
+      if (_config2.default.repeat) {
+        repeatClasses[i].classList.add("amplitude-repeat-on");
+        repeatClasses[i].classList.remove("amplitude-repeat-off");
+      } else {
+        repeatClasses[i].classList.remove("amplitude-repeat-on");
+        repeatClasses[i].classList.add("amplitude-repeat-off");
+      }
+    }
+  }
+
+  /**
+   * Syncs repeat for all of the playlist repeat buttons. Users
+   * can apply styles to the `amplitude-repeat-on` and `amplitude-repeat-off`
+   * classes. They repreent the state of the playlist in the player.
+   */
+  function syncRepeatPlaylist(playlist) {
+    /*
+    Gets all of the repeat buttons.
+    */
+    var repeatButtons = document.getElementsByClassName("amplitude-repeat");
+
+    /*
+    Iterate over all of the repeat buttons
+    */
+    for (var i = 0; i < repeatButtons.length; i++) {
+      /*
+      Ensure that the repeat button belongs to matches the
+      playlist we are syncing the state for.
+      */
+      if (repeatButtons[i].getAttribute("data-amplitude-playlist") == playlist) {
+        /*
+        If the state of the playlist is shuffled on, true, then
+        we add the 'amplitude-repeat-on' class and remove the
+        'amplitude-repeat-off' class. If the player is not shuffled
+        then we do the opposite.
+        */
+        if (_config2.default.playlists[playlist].repeat) {
+          repeatButtons[i].classList.add("amplitude-repeat-on");
+          repeatButtons[i].classList.remove("amplitude-repeat-off");
+        } else {
+          repeatButtons[i].classList.add("amplitude-repeat-off");
+          repeatButtons[i].classList.remove("amplitude-repeat-on");
+        }
+      }
+    }
+  }
+
+  /**
+   * Syncs repeat for all of the repeat song buttons. Users
+   * can apply styles to the 'amplitude-repeat-song-on' and
+   * 'amplitude-repeat-song-off' classes. They represent the state
+   * of the player.
+   */
+  function syncRepeatSong() {
+    /*
+    Gets all of the repeat song classes
+    */
+    var repeatSongClasses = document.getElementsByClassName("amplitude-repeat-song");
+
+    /*
+    Iterate over all of the repeat song classes. If repeat is on,
+    then add the 'amplitude-repeat-song-on' class and remove the
+    'amplitude-repeat-song-off' class. If it's off, then do the
+    opposite.
+    */
+    for (var i = 0; i < repeatSongClasses.length; i++) {
+      if (_config2.default.repeat_song) {
+        repeatSongClasses[i].classList.add("amplitude-repeat-song-on");
+        repeatSongClasses[i].classList.remove("amplitude-repeat-song-off");
+      } else {
+        repeatSongClasses[i].classList.remove("amplitude-repeat-song-on");
+        repeatSongClasses[i].classList.add("amplitude-repeat-song-off");
+      }
+    }
+  }
+
+  /*
+    Returns the publically available methods.
+  */
+  return {
+    syncRepeat: syncRepeat,
+    syncRepeatPlaylist: syncRepeatPlaylist,
+    syncRepeatSong: syncRepeatSong
+  };
+}(); /**
+      * Imports the config module
+      * @module config
+      */
+exports.default = RepeatElements;
+module.exports = exports["default"];
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _config = __webpack_require__(0);
+
+var _config2 = _interopRequireDefault(_config);
+
 var _debug = __webpack_require__(4);
 
 var _debug2 = _interopRequireDefault(_debug);
@@ -2050,449 +2529,6 @@ exports.default = Callbacks;
 module.exports = exports["default"];
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _config = __webpack_require__(0);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * These methods help display the audio's meta data
- *
- * @module visual/MetaDataElements
- */
-var MetaDataElements = function () {
-  /**
-   * Displays the active song's metadata. This is called after a song has
-   * been changed. This method takes the active song and displays the
-   * metadata. So once the new active song is set, we update all of the
-   * screen elements.
-   *
-   * @access public
-   */
-  function displayMetaData() {
-    /*
-    Define the image meta data keys. These are managed separately
-    since we aren't actually changing the inner HTML of these elements.
-    */
-    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
-
-    /*
-    Get all of the song info elements
-    */
-    var songInfoElements = document.querySelectorAll("[data-amplitude-song-info]");
-
-    /*
-    Iterate over all of the song info elements. We will either
-    set these to the new values, or clear them if the active song
-    doesn't have the info set.
-    */
-    for (var i = 0; i < songInfoElements.length; i++) {
-      /*
-      Get the info so we can check if the active meta data has the
-      key.
-      */
-      var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
-
-      /*
-      Grab the playlist and song index.
-      */
-      var playlist = songInfoElements[i].getAttribute("data-amplitude-playlist");
-      var songIndex = songInfoElements[i].getAttribute("data-amplitude-song-index");
-
-      /*
-      Ensure that we don't set any individual elements now. We set this with the
-      sync meta data method. The reason we don't set them here is because
-      all individual songs would get the now playing artwork. If the playlists
-      match or the element is a main element meaning it doesn't
-      belong to a playlist or a song, then we set the song info.
-      */
-      if (songIndex == null && (_config2.default.active_playlist == playlist || playlist == null && songIndex == null)) {
-        /*
-        If the active metadata has the key, then we set it,
-        otherwise we clear it. If it's an image element then
-        we default it to the default info if needed.
-        */
-        var val = _config2.default.active_metadata[info] != undefined ? _config2.default.active_metadata[info] : null;
-        if (imageMetaDataKeys.indexOf(info) >= 0) {
-          val = val || _config2.default.default_album_art;
-          songInfoElements[i].setAttribute("src", val);
-        } else {
-          val = val || "";
-          songInfoElements[i].innerHTML = val;
-        }
-      }
-    }
-  }
-
-  /**
-   * Displays the playlist meta data.
-   */
-  function displayPlaylistMetaData() {
-    /*
-    Define the image meta data keys. These are managed separately
-    since we aren't actually changing the inner HTML of these elements.
-    */
-    var imageMetaDataKeys = ["image_url"];
-
-    /*
-    Get all of the playlist info elements
-    */
-    var playlistInfoElements = document.querySelectorAll("[data-amplitude-playlist-info]");
-
-    /*
-    Iterate over all of the playlist info elements. We will either
-    set these to the new values, or clear them if the active song
-    doesn't have the info set.
-    */
-    for (var i = 0; i < playlistInfoElements.length; i++) {
-      /*
-      Get the info so we can check if the active meta data has the
-      key.
-      */
-      var info = playlistInfoElements[i].getAttribute("data-amplitude-playlist-info");
-      var playlist = playlistInfoElements[i].getAttribute("data-amplitude-playlist");
-
-      if (_config2.default.playlists[playlist][info] != undefined) {
-        if (imageMetaDataKeys.indexOf(info) >= 0) {
-          playlistInfoElements[i].setAttribute("src", _config2.default.playlists[playlist][info]);
-        } else {
-          playlistInfoElements[i].innerHTML = _config2.default.playlists[playlist][info];
-        }
-      } else {
-        /*
-        We look for the default album art because
-        the actual key didn't exist. If the default album
-        art doesn't exist then we set the src attribute
-        to null.
-        */
-        if (imageMetaDataKeys.indexOf(info) >= 0) {
-          if (_config2.default.default_playlist_art != "") {
-            playlistInfoElements[i].setAttribute("src", _config2.default.default_playlist_art);
-          } else {
-            playlistInfoElements[i].setAttribute("src", "");
-          }
-        } else {
-          playlistInfoElements[i].innerHTML = "";
-        }
-      }
-    }
-  }
-
-  /**
-   * Sets the first song in the playlist. This is used to fill in the meta
-   * data in the playlist
-   *
-   * @param {object} song 			- The song we are setting to be the first song in the playlist
-   * @param {string} playlist 	- Key of the playlist we are setting the first song in
-   */
-  function setFirstSongInPlaylist(song, playlist) {
-    /*
-      Define the image meta data keys. These are managed separately
-      since we aren't actually changing the inner HTML of these elements.
-    */
-    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
-
-    /*
-      Get all of the song info elements
-    */
-    var songInfoElements = document.querySelectorAll('[data-amplitude-song-info][data-amplitude-playlist="' + playlist + '"]');
-
-    /*
-      Iterate over all of the song info elements. We will either
-      set these to the new values, or clear them if the active song
-      doesn't have the info set.
-    */
-    for (var i = 0; i < songInfoElements.length; i++) {
-      /*
-        Get the info so we can check if the active meta data has the
-        key.
-      */
-      var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
-
-      /*
-        Get the song info element playlist.
-      */
-      var elementPlaylist = songInfoElements[i].getAttribute("data-amplitude-playlist");
-
-      /*
-        If the playlists match or the element is a main element, then
-        we set the song info.
-      */
-      if (elementPlaylist == playlist) {
-        /*
-          If the active metadata has the key, then we set it,
-          otherwise we clear it. If it's an image element then
-          we default it to the default info if needed.
-        */
-        if (song[info] != undefined) {
-          if (imageMetaDataKeys.indexOf(info) >= 0) {
-            songInfoElements[i].setAttribute("src", song[info]);
-          } else {
-            songInfoElements[i].innerHTML = song[info];
-          }
-        } else {
-          /*
-            We look for the default album art because
-            the actual key didn't exist. If the default album
-            art doesn't exist then we set the src attribute
-            to null.
-          */
-          if (imageMetaDataKeys.indexOf(info) >= 0) {
-            if (song.default_album_art != "") {
-              songInfoElements[i].setAttribute("src", song.default_album_art);
-            } else {
-              songInfoElements[i].setAttribute("src", "");
-            }
-          } else {
-            songInfoElements[i].innerHTML = "";
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Sets the meta data for songs loaded in the songs array
-   */
-  function syncMetaData() {
-    /*
-    Define the image meta data keys. These are managed separately
-    since we aren't actually changing the inner HTML of these elements.
-    */
-    var imageMetaDataKeys = ["cover_art_url", "station_art_url", "podcast_episode_cover_art_url"];
-
-    /*
-    Get all of the song info elements
-    */
-    var songInfoElements = document.querySelectorAll("[data-amplitude-song-info]");
-
-    /*
-    Iterate over all of the song info elements. We will either
-    set these to the new values, or clear them if the active song
-    doesn't have the info set.
-    */
-    for (var i = 0; i < songInfoElements.length; i++) {
-      var songIndex = songInfoElements[i].getAttribute("data-amplitude-song-index");
-      var playlist = songInfoElements[i].getAttribute("data-amplitude-playlist");
-
-      if (songIndex != null && playlist == null) {
-        var info = songInfoElements[i].getAttribute("data-amplitude-song-info");
-
-        /*
-         Get the song info value referenced on the element.  Depending on the type of
-         element, we may need to fallback to another value when the direct value
-         we want isn't found.
-         i.e.
-            data-amplitude-song-info="cover_art_url" defaults to using the value
-            of "default_album_art" when "cover_art_url" is missing on the song.
-        */
-        var val = _config2.default.songs[songIndex][info] != undefined ? _config2.default.songs[songIndex][info] : null;
-        /*
-         If it's an image meta data key, then we set the src attribute of
-         the element. Otherwise we set the inner HTML of the element.
-        */
-        if (imageMetaDataKeys.indexOf(info) >= 0) {
-          /*
-           If this is an image meta data key and the individual song doesn't
-           have the key, use the default_album_art
-           */
-          val = val || _config2.default.default_album_art;
-          songInfoElements[i].setAttribute("src", val);
-        } else {
-          songInfoElements[i].innerHTML = val;
-        }
-      }
-
-      /*
-        If the song index and playlist are not null, continue.
-      */
-      if (songIndex != null && playlist != null) {
-        /*
-          Get the info we are displaying.
-        */
-        var _info = songInfoElements[i].getAttribute("data-amplitude-song-info");
-
-        /*
-          Set the meta data accordingly.
-        */
-        if (_config2.default.playlists[playlist].songs[songIndex][_info] != undefined) {
-          if (imageMetaDataKeys.indexOf(_info) >= 0) {
-            songInfoElements[i].setAttribute("src", _config2.default.playlists[playlist].songs[songIndex][_info]);
-          } else {
-            songInfoElements[i].innerHTML = _config2.default.playlists[playlist].songs[songIndex][_info];
-          }
-        }
-      }
-    }
-
-    /*
-      Display the playlist meta data.
-    */
-    displayPlaylistMetaData();
-  }
-
-  /**
-   * Returns publically facing methods
-   */
-  return {
-    displayMetaData: displayMetaData,
-    setFirstSongInPlaylist: setFirstSongInPlaylist,
-    syncMetaData: syncMetaData,
-    displayPlaylistMetaData: displayPlaylistMetaData
-  };
-}(); /**
-      * Imports the config module
-      * @module config
-      */
-exports.default = MetaDataElements;
-module.exports = exports["default"];
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _config = __webpack_require__(0);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Handles all of the visual syncing to the state of the config for the repeat
- * elements.
- *
- * @module visual/RepeatElements
- */
-var RepeatElements = function () {
-  /**
-   * Syncs repeat for all of the repeat buttons. Users
-   * can apply styles to the 'amplitude-repeat-on' and
-   * 'amplitude-repeat-off' classes. They represent the state
-   * of the player.
-   */
-  function syncRepeat() {
-    /*
-    Gets all of the repeat classes
-    */
-    var repeatClasses = document.getElementsByClassName("amplitude-repeat");
-
-    /*
-    Iterate over all of the repeat classes. If repeat is on,
-    then add the 'amplitude-repeat-on' class and remove the
-    'amplitude-repeat-off' class. If it's off, then do the
-    opposite.
-    */
-    for (var i = 0; i < repeatClasses.length; i++) {
-      if (_config2.default.repeat) {
-        repeatClasses[i].classList.add("amplitude-repeat-on");
-        repeatClasses[i].classList.remove("amplitude-repeat-off");
-      } else {
-        repeatClasses[i].classList.remove("amplitude-repeat-on");
-        repeatClasses[i].classList.add("amplitude-repeat-off");
-      }
-    }
-  }
-
-  /**
-   * Syncs repeat for all of the playlist repeat buttons. Users
-   * can apply styles to the `amplitude-repeat-on` and `amplitude-repeat-off`
-   * classes. They repreent the state of the playlist in the player.
-   */
-  function syncRepeatPlaylist(playlist) {
-    /*
-    Gets all of the repeat buttons.
-    */
-    var repeatButtons = document.getElementsByClassName("amplitude-repeat");
-
-    /*
-    Iterate over all of the repeat buttons
-    */
-    for (var i = 0; i < repeatButtons.length; i++) {
-      /*
-      Ensure that the repeat button belongs to matches the
-      playlist we are syncing the state for.
-      */
-      if (repeatButtons[i].getAttribute("data-amplitude-playlist") == playlist) {
-        /*
-        If the state of the playlist is shuffled on, true, then
-        we add the 'amplitude-repeat-on' class and remove the
-        'amplitude-repeat-off' class. If the player is not shuffled
-        then we do the opposite.
-        */
-        if (_config2.default.playlists[playlist].repeat) {
-          repeatButtons[i].classList.add("amplitude-repeat-on");
-          repeatButtons[i].classList.remove("amplitude-repeat-off");
-        } else {
-          repeatButtons[i].classList.add("amplitude-repeat-off");
-          repeatButtons[i].classList.remove("amplitude-repeat-on");
-        }
-      }
-    }
-  }
-
-  /**
-   * Syncs repeat for all of the repeat song buttons. Users
-   * can apply styles to the 'amplitude-repeat-song-on' and
-   * 'amplitude-repeat-song-off' classes. They represent the state
-   * of the player.
-   */
-  function syncRepeatSong() {
-    /*
-    Gets all of the repeat song classes
-    */
-    var repeatSongClasses = document.getElementsByClassName("amplitude-repeat-song");
-
-    /*
-    Iterate over all of the repeat song classes. If repeat is on,
-    then add the 'amplitude-repeat-song-on' class and remove the
-    'amplitude-repeat-song-off' class. If it's off, then do the
-    opposite.
-    */
-    for (var i = 0; i < repeatSongClasses.length; i++) {
-      if (_config2.default.repeat_song) {
-        repeatSongClasses[i].classList.add("amplitude-repeat-song-on");
-        repeatSongClasses[i].classList.remove("amplitude-repeat-song-off");
-      } else {
-        repeatSongClasses[i].classList.remove("amplitude-repeat-song-on");
-        repeatSongClasses[i].classList.add("amplitude-repeat-song-off");
-      }
-    }
-  }
-
-  /*
-    Returns the publically available methods.
-  */
-  return {
-    syncRepeat: syncRepeat,
-    syncRepeatPlaylist: syncRepeatPlaylist,
-    syncRepeatSong: syncRepeatSong
-  };
-}(); /**
-      * Imports the config module
-      * @module config
-      */
-exports.default = RepeatElements;
-module.exports = exports["default"];
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2513,7 +2549,7 @@ var MuteElements = function () {
    * state of the player if it's muted or not.
    *
    * @access public
-   * @param {string} state 	- The muted state of the player.
+   * @param {string} state  - The muted state of the player.
    */
   function setMuted(state) {
     /*
@@ -2845,9 +2881,9 @@ var Shuffler = function () {
    * Swaps and randomizes the song shuffle.
    *
    * @access private
-   * @param {object} shuffleList 	- The list of songs that is going to be shuffled
-   * @param {number} original 		- The original index of he song in the songs array
-   * @param {number} random 			- The randomized index that will be the new index of the song in the shuffle array.
+   * @param {object} shuffleList  - The list of songs that is going to be shuffled
+   * @param {number} original     - The original index of he song in the songs array
+   * @param {number} random       - The randomized index that will be the new index of the song in the shuffle array.
    */
   function shuffleSwap(shuffleList, original, random) {
     var temp = shuffleList[original];
@@ -2899,9 +2935,9 @@ var SongSliderElements = function () {
    * Syncs all of the song slider elements.
    *
    * @access public
-   * @param {number} location 	- The location of the song as a percentage.
-   * @param {string} playlist 	- The playlist we are setting the song slider for.
-   * @param {number} songIndex 	- The index of the song we are adjusting the song slider for.
+   * @param {number} location   - The location of the song as a percentage.
+   * @param {string} playlist   - The playlist we are setting the song slider for.
+   * @param {number} songIndex  - The index of the song we are adjusting the song slider for.
    */
   function sync(location, playlist, songIndex) {
     syncMain(location);
@@ -2914,7 +2950,7 @@ var SongSliderElements = function () {
    * Syncs the main slider location
    *
    * @access public
-   * @param {number} location 	- The location of the song as a percentage.
+   * @param {number} location   - The location of the song as a percentage.
    */
   function syncMain(location) {
     /*
@@ -2953,8 +2989,8 @@ var SongSliderElements = function () {
    * Syncs playlist song slider locations
    *
    * @access public
-   * @param {number} location 	- The location of the song as a percentage.
-   * @param {string} playlist 	- The playlist we are setting the song slider for.
+   * @param {number} location   - The location of the song as a percentage.
+   * @param {string} playlist   - The playlist we are setting the song slider for.
    */
   function syncPlaylist(location, playlist) {
     /*
@@ -2993,8 +3029,8 @@ var SongSliderElements = function () {
    * Syncs individual song slider locations
    *
    * @access public
-   * @param {number} location 	- The location of the song as a percentage.
-   * @param {number} songIndex 	- The index of the song we are adjusting the song slider for.
+   * @param {number} location   - The location of the song as a percentage.
+   * @param {number} songIndex  - The index of the song we are adjusting the song slider for.
    */
   function syncSong(location, songIndex) {
     /*
@@ -3038,8 +3074,8 @@ var SongSliderElements = function () {
    * Syncs individual song slider locations
    *
    * @access public
-   * @param {number} location 	- The location of the song as a percentage.
-   * @param {string} playlist 	- The playlist we are setting the song slider for.
+   * @param {number} location   - The location of the song as a percentage.
+   * @param {string} playlist   - The playlist we are setting the song slider for.
    */
   function syncSongInPlaylist(location, playlist) {
     /*
@@ -3757,7 +3793,7 @@ var SoundCloud = function () {
    * With help from: http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
    *
    * @access public
-   * @param {object} userConfig 	- The config defined by the user for AmplitudeJS
+   * @param {object} userConfig   - The config defined by the user for AmplitudeJS
    */
   function loadSoundCloud(userConfig) {
     /*
@@ -3936,8 +3972,8 @@ var SoundCloud = function () {
    * function does the actual iteration and scoping.
    *
    * @access private
-   * @param {string} url 		- URL of the soundcloud song
-   * @param {number} index 	- The index of the soundcloud song in the songs array.
+   * @param {string} url    - URL of the soundcloud song
+   * @param {number} index  - The index of the soundcloud song in the songs array.
    */
   function resolveStreamable(url, index) {
     SC.get("/resolve/?url=" + url, function (sound) {
@@ -4224,7 +4260,7 @@ var SongPlayedProgressElements = function () {
    * Syncs the song played progress bars. These are HTML5 progress elements.
    *
    * @access private
-   * @param {number} songPlayedPercentage  	- The percentage of the song that has been played.
+   * @param {number} songPlayedPercentage   - The percentage of the song that has been played.
    */
   function sync(songPlayedPercentage) {
     syncGlobal(songPlayedPercentage);
@@ -4237,7 +4273,7 @@ var SongPlayedProgressElements = function () {
    * Sync how much has been played with a progress bar. This is the global progress bar.
    *
    * @access private
-   * @param {number} songPlayedPercentage 	- The percent of the song completed.
+   * @param {number} songPlayedPercentage   - The percent of the song completed.
    */
   function syncGlobal(percentage) {
     /*
@@ -4266,7 +4302,7 @@ var SongPlayedProgressElements = function () {
    * Sync how much has been played with a progress bar. This is the playlist progress bar.
    *
    * @access public
-   * @param {number} songPlayedPercentage 	- The percent of the song completed.
+   * @param {number} songPlayedPercentage   - The percent of the song completed.
    */
   function syncPlaylist(percentage) {
     /*
@@ -4294,7 +4330,7 @@ var SongPlayedProgressElements = function () {
    * Sync how much has been played with a progress bar. This is for an individual song.
    *
    * @access private
-   * @param {number} songPlayedPercentage 	- The percent of the song completed.
+   * @param {number} songPlayedPercentage   - The percent of the song completed.
    */
   function syncSong(percentage) {
     if (_config2.default.active_playlist == null) {
@@ -4324,7 +4360,7 @@ var SongPlayedProgressElements = function () {
    * Sync how much has been played with a progress bar. This is for an individual song in playlist.
    *
    * @access private
-   * @param {number} songPlayedPercentage 	- The percent of the song completed.
+   * @param {number} songPlayedPercentage   - The percent of the song completed.
    */
   function syncSongInPlaylist(percentage) {
     /*
@@ -4573,7 +4609,7 @@ var _audioNavigation = __webpack_require__(3);
 
 var _audioNavigation2 = _interopRequireDefault(_audioNavigation);
 
-var _callbacks = __webpack_require__(7);
+var _callbacks = __webpack_require__(9);
 
 var _callbacks2 = _interopRequireDefault(_callbacks);
 
@@ -4601,7 +4637,7 @@ var _playPauseElements = __webpack_require__(2);
 
 var _playPauseElements2 = _interopRequireDefault(_playPauseElements);
 
-var _metaDataElements = __webpack_require__(8);
+var _metaDataElements = __webpack_require__(7);
 
 var _metaDataElements2 = _interopRequireDefault(_metaDataElements);
 
@@ -4609,7 +4645,7 @@ var _playbackSpeedElements = __webpack_require__(18);
 
 var _playbackSpeedElements2 = _interopRequireDefault(_playbackSpeedElements);
 
-var _repeatElements = __webpack_require__(9);
+var _repeatElements = __webpack_require__(8);
 
 var _repeatElements2 = _interopRequireDefault(_repeatElements);
 
@@ -4701,44 +4737,44 @@ var Initializer = function () {
             Activates the audio context after an event for the user.
         */
         document.documentElement.addEventListener("mousedown", function () {
-          if (_config2.default.context.state !== 'running') {
+          if (_config2.default.context.state !== "running") {
             _config2.default.context.resume();
           }
         });
 
         document.documentElement.addEventListener("keydown", function () {
-          if (_config2.default.context.state !== 'running') {
+          if (_config2.default.context.state !== "running") {
             _config2.default.context.resume();
           }
         });
 
         document.documentElement.addEventListener("keyup", function () {
-          if (_config2.default.context.state !== 'running') {
+          if (_config2.default.context.state !== "running") {
             _config2.default.context.resume();
           }
         });
 
         /*
-          Set the user waveform settings if provided.
-        */
+            Set the user waveform settings if provided.
+          */
         if (userConfig.waveforms != undefined && userConfig.waveforms.sample_rate != undefined) {
           _config2.default.waveforms.sample_rate = userConfig.waveforms.sample_rate;
         }
 
         /*
-          Initialize the waveform.
-        */
+            Initialize the waveform.
+          */
         _waveform2.default.init();
 
         /*
-          If the user is registering visualizations on init,
-          we set them right away.
-        */
+            If the user is registering visualizations on init,
+            we set them right away.
+          */
         if (userConfig.visualizations != undefined && userConfig.visualizations.length > 0) {
           /*
-                Iterate over all of the visualizations and
-                register them in our player.
-              */
+                  Iterate over all of the visualizations and
+                  register them in our player.
+                */
           for (var i = 0; i < userConfig.visualizations.length; i++) {
             _visualizations2.default.register(userConfig.visualizations[i].object, userConfig.visualizations[i].params);
           }
@@ -4826,12 +4862,12 @@ var Initializer = function () {
    * config information is assigned in the publicInit() function.
    *
    * This function can be called from 2 different locations:
-   * 	1. Right away on init after the important settings are defined.
+   *  1. Right away on init after the important settings are defined.
    *
-   * 	2. After all of the Soundcloud URLs are resolved properly and
-   *	 	soundcloud is configured.  We will need the proper URLs from Soundcloud
-   * 		to stream through Amplitude so we get those right away before we
-   * 		set the information and the active song
+   *  2. After all of the Soundcloud URLs are resolved properly and
+   *    soundcloud is configured.  We will need the proper URLs from Soundcloud
+   *    to stream through Amplitude so we get those right away before we
+   *    set the information and the active song
    *
    * @access public
    * @param {object} userConfig - A JSON object of user defined values that help configure and initialize AmplitudeJS.
@@ -4848,7 +4884,7 @@ var Initializer = function () {
     /*
     Check to see if the user entered a start song
     */
-    if (userConfig.start_song != undefined && userConfig.starting_playlist) {
+    if (userConfig.start_song != undefined && !userConfig.starting_playlist) {
       /*
       Ensure what has been entered is an integer.
       */
@@ -4918,7 +4954,7 @@ var Initializer = function () {
     Amplitude sets the active song's volume to the volume defined
     by the user.
     */
-    _config2.default.volume = userConfig.volume != undefined ? userConfig.volume : 75;
+    _config2.default.volume = userConfig.volume != undefined ? userConfig.volume : 50;
 
     /*
     Sets the delay between songs if the user has it set. This should be in MS.
@@ -5085,7 +5121,7 @@ var Initializer = function () {
    * ID.
    *
    * @access private
-   * @param {object} playlists 	-
+   * @param {object} playlists  -
    */
   function countPlaylists(playlists) {
     /*
@@ -5181,10 +5217,12 @@ var WaveForm = function () {
     Initialize the local variables used in the Waveform.
   */
   var buffer = "";
-  var sampleRate = _config2.default.waveforms.sample_rate;
+  var sampleRate = "";
   var peaks = "";
 
   function init() {
+    sampleRate = _config2.default.waveforms.sample_rate;
+
     /*
       Grabs all of the waveform elements on the page.
     */
@@ -5829,7 +5867,7 @@ var BufferedProgressElements = function () {
       var playlist = songBufferedProgressBars[i].getAttribute("data-amplitude-playlist");
       var song = songBufferedProgressBars[i].getAttribute("data-amplitude-song-index");
 
-      if (playlist == null && song == null) {
+      if (playlist == null && song == null && !isNaN(_config2.default.buffered)) {
         songBufferedProgressBars[i].value = parseFloat(parseFloat(_config2.default.buffered) / 100);
       }
     }
@@ -5851,7 +5889,7 @@ var BufferedProgressElements = function () {
     for (var i = 0; i < songBufferedProgressBarsPlaylist.length; i++) {
       var song = songBufferedProgressBarsPlaylist[i].getAttribute("data-amplitude-song-index");
 
-      if (song == null) {
+      if (song == null && !isNaN(_config2.default.buffered)) {
         songBufferedProgressBarsPlaylist[i].value = parseFloat(parseFloat(_config2.default.buffered) / 100);
       }
     }
@@ -5873,7 +5911,7 @@ var BufferedProgressElements = function () {
     for (var i = 0; i < songBufferedProgressBarsSongs.length; i++) {
       var playlist = songBufferedProgressBarsSongs[i].getAttribute("data-amplitude-playlist");
 
-      if (playlist == null) {
+      if (playlist == null && !isNaN(_config2.default.buffered)) {
         songBufferedProgressBarsSongs[i].value = parseFloat(parseFloat(_config2.default.buffered) / 100);
       }
     }
@@ -5895,7 +5933,9 @@ var BufferedProgressElements = function () {
     set them to 0 which is like re-setting them.
     */
     for (var i = 0; i < songBufferedProgressBarsSongsInPlaylist.length; i++) {
-      songBufferedProgressBarsSongsInPlaylist[i].value = parseFloat(parseFloat(_config2.default.buffered) / 100);
+      if (!isNaN(_config2.default.buffered)) {
+        songBufferedProgressBarsSongsInPlaylist[i].value = parseFloat(parseFloat(_config2.default.buffered) / 100);
+      }
     }
   }
 
@@ -5952,10 +5992,6 @@ var _audioNavigation = __webpack_require__(3);
 
 var _audioNavigation2 = _interopRequireDefault(_audioNavigation);
 
-var _callbacks = __webpack_require__(7);
-
-var _callbacks2 = _interopRequireDefault(_callbacks);
-
 var _core = __webpack_require__(1);
 
 var _core2 = _interopRequireDefault(_core);
@@ -5977,11 +6013,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Imports the AmplitudeJS Core Methods
  * @module core/Core
  */
-
-
 /**
- * Imports the Audio Navigation Utility
- * @module utilities/AudioNavigation
+ * Imports the config module
+ * @module config
  */
 var Ended = function () {
   /**
@@ -6015,7 +6049,7 @@ var Ended = function () {
           /*
           Stops the active song.
           */
-          AmplitudeCore.stop();
+          _core2.default.stop();
 
           /*
             Sync the play pause elements.
@@ -6041,12 +6075,8 @@ var Ended = function () {
 
 
 /**
- * Imports the Callback Utility
- * @module utilities/callbacks
- */
-/**
- * Imports the config module
- * @module config
+ * Imports the Audio Navigation Utility
+ * @module utilities/AudioNavigation
  */
 exports.default = Ended;
 module.exports = exports["default"];
@@ -6904,8 +6934,8 @@ var Events = function () {
  * Imports the utility classes used by the evnets.
  */
 /*
-	Import the necessary classes and config to use
-	with the events.
+  Import the necessary classes and config to use
+  with the events.
 */
 exports.default = Events;
 module.exports = exports["default"];
@@ -6941,7 +6971,7 @@ var _audioNavigation = __webpack_require__(3);
 
 var _audioNavigation2 = _interopRequireDefault(_audioNavigation);
 
-var _repeatElements = __webpack_require__(9);
+var _repeatElements = __webpack_require__(8);
 
 var _repeatElements2 = _interopRequireDefault(_repeatElements);
 
@@ -6992,7 +7022,7 @@ var KeyDown = function () {
    * Runs an event on key down
    *
    * @access public
-   * @param {number} key 	- The key code the event is bound to.
+   * @param {number} key  - The key code the event is bound to.
    */
   function runKeyEvent(key) {
     /*
@@ -7304,7 +7334,7 @@ var _playPauseElements = __webpack_require__(2);
 
 var _playPauseElements2 = _interopRequireDefault(_playPauseElements);
 
-var _callbacks = __webpack_require__(7);
+var _callbacks = __webpack_require__(9);
 
 var _callbacks2 = _interopRequireDefault(_callbacks);
 
@@ -7539,8 +7569,6 @@ var Pause = function () {
       if (playlistAttribute != null && songIndexAttribute != null) {
         handleSongInPlaylistPause(playlistAttribute, songIndexAttribute);
       }
-
-      _configState2.default.setPlayerState();
     }
   }
 
@@ -7769,8 +7797,6 @@ var Play = function () {
       if (playlistAttribute != null && songIndexAttribute != null) {
         handleSongInPlaylistPlay(playlistAttribute, songIndexAttribute);
       }
-
-      _configState2.default.setPlayerState();
     }
   }
 
@@ -8084,8 +8110,6 @@ var PlayPause = function () {
       if (playlist != null && song != null) {
         handleSongInPlaylistPlayPause(playlist, song);
       }
-
-      _configState2.default.setPlayerState();
     }
   }
 
@@ -8136,7 +8160,7 @@ var PlayPause = function () {
         we go from the first song in the shuffle playlist array.
       */
       if (_config2.default.playlists[playlist].shuffle) {
-        _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].shuffle_list[0], 0);
+        _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].shuffle_list[0], 0, true);
       } else {
         _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].songs[0], 0);
       }
@@ -8186,7 +8210,7 @@ var PlayPause = function () {
       /*
       We then change the song to the index selected.
       */
-      _audioNavigation2.default.changeSong(_config2.default.songs[song], song);
+      _audioNavigation2.default.changeSong(_config2.default.songs[song], song, true);
     }
 
     /*
@@ -8200,7 +8224,7 @@ var PlayPause = function () {
       The song selected is different, so we change the
       song.
       */
-      _audioNavigation2.default.changeSong(_config2.default.songs[song], song);
+      _audioNavigation2.default.changeSong(_config2.default.songs[song], song, true);
     }
 
     /*
@@ -8249,7 +8273,7 @@ var PlayPause = function () {
       /*
       We then change the song to the index selected.
       */
-      _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].songs[song], song);
+      _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].songs[song], song, true);
     }
 
     /*
@@ -8263,7 +8287,7 @@ var PlayPause = function () {
       The song selected is different, so we change the
       song.
       */
-      _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].songs[song], song);
+      _audioNavigation2.default.changeSongPlaylist(playlist, _config2.default.playlists[playlist].songs[song], song, true);
     }
 
     /*
@@ -8623,7 +8647,7 @@ var _repeater = __webpack_require__(12);
 
 var _repeater2 = _interopRequireDefault(_repeater);
 
-var _repeatElements = __webpack_require__(9);
+var _repeatElements = __webpack_require__(8);
 
 var _repeatElements2 = _interopRequireDefault(_repeatElements);
 
@@ -8751,7 +8775,7 @@ var _repeater = __webpack_require__(12);
 
 var _repeater2 = _interopRequireDefault(_repeater);
 
-var _repeatElements = __webpack_require__(9);
+var _repeatElements = __webpack_require__(8);
 
 var _repeatElements2 = _interopRequireDefault(_repeatElements);
 
@@ -9424,11 +9448,6 @@ var Stop = function () {
       Stops the active song.
       */
       _core2.default.stop();
-
-      /*
-        Set the state of the player.
-      */
-      _configState2.default.setPlayerState();
     }
   }
 
@@ -9488,7 +9507,7 @@ var _time = __webpack_require__(23);
 
 var _time2 = _interopRequireDefault(_time);
 
-var _callbacks = __webpack_require__(7);
+var _callbacks = __webpack_require__(9);
 
 var _callbacks2 = _interopRequireDefault(_callbacks);
 
@@ -10174,7 +10193,7 @@ var _shuffleElements = __webpack_require__(19);
 
 var _shuffleElements2 = _interopRequireDefault(_shuffleElements);
 
-var _repeatElements = __webpack_require__(9);
+var _repeatElements = __webpack_require__(8);
 
 var _repeatElements2 = _interopRequireDefault(_repeatElements);
 
@@ -10194,7 +10213,7 @@ var _playPauseElements = __webpack_require__(2);
 
 var _playPauseElements2 = _interopRequireDefault(_playPauseElements);
 
-var _metaDataElements = __webpack_require__(8);
+var _metaDataElements = __webpack_require__(7);
 
 var _metaDataElements2 = _interopRequireDefault(_metaDataElements);
 
@@ -10283,7 +10302,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.init( user_config_json );
    *
    * @access public
-   * @param {object} userConfig 	- A JSON object of user defined values that helps configure and initialize AmplitudeJS.
+   * @param {object} userConfig   - A JSON object of user defined values that helps configure and initialize AmplitudeJS.
    */
   function init(userConfig) {
     _init2.default.initialize(userConfig);
@@ -10391,7 +10410,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getShufflePlaylist( playlist )
    *
    * @access public
-   * @param {string} playlist 	- The key representing the playlist ID to see if it's shuffled or not.
+   * @param {string} playlist   - The key representing the playlist ID to see if it's shuffled or not.
    */
   function getShufflePlaylist(playlist) {
     return _config2.default.playlists[playlist].shuffle;
@@ -10402,7 +10421,7 @@ var Amplitude = function () {
    *
    * Public Accessor: Amplitude.setShuffle()
    *
-   * @param {boolean} shuffle  	- True when we are shuffling the songs, false when we turn off shuffle.
+   * @param {boolean} shuffle   - True when we are shuffling the songs, false when we turn off shuffle.
    *
    * @access public
    */
@@ -10418,8 +10437,8 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setShufflePlaylist( playlist )
    *
    * @access public
-   * @param {string} playlist 	- The key representing the playlist ID to to shuffle the playlist.
-   * @param {boolean} shuffle 	- True when we are shuffling the playlist, false when we turn off shuffle.
+   * @param {string} playlist   - The key representing the playlist ID to to shuffle the playlist.
+   * @param {boolean} shuffle   - True when we are shuffling the playlist, false when we turn off shuffle.
    */
   function setShufflePlaylist(playlist, shuffle) {
     _shuffler2.default.setShufflePlaylist(playlist, shuffle);
@@ -10434,7 +10453,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setRepeat()
    *
    * @access public
-   * @param {boolean} repeatState 	- The state you want the repeat song to be in.
+   * @param {boolean} repeatState   - The state you want the repeat song to be in.
    */
   function setRepeat(repeatState) {
     _repeater2.default.setRepeat(repeatState);
@@ -10447,7 +10466,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setRepeatPlaylist( playlistKey )
    *
    * @access public
-   * @param {string} playlist 	- The key representing the playlist ID to to shuffle the playlist.
+   * @param {string} playlist   - The key representing the playlist ID to to shuffle the playlist.
    * @param {boolean} repeatState - The state you want the repeat playlist to be in.
    */
   function setRepeatPlaylist(playlist, repeatState) {
@@ -10461,7 +10480,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setRepeatSong()
    *
    * @access public
-   * @param {boolean} repeatState 	- The state you want the repeat song status to be in.
+   * @param {boolean} repeatState   - The state you want the repeat song status to be in.
    */
   function setRepeatSong(repeatState) {
     if (!_config2.default.is_touch_moving) {
@@ -10505,7 +10524,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setDefaultAlbumArt( url )
    *
    * @access public
-   * @param {string} url 	- A string representing the URL of the new default album art.
+   * @param {string} url  - A string representing the URL of the new default album art.
    */
   function setDefaultAlbumArt(url) {
     _config2.default.default_album_art = url;
@@ -10572,7 +10591,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setSongPlayedPercentage( float );
    *
    * @access public
-   * @param {number} percentage 	- The percentage of the song played
+   * @param {number} percentage   - The percentage of the song played
    */
   function setSongPlayedPercentage(percentage) {
     /*
@@ -10592,7 +10611,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setDebug( bool );
    *
    * @access public
-   * @param {boolean} state 		- Turns debugging on and off.
+   * @param {boolean} state     - Turns debugging on and off.
    */
   function setDebug(state) {
     /*
@@ -10632,7 +10651,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getSongAtIndex( song_index )
    *
    * @access public
-   * @param {number} index 	- The integer for the index of the song in the songs array.
+   * @param {number} index  - The integer for the index of the song in the songs array.
    * @returns {object} JSON representation for the song at a specific index.
    */
   function getSongAtIndex(index) {
@@ -10645,8 +10664,8 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getSongAtPlaylistIndex( playlist, index
    *
    * @access public
-   * @param {number} index 			- The integer for the index of the song in the playlist.
-   * @param {string} playlist		- The key of the playlist we are getting the song at the index for
+   * @param {number} index      - The integer for the index of the song in the playlist.
+   * @param {string} playlist   - The key of the playlist we are getting the song at the index for
    * @returns {object} JSON representation for the song at a specific index.
    */
   function getSongAtPlaylistIndex(playlist, index) {
@@ -10662,7 +10681,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.addSong( song_json )
    *
    * @access public
-   * @param {object} song 	- JSON representation of a song.
+   * @param {object} song   - JSON representation of a song.
    * @returns {number} New index of the song.
    */
   function addSong(song) {
@@ -10687,14 +10706,46 @@ var Amplitude = function () {
   }
 
   /**
+   * Adds a song to the beginning of the config array.
+   * This will allow Amplitude to play the song in a
+   * playlist type setting.
+   *
+   * Public Accessor: Amplitude.addSong( song_json )
+   *
+   * @access public
+   * @param {object} song   - JSON representation of a song.
+   * @returns {number} New index of the song (0)
+   */
+  function prependSong(song) {
+    /*
+    Ensures we have a songs array to push to.
+    */
+    if (_config2.default.songs == undefined) {
+      _config2.default.songs = [];
+    }
+
+    _config2.default.songs.unshift(song);
+
+    if (_config2.default.shuffle_on) {
+      _config2.default.shuffle_list.unshift(song);
+    }
+
+    if (_soundcloud2.default.isSoundCloudURL(song.url)) {
+      _soundcloud2.default.resolveIndividualStreamableURL(song.url, null, _config2.default.songs.length - 1, _config2.default.shuffle_on);
+    }
+
+    return 0;
+  }
+
+  /**
    * Adds a song to a playlist. This will allow Amplitude to play the song in the
    * playlist
    *
    * Public Accessor: Amplitude.addSongToPlaylist( song_json, playlist_key )
    *
    * @access public
-   * @param {object} song 			- JSON representation of a song.
-   * @param {string} playlist		- Playlist we are adding the song to.
+   * @param {object} song       - JSON representation of a song.
+   * @param {string} playlist   - Playlist we are adding the song to.
    * @returns {mixed} New index of song in playlist or null if no playlist exists
    */
   function addSongToPlaylist(song, playlist) {
@@ -10783,8 +10834,8 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.removeSongFromPlaylist( index, playlist )
    *
    * @access public
-   * @param {integer} index 			- Index of the song being removed from the playlist.
-   * @param {string} playlist			- Playlist we are removing the song from.
+   * @param {integer} index       - Index of the song being removed from the playlist.
+   * @param {string} playlist     - Playlist we are removing the song from.
    * @returns {boolean} True if removed false if not.
    */
   function removeSongFromPlaylist(index, playlist) {
@@ -10801,7 +10852,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.playNow( song )
    *
    * @access public
-   * @param {object} song 	- JSON representation of a song.
+   * @param {object} song   - JSON representation of a song.
    */
   function playNow(song) {
     /*
@@ -10855,11 +10906,6 @@ var Amplitude = function () {
     Reset all of the duration time elements.
     */
     _timeElements2.default.resetDurationTimes();
-
-    /*
-      Sets the state of the player.
-    */
-    _configState2.default.setPlayerState();
   }
 
   /**
@@ -10868,7 +10914,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.playSongAtIndex( index )
    *
    * @access public
-   * @param {number} index 	- The number representing the song in the songs array.
+   * @param {number} index  - The number representing the song in the songs array.
    */
   function playSongAtIndex(index) {
     /*
@@ -10898,11 +10944,6 @@ var Amplitude = function () {
     _core2.default.play();
 
     /*
-      Sets the state of the player.
-    */
-    _configState2.default.setPlayerState();
-
-    /*
     Sync all of the play pause buttons.
     */
     _playPauseElements2.default.sync();
@@ -10913,7 +10954,7 @@ var Amplitude = function () {
    * in should be the index of the song in the playlist and not the songs array.
    *
    * @access public
-   * @param {number} index 		- The number representing the song in the playlist array.
+   * @param {number} index    - The number representing the song in the playlist array.
    * @param {string} playlist - The key string representing the playlist we are playing the song from.
    *
    */
@@ -10945,11 +10986,6 @@ var Amplitude = function () {
     Play the song
     */
     _core2.default.play();
-
-    /*
-    Set the state of the player
-    */
-    _configState2.default.setPlayerState();
   }
 
   /**
@@ -10963,8 +10999,6 @@ var Amplitude = function () {
    */
   function play() {
     _core2.default.play();
-
-    _configState2.default.setPlayerState();
   }
 
   /**
@@ -10978,8 +11012,18 @@ var Amplitude = function () {
    */
   function pause() {
     _core2.default.pause();
+  }
 
-    _configState2.default.setPlayerState();
+  /**
+   * Allows the user to stop whatever the active song is directly
+   * through Javascript.
+   *
+   * Public Accessor: Amplitude.stop();
+   *
+   * @access public
+   */
+  function stop() {
+    _core2.default.stop();
   }
 
   /**
@@ -11010,7 +11054,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.next( playlist );
    *
    * @access public
-   * @param {string} [playlist = null 	- The playlist key
+   * @param {string} [playlist = null   - The playlist key
    */
   function next() {
     var playlist = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -11041,7 +11085,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.prev( playlist );
    *
    * @access public
-   * @param {string} [playlist = null] 	- The playlist key
+   * @param {string} [playlist = null]  - The playlist key
    */
   function prev() {
     var playlist = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -11084,7 +11128,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getSongsInPlaylist( playlist );
    *
    * @access public
-   * @param {string} playlist 	- The playlist key
+   * @param {string} playlist   - The playlist key
    */
   function getSongsInPlaylist(playlist) {
     return _config2.default.playlists[playlist].songs;
@@ -11113,7 +11157,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getSongsStatePlaylist( playlist );
    *
    * @access public
-   * @param {string} playlist 	- The playlist key
+   * @param {string} playlist   - The playlist key
    */
   function getSongsStatePlaylist(playlist) {
     if (_config2.default.playlists[playlist].shuffle) {
@@ -11162,9 +11206,9 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.getBuffered()
    *
    * @access public
-   * @param {number} seconds 						- The amount of seconds we should skip to in the song.
-   * @param {number} songIndex 					- The index of the song in the songs array.
-   * @param {string} [playlist = null]	- The playlist the song we are skipping to belogns to.
+   * @param {number} seconds            - The amount of seconds we should skip to in the song.
+   * @param {number} songIndex          - The index of the song in the songs array.
+   * @param {string} [playlist = null]  - The playlist the song we are skipping to belogns to.
    */
   function skipTo(seconds, songIndex) {
     var playlist = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -11226,8 +11270,8 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setSongMetaData()
    *
    * @access public
-   * @param {number} index					- The index of the song in the songs array.
-   * @param {object} metaData 			- The object containing the meta data we are updating.
+   * @param {number} index          - The index of the song in the songs array.
+   * @param {object} metaData       - The object containing the meta data we are updating.
    * @param {string} playlist       - The playlist we are updating the song meta data for.
    */
   function setSongMetaData(index, metaData) {
@@ -11295,7 +11339,7 @@ var Amplitude = function () {
    * Public Accessor: Amplitude.setDelay()
    *
    * @access public
-   * @param {number} delay 	- The millisecond delay time between songs
+   * @param {number} delay  - The millisecond delay time between songs
    */
   function setDelay(time) {
     _config2.default.delay = time;
@@ -11452,6 +11496,7 @@ var Amplitude = function () {
     getSongAtIndex: getSongAtIndex,
     getSongAtPlaylistIndex: getSongAtPlaylistIndex,
     addSong: addSong,
+    prependSong: prependSong,
     addSongToPlaylist: addSongToPlaylist,
     removeSong: removeSong,
     removeSongFromPlaylist: removeSongFromPlaylist,
@@ -11460,6 +11505,7 @@ var Amplitude = function () {
     playPlaylistSongAtIndex: playPlaylistSongAtIndex,
     play: play,
     pause: pause,
+    stop: stop,
     getAudio: getAudio,
     getAnalyser: getAnalyser,
     next: next,
@@ -11543,8 +11589,8 @@ var Amplitude = function () {
  * @module core/Core
  */
 /**
- * @name 		Amplitude.js
- * @author 	Dan Pastori (521 Dimensions) <opensource@521dimensions.com>
+ * @name    AmplitudeJS
+ * @author  Dan Pastori (Server Side Up) <hello@serversideup.net>
  */
 /**
  * AmplitudeJS Initializer Module
@@ -11577,7 +11623,7 @@ var _checks = __webpack_require__(5);
 
 var _checks2 = _interopRequireDefault(_checks);
 
-var _metaDataElements = __webpack_require__(8);
+var _metaDataElements = __webpack_require__(7);
 
 var _metaDataElements2 = _interopRequireDefault(_metaDataElements);
 
@@ -11872,9 +11918,12 @@ var ContainerElements = function () {
    * Applies the class 'amplitude-active-song-container' to the element
    * containing visual information regarding the active song.
    *
+   * @prop {boolean} direct - Determines if it was a direct click on the song. We
+   * then don't care if shuffle is on or not.
+   *
    * @access public
    */
-  function setActive() {
+  function setActive(direct) {
     /*
       Gets all of the song container elements.
     */
@@ -11892,12 +11941,20 @@ var ContainerElements = function () {
     that represents the song at the index.
     */
     if (_config2.default.active_playlist == "" || _config2.default.active_playlist == null) {
-      var activeIndex = '';
+      var activeIndex = "";
 
-      if (_config2.default.shuffle_on) {
-        activeIndex = _config2.default.shuffle_list[_config2.default.active_index].index;
-      } else {
+      /*
+        If we click directly on the song element, we ignore
+        whether it's in shuffle or not.
+      */
+      if (direct) {
         activeIndex = _config2.default.active_index;
+      } else {
+        if (_config2.default.shuffle_on) {
+          activeIndex = _config2.default.shuffle_list[_config2.default.active_index].index;
+        } else {
+          activeIndex = _config2.default.active_index;
+        }
       }
 
       if (document.querySelectorAll('.amplitude-song-container[data-amplitude-song-index="' + activeIndex + '"]')) {
@@ -11910,10 +11967,14 @@ var ContainerElements = function () {
         }
       }
     } else {
-      if (_config2.default.active_playlist != null && _config2.default.active_playlist != '') {
+      /*
+        If we have an active playlist or the action took place directly on the
+        song element, we ignore the shuffle.
+      */
+      if (_config2.default.active_playlist != null && _config2.default.active_playlist != "" || direct) {
         var activePlaylistIndex = _config2.default.playlists[_config2.default.active_playlist].active_index;
       } else {
-        var activePlaylistIndex = '';
+        var activePlaylistIndex = "";
 
         if (_config2.default.playlists[_config2.default.active_playlist].shuffle) {
           activePlaylistIndex = _config2.default.playlists[_config2.default.active_playlist].shuffle_list[_config2.default.playlists[_config2.default.active_playlist].active_index].index;
@@ -11976,7 +12037,7 @@ var CurrentHourElements = function () {
    * Updates any elements that display the current hour for the song.
    *
    * @access public
-   * @param {number} hours 	- An integer conaining how many hours into the song.
+   * @param {number} hours  - An integer conaining how many hours into the song.
    */
   function syncGlobal(hours) {
     /*
@@ -12471,7 +12532,7 @@ var CurrentTimeElements = function () {
    * time update for the current song.
    *
    * @access public
-   * @param {object} currentTime 					- An object containing the current time for the song in seconds, minutes, and hours.
+   * @param {object} currentTime          - An object containing the current time for the song in seconds, minutes, and hours.
    */
   function sync(currentTime) {
     /*
@@ -12488,7 +12549,7 @@ var CurrentTimeElements = function () {
    * is a computed field that will be commonly used.
    *
    * @access public
-   * @param {object} time 	- A json object conaining the parts for the current time for the song.
+   * @param {object} time   - A json object conaining the parts for the current time for the song.
    */
   function syncGlobal(time) {
     /*
@@ -12521,7 +12582,7 @@ var CurrentTimeElements = function () {
    * is a computed field that will be commonly used.
    *
    * @access public
-   * @param {object} time 	- A json object conaining the parts for the current time for the song.
+   * @param {object} time   - A json object conaining the parts for the current time for the song.
    */
   function syncPlaylist(time) {
     /*
@@ -12553,7 +12614,7 @@ var CurrentTimeElements = function () {
    * is a computed field that will be commonly used.
    *
    * @access public
-   * @param {object} time 	- A json object conaining the parts for the current time for the song.
+   * @param {object} time   - A json object conaining the parts for the current time for the song.
    */
   function syncSong(time) {
     if (_config2.default.active_playlist == null) {
@@ -12587,7 +12648,7 @@ var CurrentTimeElements = function () {
    * is a computed field that will be commonly used.
    *
    * @access public
-   * @param {object} time 	- A json object conaining the parts for the current time for the song.
+   * @param {object} time   - A json object conaining the parts for the current time for the song.
    */
   function syncSongInPlaylist(time) {
     var activePlaylistIndex = _config2.default.active_playlist != "" && _config2.default.active_playlist != null ? _config2.default.playlists[_config2.default.active_playlist].active_index : null;
@@ -13355,7 +13416,7 @@ module.exports = exports["default"];
 /* 59 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"amplitudejs","version":"5.0.3","description":"A JavaScript library that allows you to control the design of your media controls in your webpage -- not the browser. No dependencies (jQuery not required) https://521dimensions.com/open-source/amplitudejs","main":"dist/amplitude.js","devDependencies":{"babel-core":"^6.26.3","babel-loader":"^7.1.5","babel-plugin-add-module-exports":"0.2.1","babel-polyfill":"^6.26.0","babel-preset-es2015":"^6.18.0","husky":"^1.3.1","jest":"^23.6.0","prettier":"1.15.1","pretty-quick":"^1.11.1","watch":"^1.0.2","webpack":"^2.7.0"},"directories":{"doc":"docs"},"files":["dist"],"funding":{"type":"opencollective","url":"https://opencollective.com/amplitudejs"},"scripts":{"build":"node_modules/.bin/webpack","watch":"watch 'node_modules/.bin/webpack' dist","prettier":"npx pretty-quick","test":"jest"},"repository":{"type":"git","url":"git+https://github.com/521dimensions/amplitudejs.git"},"keywords":["webaudio","html5","javascript","audio-player"],"author":"521 Dimensions (https://521dimensions.com)","license":"MIT","bugs":{"url":"https://github.com/521dimensions/amplitudejs/issues"},"homepage":"https://github.com/521dimensions/amplitudejs#readme"}
+module.exports = {"name":"amplitudejs","version":"5.3.2","description":"A JavaScript library that allows you to control the design of your media controls in your webpage -- not the browser. No dependencies (jQuery not required) https://521dimensions.com/open-source/amplitudejs","main":"dist/amplitude.js","devDependencies":{"babel-core":"^6.26.3","babel-loader":"^7.1.5","babel-plugin-add-module-exports":"0.2.1","babel-polyfill":"^6.26.0","babel-preset-es2015":"^6.18.0","husky":"^1.3.1","jest":"^23.6.0","prettier":"1.15.1","pretty-quick":"^1.11.1","watch":"^1.0.2","webpack":"^2.7.0"},"directories":{"doc":"docs"},"files":["dist"],"funding":{"type":"opencollective","url":"https://opencollective.com/amplitudejs"},"scripts":{"build":"node_modules/.bin/webpack","prettier":"npx pretty-quick","preversion":"npx pretty-quick && npm run test","postversion":"git push && git push --tags","test":"jest","version":"npm run build && git add -A dist"},"repository":{"type":"git","url":"git+https://github.com/521dimensions/amplitudejs.git"},"keywords":["webaudio","html5","javascript","audio-player"],"author":"521 Dimensions (https://521dimensions.com)","license":"MIT","bugs":{"url":"https://github.com/521dimensions/amplitudejs/issues"},"homepage":"https://github.com/521dimensions/amplitudejs#readme"}
 
 /***/ })
 /******/ ]);

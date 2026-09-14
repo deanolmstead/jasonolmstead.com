@@ -1,91 +1,112 @@
-window.onkeydown = function(e) {
-    return !(e.keyCode == 32);
-};
+// ── Keyboard shortcuts ────────────────────────────────────────────────────
+// Prevent spacebar page scroll (handled by Amplitude binding below)
+window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') e.preventDefault();
+});
 
+// ── Duration helper ───────────────────────────────────────────────────────
+function formatDuration(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+function loadTrackDurations() {
+    document.querySelectorAll('.amplitude-song-container').forEach((row) => {
+        const index = parseInt(row.dataset.amplitudeSongIndex, 10);
+        const timeCell = row.querySelector('.track-time');
+        if (!timeCell || isNaN(index)) return;
+
+        const songs = Amplitude.getSongs();
+        const song = songs[index];
+        if (!song?.url) return;
+
+        const audio = new Audio();
+        audio.preload = 'metadata';
+        audio.addEventListener('loadedmetadata', () => {
+            timeCell.textContent = formatDuration(audio.duration);
+            audio.src = '';
+        });
+        audio.src = song.url;
+    });
+}
+
+// ── Amplitude init ────────────────────────────────────────────────────────
 Amplitude.init({
-    "bindings": {
-        37: 'prev',
-        39: 'next',
-        32: 'play_pause',
-        32: 'play_pause'
+    bindings: {
+        37: 'prev',        // ← arrow
+        39: 'next',        // → arrow
+        32: 'play_pause'   // spacebar
     },
-    "songs": [  
-        {
-            "name": "Under Saturns Return",
-            "recorded": "Rec // Jan 2025",
-            "url": "audio/Ruled_by_Saturn.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
+    songs: [
+        { 
+            name: "EXP // LOOP GTR 03",
+            url: "audio/EXP_LOOP_GTR_03.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },
+        { 
+            name: "EXP // LOOP BASS 10",
+            url: "audio/EXP_LOOP_BASS_10.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
         },
         {
-            "name": "Shattered Moons",
-            "recorded": "Rec // Aug 2024",
-            "url": "audio/Shattered_Saturn_Moon-J_Demo.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },                  
-        {
-            "name": "Static Eyes",
-            "recorded": "Rec // Jan 2025",
-            "url": "audio/Static_Eyes.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },         
-        {
-            "name": "Rubylith Dreams",
-            "recorded": "Rec // Jun 2020",
-            "url": "audio/Rubylith_Dreams.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },        
-        {
-            "name": "While We Drift",
-            "recorded": "Rec // Dec 2024",
-            "url": "audio/While_We_Drift.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },                
-/*        {
-            "name": "Departure",
-            "recorded": "Rec // April 24",
-            "url": "audio/Departure.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },        
-        {
-            "name": "Inverse Sequence",
-            "recorded": "Rec // April 3",
-            "url": "audio/Another_Inverse_Cycle-J_Demo.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },                                
-        {
-            "name": "New Electric Fields",
-            "recorded": "Rec // April 3",
-            "url": "audio/New_Electric_Fields.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },                        
-        {
-            "name": "Rotary Idea",
-            "recorded": "Rec // April 3",
-            "url": "audio/Rotary_Idea.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },                                      
-        {
-            "name": "Dream Too Deep",
-            "recorded": "Rec // April 3",
-            "url": "audio/Dream_Too_Deep-Piano.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
+            name: "EXP // LOOP GTR 05B",
+            url: "audio/EXP_LOOP_GTR_05B.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },
+        { 
+            name: "EXP // LOOP GTR 07",
+            url: "audio/EXP_LOOP_GTR_07.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
         },
         {
-            "name": "Spare Cycles",
-            "recorded": "Rec // April 3",
-            "url": "audio/Spare_Cycles-Demo1.mp3",
-            "cover_art_url": "img/bg_jelly.jpg"
-        },*/                                                                                                                     
+            name: "Shattered Moons",
+            url: "audio/Slow_Signal-Shattered_Moons_2026.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },   
+        {
+            name: "While We Drift",
+            url: "audio/While_We_Drift.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },             
+        {
+            name: "Rubylith Dreams",
+            url: "audio/Rubylith_Dreams.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },
+        {
+            name: "Ruled by Saturn",
+            url: "audio/Ruled_by_Saturn.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },
+        {
+            name: "Static Eyes",
+            url: "audio/Static_Eyes.mp3",
+            cover_art_url: "img/slwsgnl.jpg"
+        },
     ],
+    playlists: {
+        loveless: {
+            title: "SLW/SGNL",
+            songs: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        }
+    },
+    volume: 100,
+    shuffle_on: false,
+    active_playlist: 'loveless',
     callbacks: {
-        play: function(){
-            $("body").addClass("track-play");
-            $("body").removeClass("track-pause");            
-        },
-        pause: function(){
-            $("body").addClass("track-pause");
-            $("body").removeClass("track-play");            
-        }        
-    },    
-    "volume": 100
+        initialized: function() {
+            // Load track durations after Amplitude is fully ready
+            loadTrackDurations();
+
+            // Amplitude 5.0.3 bug: shuffle state doesn't initialize correctly
+            // without repeat being toggled first. Silently toggle repeat on/off
+            // after init to prime the state machine.
+            const repeatBtn = document.querySelector('.amplitude-repeat-song');
+            if (repeatBtn) {
+                repeatBtn.click();
+                setTimeout(() => repeatBtn.click(), 50);
+            }
+        }
+    }
 });

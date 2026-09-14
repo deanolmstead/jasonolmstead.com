@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Worlds — Band Node Interaction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+*, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg:        #08080f;
+    --bg-2:      #0f0f1a;
+    --ink:       #ffffff;
+    --ink-mid:   rgba(255,255,255,.5);
+    --ink-dim:   rgba(255,255,255,.25);
+    --ink-ghost: rgba(255,255,255,.1);
+    --accent:    rgba(255,255,255,.08);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow: hidden;
+}
+
+/* ── Canvas ─────────────────────────────────────────────────────────────── */
+#canvas {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Orbit rings ────────────────────────────────────────────────────────── */
+.orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.06);
+    pointer-events: none;
+    transition: opacity .6s ease;
+}
+
+/* ── Nodes ──────────────────────────────────────────────────────────────── */
+.node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform .3s ease, opacity .4s ease;
+    transform-origin: center;
+    user-select: none;
+}
+
+.node__circle {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.node__label {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.6;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    white-space: nowrap;
+}
+
+.node__type {
+    font-size: 7px;
+    color: var(--ink-dim);
+    letter-spacing: .12em;
+    margin-top: 2px;
+}
+
+.node__name {
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255,255,255,.9);
+    letter-spacing: .04em;
+    text-align: center;
+    line-height: 1.4;
+    padding: 0 8px;
+    pointer-events: none;
+}
+
+/* ── Band center node ───────────────────────────────────────────────────── */
+#node-band {
+    z-index: 10;
+}
+
+#node-band .node__circle {
+    width: 110px;
+    height: 110px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.2);
+}
+
+#node-band .node__circle:hover {
+    border-color: rgba(255,255,255,.5);
+    background: rgba(255,255,255,.07);
+}
+
+#node-band .node__name {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .06em;
+}
+
+/* ── Binary star — songwriter nodes ─────────────────────────────────────── */
+.node-songwriter {
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s ease, transform .6s cubic-bezier(.34, 1.2, .64, 1);
+}
+
+.node-songwriter.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.node-songwriter .node__circle {
+    width: 72px;
+    height: 72px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.3);
+}
+
+.node-songwriter .node__circle:hover {
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.7);
+    transform: scale(1.05);
+}
+
+/* ── Member nodes ───────────────────────────────────────────────────────── */
+.node-member {
+    z-index: 15;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease, transform .5s cubic-bezier(.34, 1.2, .64, 1);
+}
+
+.node-member.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.node-member .node__circle {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+.node-member .node__circle:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.4);
+}
+
+/* ── Orbit 1 nodes ──────────────────────────────────────────────────────── */
+.node-orbit1 {
+    z-index: 8;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s ease, transform .6s ease;
+}
+
+.node-orbit1.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.node-orbit1 .node__circle {
+    width: 56px;
+    height: 56px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+.node-orbit1 .node__circle:hover {
+    border-color: rgba(255,255,255,.35);
+    background: rgba(255,255,255,.06);
+}
+
+/* Label node — square */
+.node-orbit1.type-label .node__circle {
+    border-radius: 4px;
+}
+
+/* ── Edges (SVG) ────────────────────────────────────────────────────────── */
+#edges {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── Info panel ─────────────────────────────────────────────────────────── */
+#info {
+    position: fixed;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+
+#info__title {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.8);
+    margin-bottom: 4px;
+}
+
+#info__sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .14em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+}
+
+/* ── Instructions ───────────────────────────────────────────────────────── */
+#hint {
+    position: fixed;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    text-align: center;
+    line-height: 1.8;
+    pointer-events: none;
+    transition: opacity .5s ease;
+}
+
+/* ── Binary orbit animation ─────────────────────────────────────────────── */
+@keyframes orbit-cw {
+    from { transform: rotate(0deg) translateX(var(--r)) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(var(--r)) rotate(-360deg); }
+}
+
+@keyframes orbit-ccw {
+    from { transform: rotate(0deg) translateX(calc(var(--r) * -1)) rotate(0deg); }
+    to   { transform: rotate(-360deg) translateX(calc(var(--r) * -1)) rotate(360deg); }
+}
+
+.orbiting {
+    animation: orbit-cw 8s linear infinite;
+}
+
+.orbiting-ccw {
+    animation: orbit-ccw 8s linear infinite;
+}
+
+/* ── Pulse on band node ─────────────────────────────────────────────────── */
+.pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.15);
+    animation: pulseout 3s ease-out infinite;
+    pointer-events: none;
+}
+
+.pulse-ring:nth-child(2) { animation-delay: 1s; }
+.pulse-ring:nth-child(3) { animation-delay: 2s; }
+
+@keyframes pulseout {
+    0%   { width: 110px; height: 110px; opacity: .5; }
+    100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<div id="hint">
+    Hover band node to reveal members<br>
+    Tap songwriter to expand their world
+</div>
+
+<div id="canvas">
+
+    <!-- SVG edges -->
+    <svg id="edges"></svg>
+
+    <!-- Orbit rings -->
+    <div class="orbit-ring" style="width:220px;height:220px;margin-left:-110px;margin-top:-110px;top:50%;left:50%;"></div>
+    <div class="orbit-ring" style="width:420px;height:420px;margin-left:-210px;margin-top:-210px;top:50%;left:50%;"></div>
+    <div class="orbit-ring" style="width:620px;height:620px;margin-left:-310px;margin-top:-310px;top:50%;left:50%;"></div>
+
+    <!-- ── CENTER — Band node ── -->
+    <div class="node" id="node-band" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="node__circle">
+            <div class="node__name">Olivia<br>Tremor<br>Control</div>
+        </div>
+        <div class="node__label">BAND<div class="node__type">Elephant 6 · Athens GA</div></div>
+    </div>
+
+    <!-- ── BINARY STARS — Songwriters ── -->
+    <div class="node node-songwriter" id="node-hart" style="top:50%;left:50%;transform:translate(calc(-50% - 72px), calc(-50% - 40px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:9px">William<br>Cullen<br>Hart</div>
+        </div>
+        <div class="node__label">SONGWRITER<div class="node__type">co-founder</div></div>
+    </div>
+
+    <div class="node node-songwriter" id="node-doss" style="top:50%;left:50%;transform:translate(calc(-50% + 72px), calc(-50% + 40px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:9px">Bill<br>Doss</div>
+        </div>
+        <div class="node__label">SONGWRITER<div class="node__type">co-founder</div></div>
+    </div>
+
+    <!-- ── MEMBERS — float near band ── -->
+    <div class="node node-member" id="node-fernandes" style="top:50%;left:50%;transform:translate(calc(-50% + 100px), calc(-50% - 70px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px">John<br>Fernandes</div>
+        </div>
+        <div class="node__label" style="font-size:8px">MEMBER</div>
+    </div>
+
+    <div class="node node-member" id="node-harris" style="top:50%;left:50%;transform:translate(calc(-50% - 100px), calc(-50% + 70px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px">Eric<br>Harris</div>
+        </div>
+        <div class="node__label" style="font-size:8px">MEMBER</div>
+    </div>
+
+    <div class="node node-member" id="node-almstead" style="top:50%;left:50%;transform:translate(calc(-50% - 60px), calc(-50% - 100px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px">Derek<br>Almstead</div>
+        </div>
+        <div class="node__label" style="font-size:8px">MEMBER</div>
+    </div>
+
+    <!-- ── ORBIT 1 — Hart projects ── -->
+    <div class="node node-orbit1" id="node-circulatory" data-for="hart" style="top:50%;left:50%;transform:translate(calc(-50% - 240px), calc(-50% - 120px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px;text-align:center">Circulatory<br>System</div>
+        </div>
+        <div class="node__label">BAND<div class="node__type">Hart post-OTC</div></div>
+    </div>
+
+    <div class="node node-orbit1" id="node-blackfoliage" data-for="hart" style="top:50%;left:50%;transform:translate(calc(-50% - 280px), calc(-50% + 20px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:7px;text-align:center">Black<br>Foliage</div>
+        </div>
+        <div class="node__label">ALBUM · 1999<div class="node__type">OTC</div></div>
+    </div>
+
+    <!-- ── ORBIT 1 — Doss projects ── -->
+    <div class="node node-orbit1" id="node-marshmallow" data-for="doss" style="top:50%;left:50%;transform:translate(calc(-50% + 240px), calc(-50% + 80px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:7px;text-align:center">Marshmallow<br>Coast</div>
+        </div>
+        <div class="node__label">BAND<div class="node__type">Doss project</div></div>
+    </div>
+
+    <div class="node node-orbit1" id="node-cubist" data-for="doss" style="top:50%;left:50%;transform:translate(calc(-50% + 260px), calc(-50% - 60px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:7px;text-align:center">Dusk at<br>Cubist Castle</div>
+        </div>
+        <div class="node__label">ALBUM · 1996<div class="node__type">OTC</div></div>
+    </div>
+
+    <!-- ── ORBIT 1 — Shared ── -->
+    <div class="node node-orbit1 type-label" id="node-e6" style="top:50%;left:50%;transform:translate(calc(-50% + 20px), calc(-50% - 230px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px;text-align:center">Elephant<br>6</div>
+        </div>
+        <div class="node__label">COLLECTIVE<div class="node__type">Athens GA</div></div>
+    </div>
+
+    <div class="node node-orbit1" id="node-nmh" style="top:50%;left:50%;transform:translate(calc(-50% - 20px), calc(-50% + 230px))">
+        <div class="node__circle">
+            <div class="node__name" style="font-size:8px;text-align:center">Neutral<br>Milk Hotel</div>
+        </div>
+        <div class="node__label">BAND<div class="node__type">via Jeff Mangum</div></div>
+    </div>
+
+</div>
+
+<div id="info">
+    <div id="info__title">Olivia Tremor Control</div>
+    <div id="info__sub">Band · Elephant 6 · Athens, Georgia · 1989–2000, 2011–</div>
+</div>
+
+<script>
+const bandNode   = document.getElementById('node-band');
+const hartNode   = document.getElementById('node-hart');
+const dossNode   = document.getElementById('node-doss');
+const members    = document.querySelectorAll('.node-member');
+const orbit1     = document.querySelectorAll('.node-orbit1');
+const infoTitle  = document.getElementById('info__title');
+const infoSub    = document.getElementById('info__sub');
+const hint       = document.getElementById('hint');
+const svg        = document.getElementById('edges');
+
+let expanded = false;
+let hintHidden = false;
+
+const nodeInfo = {
+    'node-band':        { title: 'Olivia Tremor Control', sub: 'Band · Elephant 6 · Athens, Georgia · 1989–2000, 2011–' },
+    'node-hart':        { title: 'William Cullen Hart', sub: 'Songwriter · co-founder · visual artist' },
+    'node-doss':        { title: 'Bill Doss', sub: 'Songwriter · co-founder · 1968–2012' },
+    'node-fernandes':   { title: 'John Fernandes', sub: 'Multi-instrumentalist · OTC · The Music Tapes' },
+    'node-harris':      { title: 'Eric Harris', sub: 'Drummer · OTC' },
+    'node-almstead':    { title: 'Derek Almstead', sub: 'Bass · OTC' },
+    'node-circulatory': { title: 'Circulatory System', sub: 'Hart solo project · 2001–' },
+    'node-blackfoliage':{ title: 'Black Foliage: Animation Music Vol. 1', sub: 'Album · OTC · 1999 · Elephant 6' },
+    'node-marshmallow': { title: 'Marshmallow Coast', sub: 'Doss project · lo-fi pop' },
+    'node-cubist':      { title: 'Dusk at Cubist Castle', sub: 'Album · OTC · 1996 · Elephant 6' },
+    'node-e6':          { title: 'Elephant 6 Recording Company', sub: 'Collective · Athens GA · Ruston LA roots' },
+    'node-nmh':         { title: 'Neutral Milk Hotel', sub: 'Band · Jeff Mangum · In the Aeroplane Over the Sea · 1998' },
+};
+
+// ── Draw SVG edge between two elements ──────────────────────────────────
+function getCenter(el) {
+    const r = el.getBoundingClientRect();
+    const cr = document.getElementById('canvas').getBoundingClientRect();
+    return {
+        x: r.left + r.width / 2 - cr.left,
+        y: r.top  + r.height / 2 - cr.top
+    };
+}
+
+function drawEdge(fromEl, toEl, opacity = .15, dashed = false) {
+    const a = getCenter(fromEl);
+    const b = getCenter(toEl);
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+    line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+    line.setAttribute('stroke', `rgba(255,255,255,${opacity})`);
+    line.setAttribute('stroke-width', '1');
+    if (dashed) line.setAttribute('stroke-dasharray', '3,4');
+    return line;
+}
+
+function redrawEdges() {
+    svg.innerHTML = '';
+    if (!expanded) return;
+
+    // Band → songwriters
+    svg.appendChild(drawEdge(bandNode, hartNode, .25));
+    svg.appendChild(drawEdge(bandNode, dossNode, .25));
+
+    // Songwriters orbit each other
+    svg.appendChild(drawEdge(hartNode, dossNode, .12, true));
+
+    // Band → members
+    members.forEach(m => {
+        if (m.classList.contains('visible')) {
+            svg.appendChild(drawEdge(bandNode, m, .1, true));
+        }
+    });
+
+    // Hart → his orbit 1
+    document.querySelectorAll('.node-orbit1[data-for="hart"]').forEach(n => {
+        if (n.classList.contains('visible')) {
+            svg.appendChild(drawEdge(hartNode, n, .15));
+        }
+    });
+
+    // Doss → his orbit 1
+    document.querySelectorAll('.node-orbit1[data-for="doss"]').forEach(n => {
+        if (n.classList.contains('visible')) {
+            svg.appendChild(drawEdge(dossNode, n, .15));
+        }
+    });
+
+    // Band → shared orbit 1
+    document.querySelectorAll('.node-orbit1:not([data-for])').forEach(n => {
+        if (n.classList.contains('visible')) {
+            svg.appendChild(drawEdge(bandNode, n, .12, true));
+        }
+    });
+}
+
+// ── Expand / collapse ────────────────────────────────────────────────────
+function expand() {
+    if (expanded) return;
+    expanded = true;
+
+    if (!hintHidden) {
+        hint.style.opacity = '0';
+        hintHidden = true;
+    }
+
+    // Show songwriters
+    setTimeout(() => { hartNode.classList.add('visible'); }, 0);
+    setTimeout(() => { dossNode.classList.add('visible'); }, 80);
+
+    // Show members — staggered, further delay
+    let i = 0;
+    members.forEach(m => {
+        setTimeout(() => { m.classList.add('visible'); }, 200 + i * 80);
+        i++;
+    });
+
+    // Show orbit 1 — after members
+    let j = 0;
+    orbit1.forEach(n => {
+        setTimeout(() => {
+            n.classList.add('visible');
+            setTimeout(redrawEdges, 50);
+        }, 400 + j * 100);
+        j++;
+    });
+
+    setTimeout(redrawEdges, 600);
+}
+
+function collapse() {
+    if (!expanded) return;
+    expanded = false;
+
+    hartNode.classList.remove('visible');
+    dossNode.classList.remove('visible');
+    members.forEach(m => m.classList.remove('visible'));
+    orbit1.forEach(n => n.classList.remove('visible'));
+    svg.innerHTML = '';
+
+    setInfo('node-band');
+}
+
+// ── Info panel ───────────────────────────────────────────────────────────
+function setInfo(id) {
+    const d = nodeInfo[id];
+    if (!d) return;
+    infoTitle.textContent = d.title;
+    infoSub.textContent   = d.sub;
+}
+
+// ── Event bindings ───────────────────────────────────────────────────────
+bandNode.addEventListener('mouseenter', expand);
+bandNode.addEventListener('click', () => expanded ? collapse() : expand());
+
+// Hover info on all nodes
+document.querySelectorAll('.node').forEach(el => {
+    el.addEventListener('mouseenter', () => setInfo(el.id));
+    el.addEventListener('mouseleave', () => setInfo('node-band'));
+});
+
+// Touch support
+bandNode.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    expanded ? collapse() : expand();
+}, { passive: false });
+
+// Redraw on resize
+window.addEventListener('resize', redrawEdges);
+</script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Worlds — OTC Knowledge Graph</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+*, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --ink:       #1a1a18;
+    --ink-mid:   #4a4a44;
+    --ink-light: #8a8a80;
+    --ink-faint: #d4d4cc;
+    --paper:     #f2efe6;
+    --paper-dark:#e8e4d8;
+    --accent:    #1a1a18;
+    --serif: 'DM Sans', sans-serif;
+    --mono:  'IBM Plex Mono', 'Courier New', monospace;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+}
+
+body { padding: 60px 48px 80px; }
+
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 48px;
+}
+
+.doc-header__title {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+.doc-header__title strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin-top: 4px;
+    line-height: 1;
+}
+
+.doc-header__meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    line-height: 2;
+    letter-spacing: .08em;
+}
+
+.figure-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 32px;
+}
+
+.diagram {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+svg.diagram-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.legend {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink-faint);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+
+.legend-swatch {
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid var(--ink);
+    flex-shrink: 0;
+}
+
+.legend-swatch.orbit-0  { background: var(--ink); }
+.legend-swatch.orbit-1  { background: var(--paper-dark); }
+.legend-swatch.orbit-2  { background: var(--paper); }
+.legend-swatch.orbit-3  { background: var(--paper); border-style: dashed; }
+.legend-swatch.type-artist  { border-radius: 50%; background: var(--ink); }
+.legend-swatch.type-label   { border-radius: 0; background: var(--paper-dark); }
+.legend-swatch.type-studio  { clip-path: polygon(50% 0%, 100% 100%, 0% 100%); background: var(--ink-mid); border: none; }
+.legend-swatch.type-binary  { border-radius: 50%; background: none; border: 1.5px dashed var(--ink); position: relative; }
+
+.annotations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 48px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--ink-faint);
+}
+
+.annotation { display: flex; gap: 16px; }
+
+.annotation__num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-light);
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: .05em;
+}
+
+.annotation__title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.annotation__text {
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    font-weight: 500;
+}
+
+.doc-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: .1em;
+}
+
+.diagram-svg .node-group {
+    opacity: 0;
+    animation: fadein .4s ease forwards;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: scale(.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.node-group:nth-child(1)  { animation-delay: .05s; }
+.node-group:nth-child(2)  { animation-delay: .1s; }
+.node-group:nth-child(3)  { animation-delay: .15s; }
+.node-group:nth-child(4)  { animation-delay: .2s; }
+.node-group:nth-child(5)  { animation-delay: .25s; }
+.node-group:nth-child(6)  { animation-delay: .3s; }
+.node-group:nth-child(7)  { animation-delay: .35s; }
+.node-group:nth-child(8)  { animation-delay: .4s; }
+.node-group:nth-child(9)  { animation-delay: .45s; }
+.node-group:nth-child(10) { animation-delay: .5s; }
+.node-group:nth-child(11) { animation-delay: .55s; }
+.node-group:nth-child(12) { animation-delay: .6s; }
+.node-group:nth-child(13) { animation-delay: .65s; }
+.node-group:nth-child(14) { animation-delay: .7s; }
+.node-group:nth-child(15) { animation-delay: .75s; }
+.node-group:nth-child(16) { animation-delay: .8s; }
+.node-group:nth-child(17) { animation-delay: .85s; }
+.node-group:nth-child(18) { animation-delay: .9s; }
+.node-group:nth-child(19) { animation-delay: .95s; }
+.node-group:nth-child(20) { animation-delay: 1.0s; }
+.node-group:nth-child(21) { animation-delay: 1.05s; }
+.node-group:nth-child(22) { animation-delay: 1.1s; }
+
+.leader-line {
+    opacity: 0;
+    animation: linein .6s ease forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes linein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+    <div class="doc-header__title">
+        Technical Reference — Knowledge Graph Anatomy
+        <strong>New Worlds</strong>
+    </div>
+    <div class="doc-header__meta">
+        FIG. 02 — SEED NODE: OTC<br>
+        BINARY STAR SYSTEM<br>
+        ELEPHANT 6 CLUSTER<br>
+        REV. A
+    </div>
+</header>
+
+<p class="figure-label">Fig. 2 — Olivia Tremor Control · Dual Songwriter Center · Elephant 6 Orbital System</p>
+
+<div class="diagram">
+<svg class="diagram-svg" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg"
+     font-family="'DM Sans', sans-serif">
+
+    <defs>
+        <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#c8c4b8" stroke-width=".5"/>
+        </pattern>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#4a4a44"/>
+        </marker>
+        <marker id="arrow-light" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#8a8a80"/>
+        </marker>
+        <style>
+            .leader        { stroke: #4a4a44; stroke-width: .75; fill: none; stroke-dasharray: 3,3; }
+            .orbit-ring    { fill: none; stroke: #c8c4b8; stroke-width: 1; stroke-dasharray: 4,4; }
+            .binary-link   { stroke: #4a4a44; stroke-width: 1; fill: none; stroke-dasharray: 2,4; }
+            .edge          { stroke: #c8c4b8; stroke-width: 1.5; fill: none; }
+            .edge-strong   { stroke: #4a4a44; stroke-width: 1.5; fill: none; }
+            .edge-dashed   { stroke: #c8c4b8; stroke-width: 1; fill: none; stroke-dasharray: 3,3; }
+            .label-sm      { font-size: 9px; fill: #4a4a44; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+            .label-md      { font-size: 10px; fill: #1a1a18; letter-spacing: .04em; font-weight: 700; }
+            .label-lg      { font-size: 12px; fill: #1a1a18; font-weight: 800; letter-spacing: .02em; }
+            .label-dim     { font-size: 9px; fill: #8a8a80; letter-spacing: .08em; font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+            .callout-line  { stroke: #4a4a44; stroke-width: .75; fill: none; }
+        </style>
+    </defs>
+
+    <!-- cx=460, cy=340 — center of gravity between the two stars -->
+
+    <!-- ── Orbit rings ─────────────────────────────────────────────────── -->
+    <circle cx="460" cy="340" r="80"  class="orbit-ring" opacity=".3"/>
+    <circle cx="460" cy="340" r="155" class="orbit-ring" opacity=".5"/>
+    <circle cx="460" cy="340" r="240" class="orbit-ring" opacity=".7"/>
+    <circle cx="460" cy="340" r="325" class="orbit-ring"/>
+
+    <!-- Orbit labels -->
+    <text x="464" y="264" class="label-dim" text-anchor="middle">ORBIT 1</text>
+    <text x="464" y="189" class="label-dim" text-anchor="middle">ORBIT 2</text>
+    <text x="464" y="100" class="label-dim" text-anchor="middle">ORBIT 3</text>
+
+    <!-- ── Edges — center to orbit 1 ──────────────────────────────────── -->
+    <!-- OTC band → E6 collective -->
+    <line x1="460" y1="340" x2="460" y2="265" class="edge-strong"/>
+    <!-- OTC → NMH -->
+    <line x1="460" y1="340" x2="380" y2="290" class="edge-strong"/>
+    <!-- OTC → Apples -->
+    <line x1="460" y1="340" x2="540" y2="290" class="edge-strong"/>
+    <!-- OTC → Dusk at Cubist Castle -->
+    <line x1="460" y1="340" x2="355" y2="350" class="edge-strong"/>
+    <!-- OTC → Black Foliage -->
+    <line x1="460" y1="340" x2="565" y2="350" class="edge-strong"/>
+    <!-- OTC → Circulatory System -->
+    <line x1="460" y1="340" x2="400" y2="410" class="edge-strong"/>
+    <!-- OTC → Marshmallow Coast -->
+    <line x1="460" y1="340" x2="520" y2="410" class="edge-strong"/>
+
+    <!-- ── Edges — orbit 1 to orbit 2 ─────────────────────────────────── -->
+    <line x1="460" y1="265" x2="380" y2="200" class="edge"/>
+    <line x1="460" y1="265" x2="460" y2="190" class="edge"/>
+    <line x1="460" y1="265" x2="540" y2="200" class="edge"/>
+    <line x1="380" y1="290" x2="295" y2="250" class="edge"/>
+    <line x1="380" y1="290" x2="310" y2="210" class="edge"/>
+    <line x1="540" y1="290" x2="620" y2="240" class="edge"/>
+    <line x1="400" y1="410" x2="310" y2="450" class="edge"/>
+    <line x1="520" y1="410" x2="610" y2="450" class="edge"/>
+    <line x1="355" y1="350" x2="260" y2="380" class="edge"/>
+    <line x1="565" y1="350" x2="660" y2="370" class="edge"/>
+
+    <!-- ── Edges — orbit 2 to orbit 3 (dashed) ────────────────────────── -->
+    <line x1="380" y1="200" x2="320" y2="130" class="edge-dashed"/>
+    <line x1="295" y1="250" x2="210" y2="200" class="edge-dashed"/>
+    <line x1="620" y1="240" x2="700" y2="180" class="edge-dashed"/>
+    <line x1="310" y1="450" x2="240" y2="510" class="edge-dashed"/>
+    <line x1="610" y1="450" x2="680" y2="510" class="edge-dashed"/>
+    <line x1="260" y1="380" x2="170" y2="360" class="edge-dashed"/>
+
+    <!-- ── Binary star link (dashed, between Hart and Doss) ───────────── -->
+    <line x1="415" y1="330" x2="505" y2="330" class="binary-link"/>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         CENTER — Binary star: Hart + Doss + OTC band label
+         Hart sits left, Doss sits right, OTC label between them
+    ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Hart — left star -->
+    <g class="node-group" transform="translate(415,330)">
+        <circle r="32" fill="#1a1a18"/>
+        <text y="-6" text-anchor="middle" font-size="8" fill="#f2efe6" letter-spacing=".08em" font-family="'DM Sans',sans-serif" font-weight="800">WILLIAM</text>
+        <text y="4"  text-anchor="middle" font-size="8" fill="#f2efe6" letter-spacing=".08em" font-family="'DM Sans',sans-serif" font-weight="800">CULLEN</text>
+        <text y="14" text-anchor="middle" font-size="8" fill="#f2efe6" letter-spacing=".08em" font-family="'DM Sans',sans-serif" font-weight="800">HART</text>
+        <text y="48" text-anchor="middle" class="label-dim">SONGWRITER</text>
+    </g>
+
+    <!-- Doss — right star -->
+    <g class="node-group" transform="translate(505,330)">
+        <circle r="32" fill="#1a1a18"/>
+        <text y="-3" text-anchor="middle" font-size="9" fill="#f2efe6" letter-spacing=".08em" font-family="'DM Sans',sans-serif" font-weight="800">BILL</text>
+        <text y="9"  text-anchor="middle" font-size="9" fill="#f2efe6" letter-spacing=".08em" font-family="'DM Sans',sans-serif" font-weight="800">DOSS</text>
+        <text y="48" text-anchor="middle" class="label-dim">SONGWRITER</text>
+    </g>
+
+    <!-- OTC band label — floats above between them -->
+    <g class="node-group" transform="translate(460,290)">
+        <rect x="-46" y="-14" width="92" height="26" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="3" font-size="9" fill="#1a1a18" letter-spacing=".06em" font-family="'DM Sans',sans-serif" font-weight="800">OLIVIA TREMOR CONTROL</text>
+        <text text-anchor="middle" y="-24" class="label-dim">BAND — BINARY STAR CENTER</text>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         ORBIT 1
+    ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- E6 Collective — square, top -->
+    <g class="node-group" transform="translate(460,265)">
+        <rect x="-26" y="-20" width="52" height="38" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" class="label-sm" font-size="8">ELEPHANT</text>
+        <text text-anchor="middle" y="5"  class="label-sm" font-size="8">6 RECG.</text>
+        <text text-anchor="middle" y="30" class="label-dim">COLLECTIVE</text>
+    </g>
+
+    <!-- NMH — upper left -->
+    <g class="node-group" transform="translate(380,290)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">NEUTRAL</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">MILK HOTEL</text>
+        <text text-anchor="middle" y="-32" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Apples in Stereo — upper right -->
+    <g class="node-group" transform="translate(540,290)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">APPLES IN</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">STEREO</text>
+        <text text-anchor="middle" y="-32" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Dusk at Cubist Castle — left -->
+    <g class="node-group" transform="translate(355,350)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-6" class="label-sm" font-size="7">DUSK AT</text>
+        <text text-anchor="middle" y="2"  class="label-sm" font-size="7">CUBIST</text>
+        <text text-anchor="middle" y="10" class="label-sm" font-size="7">CASTLE</text>
+        <text text-anchor="middle" y="-32" class="label-dim">ALBUM · 1996</text>
+    </g>
+
+    <!-- Black Foliage — right -->
+    <g class="node-group" transform="translate(565,350)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-6" class="label-sm" font-size="7">BLACK</text>
+        <text text-anchor="middle" y="2"  class="label-sm" font-size="7">FOLIAGE</text>
+        <text text-anchor="middle" y="10" class="label-sm" font-size="7">ANIM. VOL.1</text>
+        <text text-anchor="middle" y="-32" class="label-dim">ALBUM · 1999</text>
+    </g>
+
+    <!-- Circulatory System — lower left (Hart) -->
+    <g class="node-group" transform="translate(400,410)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">CIRCULATORY</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">SYSTEM</text>
+        <text text-anchor="middle" y="32" class="label-dim">HART PROJECT</text>
+    </g>
+
+    <!-- Marshmallow Coast — lower right (Doss) -->
+    <g class="node-group" transform="translate(520,410)">
+        <circle r="20" fill="#f2efe6" stroke="#1a1a18" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">MARSHMALLOW</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">COAST</text>
+        <text text-anchor="middle" y="32" class="label-dim">DOSS PROJECT</text>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         ORBIT 2
+    ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- Jeff Mangum -->
+    <g class="node-group" transform="translate(380,200)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">JEFF</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="8">MANGUM</text>
+        <text text-anchor="middle" y="-28" class="label-dim">ARTIST</text>
+    </g>
+
+    <!-- Robert Schneider -->
+    <g class="node-group" transform="translate(460,190)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">ROBERT</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">SCHNEIDER</text>
+        <text text-anchor="middle" y="-28" class="label-dim">PRODUCER</text>
+    </g>
+
+    <!-- Elf Power -->
+    <g class="node-group" transform="translate(540,200)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="8">ELF</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="8">POWER</text>
+        <text text-anchor="middle" y="-28" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Ruston LA -->
+    <g class="node-group" transform="translate(295,250)">
+        <polygon points="0,-18 18,14 -18,14" fill="#d4d4cc" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-24" class="label-sm" font-size="7">RUSTON</text>
+        <text text-anchor="middle" y="-14" class="label-sm" font-size="7">LOUISIANA</text>
+        <text text-anchor="middle" y="28"  class="label-dim">ORIGIN</text>
+    </g>
+
+    <!-- Athens GA -->
+    <g class="node-group" transform="translate(310,210)">
+        <polygon points="0,-16 16,12 -16,12" fill="#d4d4cc" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-22" class="label-sm" font-size="7">ATHENS</text>
+        <text text-anchor="middle" y="-13" class="label-sm" font-size="7">GEORGIA</text>
+        <text text-anchor="middle" y="26"  class="label-dim">HUB</text>
+    </g>
+
+    <!-- Of Montreal -->
+    <g class="node-group" transform="translate(620,240)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">OF</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">MONTREAL</text>
+        <text text-anchor="middle" y="-28" class="label-dim">BAND · E6 ADJ.</text>
+    </g>
+
+    <!-- Brian Wilson / Beach Boys -->
+    <g class="node-group" transform="translate(260,380)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">BRIAN</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">WILSON</text>
+        <text text-anchor="middle" y="28"  class="label-dim">INFLUENCE</text>
+    </g>
+
+    <!-- 4-Track Methodology -->
+    <g class="node-group" transform="translate(660,370)">
+        <rect x="-24" y="-16" width="48" height="30" rx="3" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">4-TRACK</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">RECORDING</text>
+        <text text-anchor="middle" y="26" class="label-dim">METHODOLOGY</text>
+    </g>
+
+    <!-- Syd Barrett -->
+    <g class="node-group" transform="translate(310,450)">
+        <circle r="16" fill="#f2efe6" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">SYD</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">BARRETT</text>
+        <text text-anchor="middle" y="28"  class="label-dim">INFLUENCE</text>
+    </g>
+
+    <!-- Merge Records -->
+    <g class="node-group" transform="translate(610,450)">
+        <rect x="-20" y="-16" width="40" height="30" fill="#e8e4d8" stroke="#1a1a18" stroke-width="1"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">MERGE</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">RECORDS</text>
+        <text text-anchor="middle" y="26" class="label-dim">LABEL</text>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         ORBIT 3 — sparse, dashed circles
+    ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- The Beatles -->
+    <g class="node-group" transform="translate(320,130)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">THE</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">BEATLES</text>
+        <text text-anchor="middle" y="-22" class="label-dim">INFLUENCE</text>
+    </g>
+
+    <!-- GBV -->
+    <g class="node-group" transform="translate(210,200)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">GUIDED</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">BY VOICES</text>
+        <text text-anchor="middle" y="-22" class="label-dim">BAND</text>
+    </g>
+
+    <!-- The Kinks -->
+    <g class="node-group" transform="translate(700,180)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">THE</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">KINKS</text>
+        <text text-anchor="middle" y="-22" class="label-dim">INFLUENCE</text>
+    </g>
+
+    <!-- Sebadoh -->
+    <g class="node-group" transform="translate(240,510)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="4" class="label-sm" font-size="7">SEBADOH</text>
+        <text text-anchor="middle" y="-22" class="label-dim">BAND</text>
+    </g>
+
+    <!-- Broadcast -->
+    <g class="node-group" transform="translate(680,510)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="4" class="label-sm" font-size="7">BROADCAST</text>
+        <text text-anchor="middle" y="-22" class="label-dim">SONIC PARALLEL</text>
+    </g>
+
+    <!-- Harry Nilsson -->
+    <g class="node-group" transform="translate(170,360)">
+        <circle r="13" fill="#f2efe6" stroke="#4a4a44" stroke-width="1" stroke-dasharray="2,2"/>
+        <text text-anchor="middle" y="-3" class="label-sm" font-size="7">HARRY</text>
+        <text text-anchor="middle" y="6"  class="label-sm" font-size="7">NILSSON</text>
+        <text text-anchor="middle" y="-22" class="label-dim">INFLUENCE</text>
+    </g>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         CALLOUT ANNOTATIONS (right side)
+    ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- ① Binary Star -->
+    <line x1="538" y1="320" x2="790" y2="280" class="callout-line leader-line" marker-end="url(#arrow)"/>
+    <text x="800" y="276" class="label-sm leader-line">① BINARY STAR</text>
+    <text x="800" y="290" class="label-dim leader-line">TWO SONGWRITERS — ONE CENTER</text>
+    <text x="800" y="302" class="label-dim leader-line">HART + DOSS IN MUTUAL ORBIT</text>
+
+    <!-- ② Expansion -->
+    <line x1="585" y1="350" x2="790" y2="350" class="callout-line leader-line" marker-end="url(#arrow)"/>
+    <text x="800" y="346" class="label-sm leader-line">② EXPANSION</text>
+    <text x="800" y="360" class="label-dim leader-line">TAP NODE → BECOMES CENTER</text>
+    <text x="800" y="372" class="label-dim leader-line">MAP REORIENTS AROUND IT</text>
+
+    <!-- ③ Orbit depth -->
+    <line x1="460" y1="16" x2="460" y2="50" class="callout-line leader-line" marker-end="url(#arrow)"/>
+    <line x1="460" y1="16" x2="800" y2="16" class="callout-line leader-line"/>
+    <text x="800" y="12"  class="label-sm leader-line">③ ORBIT DEPTH</text>
+    <text x="800" y="26"  class="label-dim leader-line">INNER = RICH DETAIL</text>
+    <text x="800" y="38"  class="label-dim leader-line">OUTER = INCREASINGLY SPARSE</text>
+
+    <!-- ④ Node types -->
+    <line x1="630" y1="460" x2="790" y2="460" class="callout-line leader-line" marker-end="url(#arrow)"/>
+    <text x="800" y="456" class="label-sm leader-line">④ NODE TYPES</text>
+    <text x="800" y="470" class="label-dim leader-line">CIRCLE=ARTIST  SQUARE=LABEL</text>
+    <text x="800" y="482" class="label-dim leader-line">TRIANGLE=PLACE / ORIGIN</text>
+
+    <!-- ⑤ Edge type — left side -->
+    <line x1="205" y1="200" x2="90" y2="150" class="callout-line leader-line"/>
+    <text x="10"  y="146" class="label-sm leader-line">⑤ EDGE TYPE</text>
+    <text x="10"  y="160" class="label-dim leader-line">SOLID = DIRECT LINK</text>
+    <text x="10"  y="172" class="label-dim leader-line">DASHED = INFLUENCE / PARALLEL</text>
+
+    <!-- ⑥ Methodology node -->
+    <line x1="660" y1="354" x2="790" y2="420" class="callout-line leader-line"/>
+    <text x="800" y="416" class="label-sm leader-line">⑥ METHODOLOGY NODE</text>
+    <text x="800" y="430" class="label-dim leader-line">PROCESS AS FIRST-CLASS ENTITY</text>
+    <text x="800" y="442" class="label-dim leader-line">4-TRACK → GBV → SEBADOH THREAD</text>
+
+</svg>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+    <div class="legend-item">
+        <div class="legend-swatch type-artist"></div>
+        Artist / Band
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch type-label"></div>
+        Record Label / Collective
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch type-studio"></div>
+        Place / Origin
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch orbit-0"></div>
+        Binary Star Center
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch orbit-3"></div>
+        Orbit 3+ (sparse / horizon)
+    </div>
+</div>
+
+<!-- Annotations -->
+<div class="annotations">
+    <div class="annotation">
+        <span class="annotation__num">①</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Binary Star System</div>
+            <div class="annotation__text">Olivia Tremor Control has two primary songwriters — Hart and Doss — each with their own gravitational pull. The band node floats between them. Expanding either songwriter reorients the map around their individual world. This is a new node type: the binary star.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">②</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Expansion</div>
+            <div class="annotation__text">The core interaction. Selecting any node pulls it to center, reorienting the entire map around it. Pull Hart to center — Circulatory System moves to orbit 1. Pull Elephant 6 — the full collective comes into focus. Every expansion is a new rabbit hole.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">③</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Orbit Depth &amp; Information Density</div>
+            <div class="annotation__text">Inner orbits display rich contextual data — releases, dates, collaborators, liner notes. Outer orbits show only enough to invite curiosity. The Kinks and Beatles sit at orbit 3 not because they're less important — because the *why* of their connection is what New Worlds surfaces on expansion.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">④</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Node Taxonomy</div>
+            <div class="annotation__text">Shape communicates type at a glance. Artists and bands are circles. Labels and collectives are squares. Places and origin points are triangles. The Elephant 6 collective is a square — an institutional node, not a person. Ruston, Louisiana is a triangle — the origin that made everything possible.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">⑤</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Edge Type Encodes the Why</div>
+            <div class="annotation__text">Solid edges indicate direct relationships. Dashed edges are influence, sonic parallel, or thematic connection. GBV connects via 60s pop melodic ambition — not lo-fi methodology. Sebadoh connects via lo-fi innovation. Syd Barrett via psychedelic rupture. Same surface quality, three different edges.</div>
+        </div>
+    </div>
+    <div class="annotation">
+        <span class="annotation__num">⑥</span>
+        <div class="annotation__body">
+            <div class="annotation__title">Methodology as First-Class Node</div>
+            <div class="annotation__text">4-Track Home Recording is not an artist or a label — it's a way of working. Making it a node surfaces an entire lineage: OTC → GBV → Sebadoh → R. Stevie Moore. No algorithm creates this connection. It requires understanding that fidelity is sometimes the point, and sometimes completely beside it.</div>
+        </div>
+    </div>
+</div>
+
+<footer class="doc-footer">
+    <span>NEW WORLDS — KNOWLEDGE GRAPH SYSTEM</span>
+    <span>DON'T EDIT OUT THE WEIRDNESS</span>
+    <span>FIG. 02 / SEED: OTC / REV. A</span>
+</footer>
+
+</body>
+</html>
