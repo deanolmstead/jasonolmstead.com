@@ -1,0 +1,243 @@
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+
+html {
+    font-family: 'Europa';    
+    background: #000;
+    color: #fff;
+    font-size: 1em;
+    line-height: 1.4;
+    margin: 0;
+    webkit-font-smoothing: antialiased;    
+}
+
+body {
+    margin: 0;
+    padding: 0; 
+    overflow: hidden;   
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+}
+
+dl, fieldset, h1, h2, h3, h4, h5, h6, ol, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+a {
+    color: var(--color-light-dark);
+    text-decoration: none;
+    transition: color var(--tran-15s);
+}
+
+a:hover {
+    color: var(--color-secondary-main);
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.room {
+    background-image: url(../img/Room_Background.jpg);
+    background-size: cover;
+    width: 1530px;
+    height: 970px;
+    margin: 0 auto;
+    transform: translateX(0);    
+    transition: transform .25s ease-in-out;        
+}
+
+.room.panel-open {
+    transform: translateX(-360px);
+}
+
+.panel-nav {
+    position: absolute;
+    right: 30px;
+    top: 130px;
+    transform: translateX(0);    
+    transition: transform .25s ease-in-out;    
+}
+
+.panel-nav.panel-open {
+    transform: translateX(-350px);
+}
+
+.panel-nav-item {
+    background-color: #30273d;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px 0 rgb(0 0 0/30%);
+    transition: background .15s ease-in-out,
+                border-radius .15s ease-in-out;
+}
+
+.panel-nav-item:hover {
+    border-radius: 14px;    
+    background-color: #8a7a94;
+    background: linear-gradient(170deg,#ff006b,#fcb249);
+    background: linear-gradient(170deg,#ff006b,#8f81f1);    
+    transition: background .15s ease-in-out,
+                border-radius .15s ease-in-out;
+    cursor: pointer;
+}
+
+.panel-nav-item.active {
+    background: linear-gradient(170deg,#ff006b,#fcb249);
+    background: linear-gradient(170deg,#ff006b,#8f81f1);        
+    border-radius: 14px;
+    transition: background .15s ease-in-out,
+                border-radius .15s ease-in-out;    
+}
+
+.panel-nav-item svg {
+    fill: #fff;
+    width: 22px;
+    transform: scale(.9);
+    transform-origin: center;    
+    transition: transform .15s ease-in-out;        
+}
+
+.panel-nav-item:hover svg,
+.panel-nav-item.active svg {
+    transform: scale(1);
+}
+
+li.nav-maps svg { width: 20px; }
+li.nav-images svg { width: 20px; }
+li.nav-books svg { width: 26px; }
+li.nav-audio svg { width: 18px; }
+li.nav-chat svg { width: 20px; }
+
+.play-panel {    
+    width: 360px;
+    height: 872px;
+    position: absolute;
+    right: 0;
+    top: 98px;
+    transform: translateX(360px);    
+    transition: transform .3s ease-in-out;
+}
+
+.play-panel.active {
+    transform: translateX(0);   
+}
+
+.play-panel.panel-dice {
+    background-image: url(../img/panel_dice_01.jpg);    
+}
+
+.play-panel.panel-maps {
+    background-image: url(../img/panel_maps_01.jpg);    
+}
+
+.play-panel.panel-images {
+    background-image: url(../img/panel_images_01.jpg);    
+}
+
+.play-panel.panel-books {
+    background-image: url(../img/panel_books_01.jpg);    
+}
+
+.play-panel.panel-audio {
+    background-image: url(../img/panel_audio_01.jpg);    
+}
+
+.play-panel.panel-chat {
+    background-image: url(../img/panel_chat_01.jpg);    
+}
+
+/*.panel-nav-label {
+    background-color: #8a7a94;
+    border-radius: 12px 0 0 12px;
+    right: 38px;
+    height: 42px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 10px;    
+    position: absolute;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .05s ease-in-out;
+}
+
+.panel-nav-item:hover .panel-nav-label {
+    opacity: 1;
+    transform: scaleX(1);
+}*/
+
+/* ==========================================================================
+   Helpers
+   ========================================================================== */
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}

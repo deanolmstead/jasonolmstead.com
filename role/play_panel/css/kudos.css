@@ -1,0 +1,484 @@
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+html {
+   font-family: 'Europa';    
+   background: var(--color-dark-dark);
+   color: #fff;
+   font-size: 1em;
+   line-height: 1.4;
+   margin: 0;
+   webkit-font-smoothing: antialiased;    
+}
+
+p {
+   font-size: 18px;
+   line-height: 22px;
+}
+
+a {
+   color: var(--color-white);
+   text-decoration: none;
+   transition: color .15s ease-in-out;
+}
+
+a:hover {
+   color: var(--color-white);
+}
+
+ul {
+   margin: 0;
+   padding: 0;
+}
+
+ul li {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+button.button-cta {
+   color: var(--color-white);
+   font-size: 18px;
+   line-height: 48px;
+   text-transform: none;
+   letter-spacing: 0;   
+   height: 48px;
+   margin-top: 50px;
+   padding: 0 40px;
+   display: inline-flex; 
+   white-space: nowrap;
+}
+
+:root {
+   /* Current Color Palette */     
+   --color-red: #ff006b;
+   --color-orange: #fcb249;
+   --color-green: #abe14d;
+   --color-teal: #46ccb1;
+   --color-purple: #8f81f1;
+   --color-pink: #ff9aeb;
+   --color-blue: #8f81f1;
+   --color-black: #000000;
+   --color-dark-grey: #111111;
+   --color-grey: #242424;
+   --color-text-dark-grey: #333333;
+   --color-text-grey: #656565;
+   --color-text-light-grey: #b4b4b4;
+   --color-light-grey: #e6e6e6;
+   --color-white: #ffffff;
+   --color-dark-text: #111111;
+   --color-light-text: #ffffff;
+   --color-sheet-input-editing: #fcb249;
+
+   /* Updated Color Palette */            
+   --color-dark-dark: #14141d;
+   --color-dark-mid: #1a1a26;
+   --color-dark: #222239;
+   --color-dark-light: #3b3a50;
+   --color-dark-accent: #7c7998;
+
+   --color-primary-dark: #272742;
+   --color-primary: #6a61b2;
+   --color-primary-light: #8f81f1;
+   --color-primary-accent: #bcb3f7;
+
+   --color-secondary-dark: #66002b;
+   --color-secondary: #ff006b;
+   --color-secondary-light: #ff66a6;
+   --color-secondary-accent: #ff9aeb;  
+
+   --color-light-dark: #656565;
+   --color-light: #b4b4b4;
+   --color-light-light: #e6e6e6;
+
+   --color-accent-dark: #153d35;
+   --color-accent: #46ccb1;    
+   --color-accent-light: #b3f7f3;
+   --color-accent-accent: #fcb249; 
+
+   /* Updated Dashboard Color Palette */
+   --color-dashboard-dark: #3e3d47;
+   --color-dashboard-mid: #686677;  
+   --color-dashboard-main: #9592ab;     
+   --color-dashboard-light: #bab8c7;  
+   --color-dashboard-light-gray: #e0dfe5;  
+   --color-dashboard-light-light-gray: #f4f4f7;  
+   --color-dashboard-white: #ecebf1;               
+}
+
+/* ==========================================================================
+   Common
+   ========================================================================== */
+
+.role-kudos {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   margin: 0 18%;
+}
+
+.home-header {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   margin-top: 5%;      
+}
+
+.home-logo {
+   width: 130px;
+   min-width: 130px;
+   height: 45px; 
+}
+
+.header-divider {
+   width: 3px;
+   height: 50px;
+   border-radius: 3px;
+   background: rgba(255, 255, 255, .15);
+   margin: 0 40px;
+}
+
+.role-tagline {
+   color: var(--color-white);    
+   font-family: 'bc-alphapipe';
+   font-size: 26px;
+   font-weight: bold;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 5px;
+}
+
+.kudos-overview p {
+   color: var(--color-white);
+   font-size: 24px;
+   font-weight: normal;
+   line-height: 32px;
+   text-align: center;
+   margin: 60px auto 0 auto;
+}
+
+.team-kudos-wrapper {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   position: absolute;
+   bottom: 10%;
+   margin: 0 16%;   
+}
+
+.team-kudos-wrapper li {
+   background: rgba(0, 0, 0, .2);
+   height: 70px;
+   margin: 0 20px 60px 0;
+   padding: 10px 30px 10px 0;
+   border-radius: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   transform: scale(.85);
+   transition: transform .15s ease-in-out;
+}
+
+.team-kudos-wrapper li:hover {  
+   transform: scale(1);
+   cursor: pointer;
+}
+
+.team-kudos-wrapper li:hover .team-headshot-wrapper:after {
+   transform: rotate(180deg);
+}
+
+.team-headshot-wrapper {  
+   width: 100px;
+   min-width: 100px;
+   height: 100px;
+   border-radius: 50%;
+   margin-left: -18px;
+   position: relative;
+}
+
+.icon-arrow {
+   width: 14px;
+   height: 14px;
+   fill: var(--color-white);
+   bottom: -60px;
+   right: 50%;
+   position: absolute;
+   background: rgba(0, 0, 0, .2);
+   border-radius: 50%;
+   padding: 6px;
+   display: none;
+   transform: rotate(-90deg)
+}
+
+.show-kudos .icon-arrow {
+   display: flex;
+}
+
+.team-headshot {
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+   display: block;
+   object-fit: cover;
+   position: relative;
+   z-index: 1;
+}
+
+.team-headshot-wrapper:after {
+   content: '';
+   width: 106px;
+   height: 106px;    
+   background: conic-gradient(var(--color-red), var(--color-orange), var(--color-green), var(--color-teal), var(--color-purple), var(--color-pink), var(--color-red));
+   border-radius: 50%;
+   position: absolute;
+   top: -3px;
+   left: -3px;
+   transition: background .15s ease-in-out;
+}
+
+.team-kudos {
+   padding-left: 16px;
+}
+
+.team-kudos h3 {
+   font-size: 20px;
+   line-height: 18px;    
+   margin: 0;    
+}
+
+.team-kudos p {
+   font-size: 16px;
+   line-height: 24px;    
+   margin: 6px 0 0 0;
+   display: none;    
+}
+
+.background-rainbow {
+   width: 100vw;
+   height: 100vh;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: -1;
+   background-color: var(--color-dark-dark);    
+   background: url('../img/bg_role-main.jpg') top no-repeat;
+   background-size: cover; 
+}
+
+/* ==========================================================================
+   Interactions
+   ========================================================================== */
+
+.fade-in {
+   animation: fade-in .15s 0s ease-in-out both;
+}
+@keyframes fade-in {
+   0% { opacity: 0; }
+   100% { opacity: 1; }
+}
+
+.fade-out {
+   animation: fade-out .15s 0s ease-in-out both;
+}
+@keyframes fade-out {
+   0% { opacity: 1; }
+   100% { opacity: 0; }
+}
+
+.show-kudos {
+   overflow: hidden;
+}
+
+.show-kudos .kudos-overview p {
+   animation: fade-out var(--tran-15s) 0s both;
+}
+
+.show-kudos .team-kudos p {
+   display: flex;
+   opacity: 0;
+   animation: fade-in .5s .3s both;   
+}
+
+.show-kudos .team-headshot-wrapper {
+   transform: scale(1.2);
+}
+
+.show-kudos .team-kudos {
+   padding-left: 30px;
+}
+
+.show-kudos .team-kudos-wrapper li {
+   height: auto;
+}
+
+.googly-eyes-wrapper {
+   position: relative;
+}
+
+.show-bebo .googly-eyes-wrapper {
+   left: 8px;
+}
+
+.show-ian .googly-eyes-wrapper {
+    left: 6px;
+    top: 7px;
+}
+
+.show-logan .googly-eyes-wrapper {
+    left: -6px;
+    top: 5px;
+}
+
+.show-lyndsay .googly-eyes-wrapper {
+    top: -3px;
+    left: 5px;
+}
+
+.show-steven .googly-eyes-wrapper {
+    top: 2px;
+    left: -1px;
+}
+
+.show-suzi .googly-eyes-wrapper {
+    left: -11px;
+    top: 10px;
+}
+
+.show-kudos .googly-eyes {
+   width: 20px;
+   height: 20px;
+   background: var(--color-white);
+   position: absolute;
+   border-radius: 50%;
+   z-index: 2;
+   box-shadow: 0 0 0 1px rgb(0 0 0 / 15%);
+}
+
+.show-kudos .googly-eyes:after {
+   content: '';
+   width: 8px;
+   height: 8px;
+   background: var(--color-black);
+   position: absolute;
+   border-radius: 50%;
+   margin: 8px 2px 0 6px;
+}
+
+.show-kudos .googly-eyes.googly-eyes-left:after {
+   margin: 3px 0 0 3px;
+}
+
+.show-kudos .googly-eyes.googly-eyes-right {
+   right: 34px;
+   top: 24px;
+   animation: googly-jiggle-right .4s .15s cubic-bezier(0.230, 1.000, 0.320, 1.000) 3;
+}
+@keyframes googly-jiggle-right {
+   0% { 
+      transform: scale(1) rotate(0); 
+   }
+   50% { 
+      transform: scale(1) rotate(-90deg) translateX(2px);
+   }
+   100% { 
+      opacity: 1;
+      transform: scale(1) rotate(5deg); 
+   }   
+}
+
+.show-kudos .googly-eyes.googly-eyes-left {
+   left: 26px;
+   top: 26px;
+   animation: googly-jiggle-left .4s .15s cubic-bezier(0.230, 1.000, 0.320, 1.000) 3;
+}
+@keyframes googly-jiggle-left {
+   0% { 
+      transform: scale(1) rotate(0); 
+   }
+   50% { 
+      transform: scale(1) rotate(-90deg) translateX(-2px);
+   }
+   100% { 
+      opacity: 1;
+      transform: scale(1) rotate(-5deg); 
+   }   
+}
+
+
+.show-angel .team-kudos-wrapper li,
+.show-bebo .team-kudos-wrapper li,
+.show-danny .team-kudos-wrapper li,
+.show-ian .team-kudos-wrapper li,
+.show-logan .team-kudos-wrapper li,
+.show-lyndsay .team-kudos-wrapper li,
+.show-steven .team-kudos-wrapper li,
+.show-suzi .team-kudos-wrapper li {
+   animation: scale-down .5s 0s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+   margin: 0;
+   max-width: 65%;
+}
+@keyframes scale-down {
+   0% { 
+      opacity: 0;
+      transform: scale(.85) translate(0, 100%); 
+   }
+   50% { 
+      opacity: 1;
+      transform: scale(1.5) translate(0, -150%); 
+   }
+   100% { 
+      opacity: 1;
+      transform: scale(1.2) translate(0, -150%); 
+   }   
+}
+
+.show-angel .team-kudos-wrapper li:not(.angel),
+.show-bebo .team-kudos-wrapper li:not(.bebo),
+.show-danny .team-kudos-wrapper li:not(.danny),
+.show-ian .team-kudos-wrapper li:not(.ian),
+.show-logan .team-kudos-wrapper li:not(.logan),
+.show-lyndsay .team-kudos-wrapper li:not(.lyndsay),
+.show-steven .team-kudos-wrapper li:not(.steven),
+.show-suzi .team-kudos-wrapper li:not(.suzi) {
+   display: none;
+}
+
+
+.Button_container__2Mo5u {
+    --button-background-index: 1;
+    --button-content-index: calc(var(--button-background-index) + 1);
+    height: 36px;
+    display: inline-block;
+    position: relative;
+    border-radius: 18px;
+    box-shadow: none;
+}
+
+.Button_is-disabled__1MOGU {
+    background: var(--color-primary-main);
+    border-radius: 10px;
+}
+
+.Button_button__3QF_k {
+    width: 100%;
+    height: 100%;
+    padding: 0 36px;
+    color: var(--color-light-text);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    background: var(--color-dark-light);
+    border-radius: 10px;
+}
+
+.TableBar_bar-button-icon__2ac07 path {
+    fill: var(--color-dark-accent);    
+    stroke-opacity: 0;
+    transition: fill .2s;
+}

@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'tarrget-regular';
+    src: url('fonts/tarrget-regular.woff2') format('woff2'),
+         url('fonts/tarrget-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'paladins-straight';
+    src: url('fonts/paladins-straight.woff2') format('woff2'),
+         url('fonts/paladins-straight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

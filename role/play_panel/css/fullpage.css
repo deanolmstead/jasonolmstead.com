@@ -1,0 +1,307 @@
+/*!
+ * fullPage 3.1.2
+ * https://github.com/alvarotrigo/fullPage.js
+ *
+ * @license GPLv3 for open source use only
+ * or Fullpage Commercial License for commercial use
+ * http://alvarotrigo.com/fullPage/pricing/
+ *
+ * Copyright (C) 2018 http://alvarotrigo.com/fullPage - A project by Alvaro Trigo
+ */
+html.fp-enabled,
+.fp-enabled body {
+    margin: 0;
+    padding: 0;
+/*    overflow:hidden;
+    overflow-x: hidden !important;*/
+    /*Avoid flicker on slides transitions for mobile phones #336 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.fp-section {
+    position: relative;
+    -webkit-box-sizing: border-box; /* Safari<=5 Android<=3 */
+    -moz-box-sizing: border-box; /* <=28 */
+    box-sizing: border-box;
+}
+.fp-slide {
+    float: left;
+}
+.fp-slide, .fp-slidesContainer {
+    height: 100%;
+    display: block;
+}
+.fp-slides {
+    z-index:1;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    -webkit-transition: all 0.3s ease-out; /* Safari<=6 Android<=4.3 */
+    transition: all 0.3s ease-out;
+}
+.fp-section.fp-table, .fp-slide.fp-table {
+    display: table;
+    table-layout:fixed;
+    width: 100%;
+}
+.slide {
+    opacity: 0;
+    transition: opacity .4s ease-in-out;
+}
+.slide.active {
+    opacity: 1;
+}
+.fp-tableCell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+}
+.fp-slidesContainer {
+    float: left;
+    position: relative;
+}
+.fp-controlArrow {
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    position: absolute;
+    z-index: 4;
+    /*top: 50%;*/
+    bottom: 4%;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    margin-top: -38px;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    background-color: rgba(0, 0, 0, .15);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(.8);
+    transition: transform var(--tran-15s),
+                opacity var(--tran-15s);
+    opacity: .65;
+    display: none;        
+}
+.fp-controlArrow:hover {
+    transform: scale(1);
+    opacity: 1;
+}
+.fp-controlArrow.fp-prev {
+    /*left: -7%;
+    left: 45%;*/
+    left: 0;
+}
+.fp-controlArrow.fp-next {
+    /*right: -7%;
+    right: 45%;
+    left: 3.5%;*/
+    right: 0;
+    transform: rotate(180deg) scale(.8);    
+}
+.fp-controlArrow.fp-next:hover {
+    transform: rotate(180deg) scale(1);    
+}
+.fp-controlArrow.fp-prev:before,
+.fp-controlArrow.fp-next:before {
+    content: '';
+    background: url('../img/icons/arrow-left.svg');
+    background-repeat: no-repeat;    
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    filter: invert(1);        
+}
+.fp-scrollable {
+    overflow: hidden;
+    position: relative;
+}
+.fp-scroller{
+    overflow: hidden;
+}
+.iScrollIndicator{
+    border: 0 !important;
+}
+.fp-notransition {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+#fp-nav {
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    opacity: 1;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translate3d(0,-50%,0);
+}
+#fp-nav.fp-right {
+    right: 13px;
+}
+#fp-nav.fp-left {
+    left: 13px;
+}
+.fp-slidesNav{
+    position: absolute;
+    z-index: 4;
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    left: 0 !important;
+    right: 0;
+    margin: 0 auto !important;
+}
+.fp-slidesNav.fp-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 5%;    
+}
+.fp-slidesNav.fp-top {
+    top: 17px;
+}
+#fp-nav ul,
+.fp-slidesNav ul {
+  margin: 0;
+  padding: 0;
+}
+#fp-nav ul li,
+.fp-slidesNav ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 14px;
+    position: relative;
+}
+.fp-slidesNav ul li {
+    display: inline-block;
+}
+#fp-nav ul li a,
+.fp-slidesNav ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+}
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span {
+    background: rgba(255, 255, 255, 1);
+    height: 24px;
+    /*transform: scale(1.4);*/   
+}
+.fp-viewing-about #fp-nav ul li a.active span,
+.fp-viewing-about .fp-slidesNav ul li a.active span,
+.fp-viewing-about #fp-nav ul li:hover a.active span,
+.fp-viewing-about .fp-slidesNav ul li:hover a.active span,
+.fp-viewing-contact #fp-nav ul li a.active span,
+.fp-viewing-contact .fp-slidesNav ul li a.active span,
+.fp-viewing-contact #fp-nav ul li:hover a.active span,
+.fp-viewing-contact .fp-slidesNav ul li:hover a.active span {
+    background: rgba(0, 0, 0, 1);
+}
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    border-radius: 50%;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    height: 7px;
+    width: 7px;
+    height: 14px;
+    width: 5px;        
+    border: 0;
+    background: rgba(255, 255, 255, .2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .15s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+.fp-viewing-about #fp-nav ul li a span,
+.fp-viewing-about .fp-slidesNav ul li a span,
+.fp-viewing-contact #fp-nav ul li a span,
+.fp-viewing-contact .fp-slidesNav ul li a span {
+    background: rgba(0, 0, 0, .2);
+}
+#fp-nav ul li:hover a span,
+.fp-slidesNav ul li:hover a span {
+    background: rgba(255, 255, 255, 1);
+    height: 24px;
+    /*transform: scale(1.4);*/
+}
+#fp-nav ul li .fp-tooltip {
+    position: absolute;
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    opacity: 0;
+    width: 0;
+    cursor: pointer;
+    right: 26px;
+    top: -1px;
+/*    transform: translateX(200px);  
+    transition: transform var(--tran-15s);*/
+}
+#fp-nav ul li:hover .fp-tooltip,
+#fp-nav.fp-show-active a.active + .fp-tooltip {
+    transition: opacity .25s ease-in-out;
+    width: auto;
+    opacity: 1;
+/*    transform: translateX(200px);
+    animation: tooltip-slide-in .2s 0s ease-in-out both;*/
+}
+/*@keyframes tooltip-slide-in {
+    0% { transform: translateX(300px); }
+    100% { transform: translateX(0); }    
+}*/
+
+#fp-nav ul li .fp-tooltip.right {
+    right: 20px;
+}
+#fp-nav ul li .fp-tooltip.left {
+    left: 20px;
+}
+.fp-auto-height.fp-section,
+.fp-auto-height .fp-slide,
+.fp-auto-height .fp-tableCell{
+    height: auto !important;
+}
+
+.fp-responsive .fp-auto-height-responsive.fp-section,
+.fp-responsive .fp-auto-height-responsive .fp-slide,
+.fp-responsive .fp-auto-height-responsive .fp-tableCell {
+    height: auto !important;
+}
+
+/*Only display content to screen readers*/
+.fp-sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
