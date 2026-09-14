@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Background Visuals
+   ========================================================================== */
+
+.bg-home-art {
+	position: absolute;
+}
+
+.home-art {
+	background: url(../img/bg_home.jpg);
+    background-size: cover;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	position: absolute;
+	z-index: 0;
+	transition: filter .15s ease-in-out;
+}
+
+.bg-home-art.active .home-art {
+	animation: fade-in-home 1.25s .4s ease-out both,
+			   cycle-colors 15s 2.5s linear both 2;
+}
+@keyframes fade-in-home {
+    from { opacity: 0; }
+    to { opacity: .65; }
+}
+/*@keyframes cycle-colors {
+    0%, 100% { filter: hue-rotate(0); }
+    50% { filter: hue-rotate(-80deg); }
+}*/
+
+.bg-home-art,
+.bg-track-art {
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+/*.bg-track-art:before {
+	content: '';
+	background: radial-gradient(ellipse at center,
+				rgba(0,0,0,0) 50%,
+				rgba(0,0,0,.4) 100%);
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}*/
+
+.bg-track-art:after {
+	content: '';
+    background: linear-gradient(to bottom, 
+		    	rgba(0,0,0,0) 0%,
+		    	rgba(0,0,0,1) 100%);
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}
+
+.album-fx {
+    position: fixed;
+    top: 0;
+	bottom: 0;
+    left: 0;
+    right: 0;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.album-fx:after {
+	content: '';
+	background: url(../img/bg_noise.png);
+	width: 100%;
+	height: 100%;
+	background-repeat: repeat;
+	position: absolute;
+	mix-blend-mode: soft-light;
+	opacity: .15;
+	z-index: 2;
+}
+
+.album-art {
+	width: 100%;
+	height: 100%;
+	opacity: .65;
+	position: absolute;
+	z-index: 0;
+}
+
+.album-art.art-1,
+.album-art.art-2,
+.album-art.art-3 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    width: 400px;
+    height: 400px;
+    left: 0;
+    opacity: 1;
+    z-index: 1;
+    transform: rotate(180deg);
+}
+
+.album-art.art-2 {
+	transform: rotate(180deg) scale(1.5);
+    z-index: 2;
+    opacity: .8;
+    filter: brightness(.6);
+}
+
+.album-art.art-3 {
+    transform: rotate(180deg) scale(2);
+    z-index: 1;
+    opacity: .3;
+    filter: brightness(0.4);
+}
+
+.fullscreen-black {
+	background: #000;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+	opacity: 0;
+}
+
+.bg-video {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	position: fixed;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+    z-index: 1;
+}
+
+.bg-video video {
+	object-fit: cover;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	opacity: 0;
+}
+
+.view-main video {
+	display: none;
+}
+
+.view-player video {
+	display: flex;
+	opacity: 0;
+	animation: fade-in 1s .35s ease-in-out forwards;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media only screen and (max-width: 768px) {
+	.home-art {
+		background-position: -90% 0;
+	}
+	#bg-track-art:before {
+		background: linear-gradient(to bottom,
+					rgba(0,0,0,0) 10%,
+					rgba(0,0,0,.85) 85%);
+	}
+	#bg-track-art:after {
+		display: none;
+	}
+	img.album-art {
+        width: 340%;
+        left: -30%;
+	}
+	.view-player video {
+		display: none;
+	}
+}
