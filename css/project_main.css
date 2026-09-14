@@ -1,0 +1,101 @@
+/* ==========================================================================
+   Projects // Carousel Quotes
+   ========================================================================== */
+
+.project-full {
+    background: var(--primary);
+}
+
+.carousel-quotes {
+    margin: 0;
+    margin-top: -40px;
+}
+
+.carousel-quotes .carousel-cell {
+    background: none;
+    color: var(--white);
+    width: 100%;
+    padding: 0px 22%;
+    filter: brightness(1);
+}
+
+.carousel-quotes .carousel-cell .user-name {
+    font-weight: 600;
+    margin-bottom: 0.4em;
+}
+
+.carousel-quotes .carousel-cell h6 {
+    color: var(--primary-light);
+}
+
+.carousel-quotes .flickity-prev-next-button:before {
+    background: none;
+}
+
+.carousel-quotes .flickity-prev-next-button:after {
+    color: var(--white);
+}
+
+.carousel-quotes .flickity-page-dots {
+    margin-top: -90px;
+}
+
+.carousel-quotes .dot:after {
+    background: var(--white);
+}
+
+.carousel-quotes .dot.is-selected:after {
+    background: var(--white);
+}
+
+.pullquote {
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 40px;
+    letter-spacing: -.005em;
+    margin-bottom: 1em;
+    max-width: 600px;
+}
+
+.list-text li {
+    list-style: none;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 300;    
+    margin-bottom: 14px;
+}
+
+.project-view .device-laptop,
+.project-view .device-mobile {
+    max-width: none; 
+}
+
+/* ==========================================================================
+    Media Queries
+   ========================================================================== */
+
+/* Mobile - Portrait */
+@media only screen and (max-width: 768px) {
+    html {
+        display: flex;
+    }
+    .row {
+        flex-wrap: wrap;
+    }
+    .project-grid {
+        width: 100%;
+    }
+    .project-item {
+        flex-direction: column;
+    }
+    .device-image-wrapper {
+        width: 100%;
+    }
+    .project-desc {
+        width: 100%;
+    }
+    .panel.active {
+        width: 100%;
+    }                   
+}

@@ -128,7 +128,7 @@ $(document).ready(function(){
     });    
     $(".link").click(function() {
         $(".page-transition").toggleClass("active");
-        var url = "role/";
+        var url = "role/index.html";
         var delay = 1000;
         setTimeout(function() {
         window.location.href = url;

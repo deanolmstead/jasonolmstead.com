@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Contact Form
+   ========================================================================== */
+
+.wrapper .input_field { 
+    margin-bottom: 10px; 
+} 
+  
+.wrapper 
+    .input_field 
+    input[type="text"], 
+.wrapper textarea { 
+    width: 100%;
+    padding: 1em 0;
+    background: none;
+    border: none;
+    border-bottom: solid 2px var(--base); 
+} 
+  
+.wrapper textarea { 
+    resize: none; 
+    height: 80px; 
+} 
+  
+.wrapper .btn input[type="submit"] { 
+    border: 0px; 
+    margin-top: 15px; 
+    padding: 10px; 
+    text-align: center; 
+    width: 100%; 
+    background: #569a4d; 
+    color: #fcfbf7; 
+    text-transform: uppercase; 
+    letter-spacing: 5px; 
+    font-weight: bold; 
+    border-radius: 25px; 
+    cursor: pointer; 
+} 
+  
+#error_message { 
+    margin-bottom: 20px; 
+    background: #fe8b8e; 
+    padding: 0px; 
+    text-align: center; 
+    font-size: 14px; 
+    transition: all 0.5s ease; 
+}
