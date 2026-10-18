@@ -110,6 +110,24 @@
     <img src="img/nav-mobile.png" class="nav-mobile" alt="">
   </nav>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/nw-utils.js"></script> 
+  <script src="js/nw-utils.js"></script>
+<div id="dbg" style="position:fixed;top:60px;left:8px;z-index:100;background:#000b;color:#0f0;font:12px monospace;padding:6px;white-space:pre"></div>
+<script>
+(function () {
+  var p = document.createElement('div');
+  p.style.cssText = 'position:fixed;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);visibility:hidden';
+  document.body.appendChild(p);
+  function r() {
+    var cs = getComputedStyle(p);
+    document.getElementById('dbg').textContent =
+      'inner ' + innerWidth + 'x' + innerHeight + '\n' +
+      'screen ' + screen.width + 'x' + screen.height + '\n' +
+      'visual ' + (window.visualViewport ? Math.round(visualViewport.height) : '-') + '\n' +
+      'safe top/bottom ' + cs.paddingTop + ' / ' + cs.paddingBottom + '\n' +
+      'standalone ' + navigator.standalone + ' | ' + matchMedia('(display-mode: standalone)').matches;
+  }
+  r(); addEventListener('resize', r);
+})();
+</script>   
 </body>
 </html>
