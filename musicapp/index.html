@@ -15,60 +15,27 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --bg: #2b2f36;
-    --card: #23262c;
-    --text: #fff;
-    --muted: #9a9da3;
-    --pill: #454950;
-    --pad: 20px;
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body {
-    margin: 0;
-    height: 100vh;
-    height: 100dvh;
-    background: var(--bg); color: var(--text);
-    font-family: 'Outfit', system-ui, sans-serif;
-    overscroll-behavior: none;
-    -webkit-user-select: none; user-select: none;
-  }
-  .nav {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    max-width: 480px; margin: 0 auto;
-    padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
-  }
-  .nav img { width: 100%; height: auto; display: block; }
-  .nav .slice { margin: 0; }
-  .app { 
-    height: 100vh;
-    height: 100dvh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding:
-      calc(env(safe-area-inset-top) + 24px)
-      var(--pad)
-      calc(env(safe-area-inset-bottom) + 160px);    
-    max-width: 480px;
-    margin: 0 auto;
-  } 
-  .slice {
-    position: relative;
-    margin: 30px 0;
-  }
-  .slice img { width: 100%; height: auto; display: block; }
-  .hot { position: absolute; display: block; }
-  .greeting { font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }  
-</style>
 </head>
 <body>
-  <main class="app">
-    <section data-screen="splash" hidden></section>
+  <main class="app no-scrollbar">
+    <section data-screen="splash" class="splash">
+      
+        <img src="img/01_ring_0_splash.png" class="ring ring-0" alt="">
+      
+      
+        <img src="img/01_ring_1_splash.png" class="ring ring-1" alt="">
+      
+      
+        <img src="img/01_ring_2_splash.png" class="ring ring-2" alt="">
+      
+      
+        <img src="img/01_ring_3_splash.png" class="ring ring-3" alt="">
+      
+    </section>
     
-    <section data-screen="home">
+    <section data-screen="home" class="home" hidden>
 
       <div class="greeting" data-reset>Good to have you back, J</div>
       <div class="slice">

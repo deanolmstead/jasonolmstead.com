@@ -97,4 +97,10 @@ $(function () {
     show(HOME);
     paint();
   }
+
+  /* splash animation test */
+  setTimeout(function(){
+     $('.slide').addClass('none');
+     $('.home').addClass('relative');     
+  },4000);
 });
