@@ -13,7 +13,6 @@
 <meta name="apple-mobile-web-app-title" content="New Worlds">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -65,25 +64,29 @@
   .nav .on { background: var(--pill); border-radius: 999px; padding: 8px 16px; }
   .nav .search { width: 56px; height: 56px; border-radius: 50%; background: rgba(35,38,44,.92); }
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<script src="js/nw-utils.js"></script>
 <body>
   <main class="app">
-    <div class="greeting">Good to have you back, J</div>
+    <section data-screen="splash" hidden></section>
+    
+    <section data-screen="home">
+      <div class="greeting" data-reset>Good to have you back, J</div>
 
-    <p class="eyebrow">Discover artists</p>
-    <h2>explore deeper</h2>
-    <div class="card"><b>Dive deeper and discover new artist connections.</b><div><span class="pill">Choose an Artist</span></div></div>
+      <p class="eyebrow">Discover artists</p>
+      <h2>explore deeper</h2>
+      <div class="card"><b>Dive deeper and discover new artist connections.</b><div><span class="pill">Choose an Artist</span></div></div>
 
-    <p class="eyebrow">Connected</p>
-    <h2>deep cuts</h2>
-    <div class="card"><b>Best of 90’s Thrill Jockey</b><span>Tortoise, Sea and Cake, Trans Am, Eleventh Dream Day…</span></div>
+      <p class="eyebrow">Connected</p>
+      <h2>deep cuts</h2>
+      <div class="card"><b>Best of 90’s Thrill Jockey</b><span>Tortoise, Sea and Cake, Trans Am, Eleventh Dream Day…</span></div>
+    </section>
   </main>
 
   <nav class="nav">
     <div class="bar"><span class="on">Home</span><span>Library</span><span>Discovery</span></div>
     <div class="search"></div>
   </nav>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/nw-utils.js"></script> 
 </body>
 </html>
