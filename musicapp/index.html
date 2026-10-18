@@ -75,7 +75,8 @@
   .nav { max-width: 456px; margin: 0 auto; }  
   .slice { position: relative; }
   .slice img { width: 100%; height: auto; display: block; }
-  .hot { position: absolute; display: block; }  
+  .hot { position: absolute; display: block; }
+  .nav-mobile { width: 100%; } 
 </style>
 </head>
 <body>
@@ -87,7 +88,7 @@
       <div class="greeting" data-reset>Good to have you back, J</div>
       <div class="slice">
         <img src="img/section-discover.png" alt="">
-        <a class="hot" data-go="station"></a>
+        <a class="hot" data-go="station" data-back style="left:3%; top:4%; width:12%; height:6%"></a>
       </div>
       <div class="slice">
         <img src="img/section-mixtapes.png" alt="">
@@ -101,13 +102,12 @@
       <div class="slice">
         <img src="img/section-spinning.png" alt="">
       </div>
-      
+
     </section>
   </main>
 
   <nav class="nav">
-    <div class="bar"><span class="on">Home</span><span>Library</span><span>Discovery</span></div>
-    <div class="search"></div>
+    <img src="img/nav-mobile.png" class="nav-mobile" alt="">
   </nav>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/nw-utils.js"></script> 
