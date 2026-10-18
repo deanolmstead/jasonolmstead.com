@@ -42,6 +42,7 @@
     padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   }
   .nav img { width: 100%; height: auto; display: block; }
+  .nav .slice { margin: 0; }
   .app { 
     height: 100vh;
     height: 100dvh;
@@ -91,9 +92,10 @@
   </main>
 
   <nav class="nav">
-    <img src="img/nav-mobile.png" class="nav-mobile" alt="">
-  </nav>
+     <div class="slice"><img src="img/nav-mobile.png" class="nav-mobile" alt=""></div>
+   </nav>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/nw-utils.js"></script>  
+  <script src="js/nw-utils.js"></script>
+  <script src="js/hot-measure.js"></script>
 </body>
 </html>
