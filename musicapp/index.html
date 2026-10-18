@@ -63,17 +63,12 @@
   .pill { display: inline-block; background: var(--pill); border-radius: 999px; padding: 12px 22px; margin-top: 14px; font-weight: 500; }
 
   .nav {
-    position: fixed; left: 12px; right: 12px;
-    bottom: 0;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 22px);
-    display: flex; gap: 10px;
+    position: fixed; left: 0; right: 0; bottom: 0;
+    max-width: 480px; margin: 0 auto;
+    padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   }
-  .nav .bar { flex: 1; display: flex; justify-content: space-around; align-items: center;
-    background: rgba(35,38,44,.92); border-radius: 999px; padding: 14px 8px; font-weight: 500; }
-  .nav .on { background: var(--pill); border-radius: 999px; padding: 8px 16px; }
-  .nav .search { width: 56px; height: 56px; border-radius: 50%; background: rgba(35,38,44,.92); }
-  .app { max-width: 480px; margin: 0 auto; }
-  .nav { max-width: 456px; margin: 0 auto; }  
+  .nav img { width: 100%; height: auto; display: block; }
+  .app { max-width: 480px; margin: 0 auto; } 
   .slice { position: relative; }
   .slice img { width: 100%; height: auto; display: block; }
   .hot { position: absolute; display: block; }
