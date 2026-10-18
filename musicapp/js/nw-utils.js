@@ -98,9 +98,11 @@ $(function () {
     paint();
   }
 
-  /* splash animation test */
-  setTimeout(function(){
-     $('.slide').addClass('none');
-     $('.home').addClass('relative');     
-  },4000);
+  /* intro: plays once, then gets out of the way */
+  $('.splash').on('animationend', function (e) {
+    if (e.originalEvent.animationName === 'fade-out') $(this).remove();
+  });
+  $('.home').on('animationend', function (e) {
+    if (e.target === this) $(this).removeClass('intro');
+  });
 });

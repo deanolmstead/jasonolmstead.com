@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Music Discovery App Prototype</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2b2f36">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="New Worlds">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="app no-scrollbar">
+    <section data-screen="splash" class="splash">
+      
+        <img src="img/01_ring_0_splash.png" class="ring ring-0" alt="">
+      
+      
+        <img src="img/01_ring_1_splash.png" class="ring ring-1" alt="">
+      
+      
+        <img src="img/01_ring_2_splash.png" class="ring ring-2" alt="">
+      
+      
+        <img src="img/01_ring_3_splash.png" class="ring ring-3" alt="">
+      
+    </section>
+    
+    <section data-screen="home" class="home" hidden>
+
+      <div class="greeting" data-reset>Good to have you back, J</div>
+      <div class="slice">
+        <img src="img/section-discover.png" alt="">
+        <a class="hot" data-go="station" style="left:3%; top:4%; width:12%; height:6%"></a>
+      </div>
+      <div class="slice">
+        <img src="img/section-mixtapes.png" alt="">
+      </div>
+      <div class="slice">
+        <img src="img/section-samelabel.png" alt="">
+      </div>
+      <div class="slice">
+        <img src="img/section-thread.png" alt="">
+      </div>
+      <div class="slice">
+        <img src="img/section-spinning.png" alt="">
+      </div>
+
+    </section>
+  </main>
+
+  <nav class="nav">
+     <div class="slice"><img src="img/nav-mobile.png" class="nav-mobile" alt=""></div>
+   </nav>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/nw-utils.js"></script>
+  <script src="js/hot-measure.js"></script>
+</body>
+</html>

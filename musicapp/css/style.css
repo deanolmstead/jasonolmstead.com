@@ -7,6 +7,7 @@
   --pad: 20px;
   --1s-ease: 1s ease-in-out;
 }
+[hidden] { display: none !important; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0;
@@ -80,11 +81,11 @@ html, body {
   width: 100%;
   height: 100%; 
 } 
-.home {
-  animation: fade-in 1s 4.5s ease-in-out forwards;
-  display: block;
-  position: relative;
+.home { position: relative; }
+.home.intro {
   opacity: 0;
+  pointer-events: none;
+  animation: fade-in 1s 4.5s ease-in-out forwards;
 }
 @keyframes fade-in {
   from {
