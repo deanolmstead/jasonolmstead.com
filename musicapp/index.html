@@ -12,7 +12,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="New Worlds">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,10 +36,13 @@
     overscroll-behavior: none;
     -webkit-user-select: none; user-select: none;
   }
-
-  /* TEMP */
-  body::after { content:''; position:fixed; left:0; right:0; bottom:0; height:6px; background:red; z-index:99; }
-  .app {
+  .nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    max-width: 480px; margin: 0 auto;
+    padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
+  }
+  .nav img { width: 100%; height: auto; display: block; }
+  .app { 
     height: 100vh;
     height: 100dvh;
     overflow-y: auto;
@@ -48,31 +50,14 @@
     padding:
       calc(env(safe-area-inset-top) + 24px)
       var(--pad)
-      calc(env(safe-area-inset-bottom) + 160px);
-  }
-
-  .eyebrow { font-size: 14px; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); margin: 32px 0 0; }
-  h2 { font-size: 30px; font-weight: 600; letter-spacing: -0.04em; margin: 0 0 14px; }
-  .greeting { font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }
-  .card {
-    background: var(--card); border-radius: 22px; padding: 22px;
-    min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end;
-  }
-  .card b { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
-  .card span { color: var(--muted); font-size: 16px; margin-top: 6px; }
-  .pill { display: inline-block; background: var(--pill); border-radius: 999px; padding: 12px 22px; margin-top: 14px; font-weight: 500; }
-
-  .nav {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    max-width: 480px; margin: 0 auto;
-    padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
-  }
-  .nav img { width: 100%; height: auto; display: block; }
-  .app { max-width: 480px; margin: 0 auto; } 
+      calc(env(safe-area-inset-bottom) + 160px);    
+    max-width: 480px;
+    margin: 0 auto;
+  } 
   .slice { position: relative; }
   .slice img { width: 100%; height: auto; display: block; }
   .hot { position: absolute; display: block; }
-  .nav-mobile { width: 100%; } 
+  .greeting { font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }  
 </style>
 </head>
 <body>
@@ -84,7 +69,7 @@
       <div class="greeting" data-reset>Good to have you back, J</div>
       <div class="slice">
         <img src="img/section-discover.png" alt="">
-        <a class="hot" data-go="station" data-back style="left:3%; top:4%; width:12%; height:6%"></a>
+        <a class="hot" data-go="station" style="left:3%; top:4%; width:12%; height:6%"></a>
       </div>
       <div class="slice">
         <img src="img/section-mixtapes.png" alt="">
@@ -106,24 +91,6 @@
     <img src="img/nav-mobile.png" class="nav-mobile" alt="">
   </nav>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/nw-utils.js"></script>
-<div id="dbg" style="position:fixed;top:60px;left:8px;z-index:100;background:#000b;color:#0f0;font:12px monospace;padding:6px;white-space:pre"></div>
-<script>
-(function () {
-  var p = document.createElement('div');
-  p.style.cssText = 'position:fixed;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);visibility:hidden';
-  document.body.appendChild(p);
-  function r() {
-    var cs = getComputedStyle(p);
-    document.getElementById('dbg').textContent =
-      'inner ' + innerWidth + 'x' + innerHeight + '\n' +
-      'screen ' + screen.width + 'x' + screen.height + '\n' +
-      'visual ' + (window.visualViewport ? Math.round(visualViewport.height) : '-') + '\n' +
-      'safe top/bottom ' + cs.paddingTop + ' / ' + cs.paddingBottom + '\n' +
-      'standalone ' + navigator.standalone + ' | ' + matchMedia('(display-mode: standalone)').matches;
-  }
-  r(); addEventListener('resize', r);
-})();
-</script>   
+  <script src="js/nw-utils.js"></script>  
 </body>
 </html>
