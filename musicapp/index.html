@@ -56,7 +56,8 @@
 
   .nav {
     position: fixed; left: 12px; right: 12px;
-    bottom: calc(env(safe-area-inset-bottom) + 10px);
+    bottom: 0;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 22px);
     display: flex; gap: 10px;
   }
   .nav .bar { flex: 1; display: flex; justify-content: space-around; align-items: center;
@@ -65,6 +66,7 @@
   .nav .search { width: 56px; height: 56px; border-radius: 50%; background: rgba(35,38,44,.92); }
   .app { max-width: 480px; margin: 0 auto; }
   .nav { max-width: 456px; margin: 0 auto; }  
+  .shot img { width: 100%; height: auto; display: block; }
 </style>
 </head>
 <body>
@@ -73,7 +75,10 @@
     
     <section data-screen="home">
       <div class="greeting" data-reset>Good to have you back, J</div>
-
+      <div class="slice">
+        <img src="img/home-02-deepcuts.webp" alt="">
+        <a class="hot" data-go="station"></a>
+      </div>
       <p class="eyebrow">Discover artists</p>
       <h2>explore deeper</h2>
       <div class="card"><b>Dive deeper and discover new artist connections.</b><div><span class="pill">Choose an Artist</span></div></div>
