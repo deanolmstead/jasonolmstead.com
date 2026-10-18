@@ -66,7 +66,9 @@
   .nav .search { width: 56px; height: 56px; border-radius: 50%; background: rgba(35,38,44,.92); }
   .app { max-width: 480px; margin: 0 auto; }
   .nav { max-width: 456px; margin: 0 auto; }  
-  .shot img { width: 100%; height: auto; display: block; }
+  .slice { position: relative; }
+  .slice img { width: 100%; height: auto; display: block; }
+  .hot { position: absolute; display: block; }  
 </style>
 </head>
 <body>
@@ -74,18 +76,36 @@
     <section data-screen="splash" hidden></section>
     
     <section data-screen="home">
+
       <div class="greeting" data-reset>Good to have you back, J</div>
       <div class="slice">
-        <img src="img/home-02-deepcuts.webp" alt="">
+        <img src="img/section-discover.png" alt="">
         <a class="hot" data-go="station"></a>
       </div>
-      <p class="eyebrow">Discover artists</p>
+      <div class="slice">
+        <img src="img/section-mixtapes.png" alt="">
+        <a class="hot" data-go="station"></a>
+      </div>
+      <div class="slice">
+        <img src="img/section-samelabel.png" alt="">
+        <a class="hot" data-go="station"></a>
+      </div>
+      <div class="slice">
+        <img src="img/section-thread.png" alt="">
+        <a class="hot" data-go="station"></a>
+      </div>
+      <div class="slice">
+        <img src="img/section-spinning.png" alt="">
+        <a class="hot" data-go="station"></a>
+      </div>
+      <!-- <p class="eyebrow">Discover artists</p>
       <h2>explore deeper</h2>
       <div class="card"><b>Dive deeper and discover new artist connections.</b><div><span class="pill">Choose an Artist</span></div></div>
 
       <p class="eyebrow">Connected</p>
       <h2>deep cuts</h2>
-      <div class="card"><b>Best of 90’s Thrill Jockey</b><span>Tortoise, Sea and Cake, Trans Am, Eleventh Dream Day…</span></div>
+      <div class="card"><b>Best of 90’s Thrill Jockey</b><span>Tortoise, Sea and Cake, Trans Am, Eleventh Dream Day…</span></div> -->
+
     </section>
   </main>
 

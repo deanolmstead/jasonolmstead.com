@@ -39,7 +39,15 @@ $(function () {
     $('.app').scrollTop(0);
   }
 
-  NW.go = function (name) { stack.push(name); show(name); };
+  NW.go = function (name) {
+    if (!$('[data-screen="' + name + '"]').length) { console.warn('NW: no screen named "' + name + '"'); return; }
+    stack.push(name);
+    show(name);
+  };
+
+  /* tap areas: data-go="screen-name" goes there, data-back goes back */
+  $doc.on('click', '[data-go]', function () { NW.go($(this).data('go')); });
+  $doc.on('click', '[data-back]', function () { NW.back(); });
 
   NW.back = function () {
     if (stack.length > 1) stack.pop();
