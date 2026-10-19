@@ -57,11 +57,15 @@ html, body {
 .slice img { width: 100%; height: auto; display: block; }
 .hot { position: absolute; display: block; }
 
+/* DEBUG: show tap areas. Delete or comment out before sharing with friends. */
+.hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }
+
 /* ---- home ---- */
 .home { position: relative; padding-top: calc(env(safe-area-inset-top) + 24px); }
 /* TEMP: current home slices were exported at the padded width, so keep the side margins.
    After re-exporting them full screen width, change this to:  margin: 30px 0; */
 .home .slice { margin: 30px var(--pad); }
+.home .slice.scroll { margin: 30px 0 0 30px; }
 .greeting {
   font-size: 22px; font-weight: 600; letter-spacing: -0.03em;
   margin: 30px 0 60px;
