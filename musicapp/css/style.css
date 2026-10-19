@@ -5,7 +5,7 @@
   --muted: #9a9da3;
   --pill: #454950;
   --pad: 20px;
-  --1s-ease: 1s ease-in-out;
+  --home-fade-in: fade-in 1s 4.5s ease-in-out forwards;
 }
 [hidden] { display: none !important; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -13,7 +13,9 @@ html, body {
   margin: 0;
   height: 100vh;
   height: 100dvh;
-  background: var(--bg); color: var(--text);
+  background: var(--bg);
+  background-image: url('../img/01_bg_splash.jpg');
+  color: var(--text);
   font-family: 'Outfit', system-ui, sans-serif;
   overscroll-behavior: none;
   -webkit-user-select: none; user-select: none;
@@ -25,7 +27,7 @@ html, body {
   max-width: 480px; margin: 0 auto;
   padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   opacity: 0;
-  animation: fade-in 1s 4.5s ease-in-out forwards;
+  animation: var(--home-fade-in);
 }
 .nav img { width: 100%; height: auto; display: block; }
 .nav .slice { margin: 0; }
@@ -40,7 +42,7 @@ html, body {
   overflow-y: auto;
   overflow-x: hidden;   /* stops a wide carousel from making the whole page scroll sideways */
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 calc(env(safe-area-inset-bottom) + 160px);   /* bottom = room to scroll clear of the nav */
+  padding: 0 0 calc(env(safe-area-inset-bottom) + 60px);   /* bottom = room to scroll clear of the nav */
   max-width: 480px;
   margin: 0 auto;
 }
@@ -61,22 +63,23 @@ html, body {
 .hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }
 
 /* ---- home ---- */
-.home { position: relative; padding-top: calc(env(safe-area-inset-top) + 24px); }
+.view { position: relative; padding-top: calc(env(safe-area-inset-top) + 52px); }
 /* TEMP: current home slices were exported at the padded width, so keep the side margins.
    After re-exporting them full screen width, change this to:  margin: 30px 0; */
-.home .slice { margin: 30px var(--pad); }
+.home .slice { margin: 0px var(--pad) 30px; }
 .home .slice.scroll { margin: 30px 0 0 30px; }
 .greeting {
   font-size: 22px; font-weight: 600; letter-spacing: -0.03em;
-  margin: 30px 0 60px;
+  margin: 0px 0 60px;
   padding: 0 var(--pad);
 }
 
 /* ---- intro animation ---- */
 .home.intro {
-  opacity: 0;
   pointer-events: none;
-  animation: fade-in 1s 4.5s ease-in-out forwards;
+  animation: var(--home-fade-in);
+  opacity: 0;  
+/*  animation: fade-in 1s 4.5s ease-in-out forwards;*/
 }
 .ring { position: fixed; height: 100vh; }
 .ring-0 {
