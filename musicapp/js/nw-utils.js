@@ -8,6 +8,7 @@
    Toggles:   <div data-toggle="artist-tortoise"> ... </div>   (adds/removes class "on")
               NW.picked()  -> array of ids currently on
               $(document).on('nw:change', function () { ...redraw avatar stack... });
+   Tabs:      <a class="hot" data-tab="home"> jumps to a screen and clears the back history
    Reset:     long-press 1s on any [data-reset] element, or open the page with ?reset
               $(document).on('nw:reset', function () { ... });
 */
@@ -31,12 +32,15 @@ $(function () {
   NW.picked = function () { return NW.state.picked.slice(); };
 
   /* screens */
-  function show(name) {
+  var current = null, scrollAt = {};
+  function show(name, restore) {
     var $target = $('[data-screen="' + name + '"]');
     if (!$target.length) { console.warn('NW: no screen named "' + name + '"'); return; }
+    if (current) scrollAt[current] = $('.app').scrollTop();
     $('[data-screen]').prop('hidden', true);
     $target.prop('hidden', false);
-    $('.app').scrollTop(0);
+    $('.app').scrollTop(restore ? (scrollAt[name] || 0) : 0);
+    current = name;
   }
 
   NW.go = function (name) {
@@ -45,13 +49,21 @@ $(function () {
     show(name);
   };
 
-  /* tap areas: data-go="screen-name" goes there, data-back goes back */
+  /* tap areas: data-go="screen-name" goes there, data-back goes back,
+     data-tab="screen-name" jumps there and clears the history (for the nav tabs) */
   $doc.on('click', '[data-go]', function () { NW.go($(this).data('go')); });
   $doc.on('click', '[data-back]', function () { NW.back(); });
+  $doc.on('click', '[data-tab]', function () { NW.tab($(this).data('tab')); });
+
+  NW.tab = function (name) {
+    if (!$('[data-screen="' + name + '"]').length) { console.warn('NW: no screen named "' + name + '"'); return; }
+    stack = [name];
+    show(name, true);
+  };
 
   NW.back = function () {
     if (stack.length > 1) stack.pop();
-    show(stack[stack.length - 1]);
+    show(stack[stack.length - 1], true);
   };
 
   /* toggles */
