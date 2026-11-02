@@ -21,6 +21,20 @@ $(function () {
   /* VIEWPORT READOUT (debug): small green box top-right showing the numbers iOS reports, so you can screenshot them.
      If "gap" is not 0 in the home-screen app, iOS sized the layout short (see notes). Set DEBUG_VIEWPORT = false when done. */
   var DEBUG_VIEWPORT = true;
+
+  /* STANDALONE HEIGHT FIX: in the iOS home-screen app, give the page a minimum height equal to the real screen height.
+     Right after this was added, the bottom gap went away (layout 852 instead of 793). Harmless in Safari and on desktop. */
+  function fitHeight() {
+    if (!window.navigator.standalone) return;
+    var portrait = window.innerHeight >= window.innerWidth;
+    var H = portrait ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+    document.documentElement.style.minHeight = H + 'px';
+    document.body.style.minHeight = H + 'px';
+  }
+  fitHeight();
+  $(window).on('resize orientationchange pageshow', fitHeight);
+  document.addEventListener('visibilitychange', fitHeight);
+
   function fitGap() {
     if (!DEBUG_VIEWPORT) return;
     var sa = !!window.navigator.standalone;
@@ -35,7 +49,7 @@ $(function () {
   /* PROBES (debug): colored bars that show which kinds of positioning can paint in the strip at the bottom.
      A red = fixed, bottom:0   B blue = fixed, placed at the screen's bottom edge   C green = absolute, placed at the screen's bottom edge
      right-edge bars: magenta = 100lvh tall, cyan = 100dvh, orange = 100svh. Screenshot the phone and send it over. Remove with DEBUG_PROBES = false. */
-  var DEBUG_PROBES = true;
+  var DEBUG_PROBES = false;
   function probes() {
     if (!DEBUG_PROBES || $('#vp-probes').length) return;
     var H = Math.max(screen.width, screen.height);
@@ -49,7 +63,6 @@ $(function () {
     $w.append(bar('', 'position:fixed;top:0;right:0;width:5px;height:100lvh;', 'magenta'));
     $w.append(bar('', 'position:fixed;top:0;right:8px;width:5px;height:100dvh;', 'cyan'));
     $w.append(bar('', 'position:fixed;top:0;right:16px;width:5px;height:100svh;', 'orange'));
-    document.body.style.minHeight = H + 'px';   /* lets probe C sit inside the document */
   }
   fitGap();
   $(window).on('resize orientationchange pageshow', fitGap);
