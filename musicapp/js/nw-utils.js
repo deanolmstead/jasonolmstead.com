@@ -20,7 +20,7 @@ $(function () {
 
   /* VIEWPORT READOUT (debug): small green box top-right showing the numbers iOS reports, so you can screenshot them.
      If "gap" is not 0 in the home-screen app, iOS sized the layout short (see notes). Set DEBUG_VIEWPORT = false when done. */
-  var DEBUG_VIEWPORT = true;
+  var DEBUG_VIEWPORT = false;
 
   /* STANDALONE HEIGHT FIX: in the iOS home-screen app, give the page a minimum height equal to the real screen height.
      Right after this was added, the bottom gap went away (layout 852 instead of 793). Harmless in Safari and on desktop. */

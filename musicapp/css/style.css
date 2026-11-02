@@ -6,6 +6,7 @@
   --pill: #454950;
   --pad: 20px;
   --home-fade-in: fade-in 1s 3.5s ease-in-out forwards; 
+  --top: calc(env(safe-area-inset-top) + 70px);
 }
 [hidden] { display: none !important; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -108,7 +109,9 @@ h3 {
 /* ---- home ---- */
 .view {
   position: relative;
-  padding-top: calc(env(safe-area-inset-top) + 10px);
+  padding-top: var(--top);
+  padding-bottom: 22%;
+
 }
 /* TEMP: current home slices were exported at the padded width, so keep the side margins.
    After re-exporting them full screen width, change this to:  margin: 30px 0; */
@@ -133,9 +136,6 @@ h3 {
 .library .slice,
 .discovery .slice {
   padding: 0 20px;
-}
-.home .slice:last-of-type {
-    padding-bottom: 22%;
 }
 .slice .section-discovery-rings {
   position: absolute;
