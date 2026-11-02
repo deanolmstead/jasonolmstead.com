@@ -20,46 +20,52 @@
 </head>
 <body>
   <main class="app no-scrollbar">
+    <img src="img/bg_splash.jpg" class="bg-fixed" alt="">
     <section class="splash" aria-hidden="true">
-      
         <img src="img/01_ring_0_splash.png" class="ring ring-0" alt="">
         <img src="img/01_ring_1_splash.png" class="ring ring-1" alt="">
         <img src="img/01_ring_2_splash.png" class="ring ring-2" alt="">
         <img src="img/01_ring_3_splash.png" class="ring ring-3" alt="">
-      
     </section>
     
     <section data-screen="home" class="view home intro" hidden>
-
+      <img src="img/bg_default.jpg" class="bg-fixed" alt="">
       <div class="slice">
-        <img src="img/section_greeting.png" alt="">
+        <img src="img/section_discovery_rings.png" class="section-discovery-rings" alt="">
+        <img src="img/section_discovery.png" alt="">
+        <a class="hot" data-go="discovery" style="top: 70%;width: 40%;height: 10%;left: 30%;"></a>
       </div>
+      <!-- CAROUSEL: data-carousel makes this slice swipe left/right. The image must be exported wider than the
+           screen (extra cards off to the right). Optional: data-card="N" snaps to every N pt (card width + gap). -->
       <div class="slice">
-        <img src="img/section_discover.png" alt="">
-        <a class="hot" data-go="discover-artists" style="right: -20px; top: 152px; width: 220px; height: 50px;"></a>
+        <img src="img/section_header_stations.png" alt="">
       </div>
-      <div class="slice scroll">
+      <div class="slice scroll-stations" data-carousel>
         <img src="img/section_stations.png" alt="">
       </div>
       <div class="slice">
         <img src="img/section_samelabel.png" alt="">
       </div>
-      <div class="slice scroll">
+      <!-- <div class="slice" data-carousel>
         <img src="img/section_mixtapes.png" alt="">
-      </div>      
-      <div class="slice scroll">
+      </div> -->
+      <div class="slice">
+        <img src="img/section_header_thread.png" alt="">
+      </div>
+      <div class="slice" data-carousel>
         <img src="img/section_thread.png" alt="">
       </div>
-      <div class="slice scroll">
+      <div class="slice">
         <img src="img/section_spinning.png" alt="">
       </div>
 
     </section>
 
-    <section data-screen="discover-artists" class="view discover-artists" hidden>
+    <section data-screen="discovery" class="view discovery" hidden>
+      <img src="img/bg_discovery.jpg" class="bg-fixed" alt="">
       <div class="slice scroll">
         <img src="img/view_artists.png" alt="">
-        <a class="hot" data-back="home" style="left: 10px;top: 50px;width: 55px;height: 55px;"></a>
+        <a class="hot" data-back="home" data-tab="home" style="left: 1%;bottom: 11%;width: 25%;height: 80%;"></a>
       </div>
     </section>
 
@@ -68,8 +74,9 @@
   <nav class="nav">
     <div class="slice">
       <img src="img/nav_mobile.png" class="nav-mobile" alt="">
-      <a class="hot" data-tab="home" style="left: 2%;bottom: 10%;width: 112px;height: 52px;"></a>
-      <a class="hot" data-tab="library" style="left: 28%;bottom: 10%;width: 112px;height: 52px;"></a>
+      <a class="hot" data-tab="home" style="left: 1%;bottom: 11%;width: 26%;height: 80%;"></a>
+      <a class="hot" data-tab="library" style="left: 27%;bottom: 11%;width: 26%;height: 80%;"></a>
+      <a class="hot" data-tab="discovery" style="left: 54%;bottom: 11%;width: 26%;height: 80%;"></a>      
     </div>
   </nav>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

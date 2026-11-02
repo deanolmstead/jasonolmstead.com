@@ -37,9 +37,11 @@ $(function () {
     var $target = $('[data-screen="' + name + '"]');
     if (!$target.length) { console.warn('NW: no screen named "' + name + '"'); return; }
     if (current) scrollAt[current] = $('.app').scrollTop();
+    if (current) $('[data-screen="' + current + '"] [data-carousel]').each(function () { $(this).data('nwLeft', this.scrollLeft); }); /* CAROUSEL: remember sideways position */
     $('[data-screen]').prop('hidden', true);
     $target.prop('hidden', false);
     $('.app').scrollTop(restore ? (scrollAt[name] || 0) : 0);
+    $target.find('[data-carousel]').each(function () { this.scrollLeft = restore ? ($(this).data('nwLeft') || 0) : 0; }); /* CAROUSEL */
     current = name;
   }
 
@@ -109,6 +111,37 @@ $(function () {
     show(HOME);
     paint();
   }
+
+  /* carousels (CAROUSEL): <div class="slice" data-carousel> scrolls sideways when its image is wider than the screen.
+     Sizing uses your 2x artboard: an image 786 px wide fills the screen; 1572 px wide is two screens, etc.
+     Optional data-card="300" snaps to every 300 pt (card width + gap). */
+  var ARTBOARD = 786;   /* px width of one screen in your exports (393 pt at 2x) */
+  $('.slice[data-carousel]').each(function () {
+    var $slice = $(this);
+    var img = $slice.find('img').get(0);
+    if (!img) return;
+    var $strip = $('<div class="strip"></div>');
+    $slice.wrapInner($strip);
+    $strip = $slice.children('.strip');
+    function size() {
+      var ratio = Math.max(1, img.naturalWidth / ARTBOARD);
+      $strip.css('--strip', ratio);
+      var card = parseFloat($slice.attr('data-card'));
+      $strip.children('.snap').remove();
+      $slice.removeClass('snaps');
+      if (card > 0 && ratio > 1) {
+        var total = ratio * 393;   /* strip width in pt */
+        var end = total - 393, xs = [];
+        for (var x = 0; x < end; x += card) xs.push(x);
+        xs.push(end);   /* last stop = the very end, so the final card is reachable */
+        $.each(xs, function (i, x) {
+          $('<i class="snap"></i>').css('left', (x / total * 100) + '%').appendTo($strip);
+        });
+        $slice.addClass('snaps');
+      }
+    }
+    if (img.complete && img.naturalWidth) size(); else $(img).one('load', size);
+  });
 
   /* intro: plays once, then gets out of the way */
   $('.splash').on('animationend', function (e) {

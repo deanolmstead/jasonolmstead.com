@@ -5,7 +5,7 @@
   --muted: #9a9da3;
   --pill: #454950;
   --pad: 20px;
-  --home-fade-in: fade-in 1s 4.5s ease-in-out forwards;
+  --home-fade-in: fade-in 1s 3.5s ease-in-out forwards; 
 }
 [hidden] { display: none !important; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -13,8 +13,6 @@ html, body {
   margin: 0;
   height: 100vh;
   height: 100dvh;
-  background: var(--bg);
-  background-image: url('../img/01_bg_splash.jpg');
   color: var(--text);
   font-family: 'Outfit', system-ui, sans-serif;
   overscroll-behavior: none;
@@ -42,7 +40,7 @@ html, body {
   overflow-y: auto;
   overflow-x: hidden;   /* stops a wide carousel from making the whole page scroll sideways */
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 calc(env(safe-area-inset-bottom) + 60px);   /* bottom = room to scroll clear of the nav */
+/*  padding: 0 0 calc(env(safe-area-inset-bottom) + 60px);*/   /* bottom = room to scroll clear of the nav */
   max-width: 480px;
   margin: 0 auto;
 }
@@ -59,51 +57,86 @@ html, body {
 .slice img { width: 100%; height: auto; display: block; }
 .hot { position: absolute; display: block; }
 
+/* ---- carousels (CAROUSEL) ----
+   <div class="slice" data-carousel> becomes a horizontal scroller (native momentum + rubber-band).
+   nw-utils.js wraps its contents in .strip, sized from the image's real width, so hot areas
+   stay % of the full strip. If the image isn't wider than the screen it just sits still.
+   Add data-card="N" (pt between card starts) for snapping. */
+.slice[data-carousel] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;   /* no Safari back-swipe at the edges */
+  scrollbar-width: none;
+}
+.slice[data-carousel]::-webkit-scrollbar { display: none; }
+.slice[data-carousel].snaps { scroll-snap-type: x mandatory; }
+.slice[data-carousel] .strip { position: relative; width: calc(var(--strip, 1) * 100%); }
+.slice[data-carousel] .strip img { -webkit-user-drag: none; -webkit-touch-callout: none; }
+.slice[data-carousel] .snap { position: absolute; top: 0; bottom: 0; width: 1px; scroll-snap-align: start; scroll-snap-stop: always; pointer-events: none; }
+
 /* DEBUG: show tap areas. Delete or comment out before sharing with friends. */
 .hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }
 
 /* ---- home ---- */
-.view { position: relative; padding-top: calc(env(safe-area-inset-top) + 52px); }
+/*.view { position: relative; padding-top: calc(env(safe-area-inset-top) + 52px); }*/
 /* TEMP: current home slices were exported at the padded width, so keep the side margins.
    After re-exporting them full screen width, change this to:  margin: 30px 0; */
-.home .slice { margin: 0px var(--pad) 30px; }
-.home .slice.scroll { margin: 30px 0 0 30px; }
+/*.home .slice { margin: 0px var(--pad) 30px; }
+.home .slice.scroll { margin: 30px 0 0 30px; }*/
 .greeting {
   font-size: 22px; font-weight: 600; letter-spacing: -0.03em;
   margin: 0px 0 60px;
   padding: 0 var(--pad);
 }
+.bg-fixed {
+  background-image: url('../img/bg_default.jpg');
+  width: 100vw;
+  height: 100vh;  
+  position: fixed;
+}
+.home .slice {
+  padding: 0 20px;
+}
+.slice .section-discovery-rings {
+  position: absolute;
+  mix-blend-mode: screen;
+  width: 88vw;
+}
+.scroll-stations {
+  max-width: 1310px;
+}
+.slice.scroll-stations[data-carousel] .strip { max-width: 1310px; }
 
 /* ---- intro animation ---- */
 .home.intro {
   pointer-events: none;
   animation: var(--home-fade-in);
   opacity: 0;  
-/*  animation: fade-in 1s 4.5s ease-in-out forwards;*/
 }
 .ring { position: fixed; height: 100vh; }
 .ring-0 {
   opacity: 0;
-  animation: fade-in 1s .7s ease-in-out forwards;
+  animation: fade-in 1s .5s ease-in-out forwards;
   z-index: 3;
 }
 .ring-1 {
   opacity: 0;
-  animation: fade-in 1s .9s ease-in-out forwards;
+  animation: fade-in 1s .7s ease-in-out forwards;
   z-index: 2;
 }
 .ring-2 {
   opacity: 0;
-  animation: fade-in 1s 1.1s ease-in-out forwards;
+  animation: fade-in 1s .9s ease-in-out forwards;
   z-index: 1;
 }
 .ring-3 {
   opacity: 0;
-  animation: fade-in 1s 1.3s ease-in-out forwards;
+  animation: fade-in 1s 1.1s ease-in-out forwards;
   z-index: 0;
 }
 .splash {
-  animation: fade-out 1s 4s ease-in-out forwards;
+  animation: fade-out 1s 3s ease-in-out forwards;
   position: absolute;
   top: 0;
   left: 0;
