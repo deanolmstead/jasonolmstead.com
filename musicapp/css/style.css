@@ -47,7 +47,7 @@ h3 {
 }
 /* ---- nav ---- */
 .nav {
-  position: fixed; left: 0; right: 0; bottom: calc(0px - var(--gap, 0px));   /* GAP FIX: --gap is set by nw-utils.js */
+  position: fixed; left: 0; right: 0; bottom: 0;
   max-width: 480px; margin: 0 auto;
   padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   opacity: 0;
@@ -61,11 +61,9 @@ h3 {
    Opt in to side spacing with .pad (text) or .inset (slices).
    Top spacing belongs to each screen (see .home). */
 .app {
-  /* GAP FIX: pinned to the edges (not 100vh/100dvh). --gap is the height iOS leaves uncovered at the bottom in the
-     home-screen app; nw-utils.js measures it. It is 0 everywhere else, so this is a normal full-screen box. */
+  /* pinned to the screen edges instead of using a vh/dvh height */
   position: fixed;
-  top: 0; left: 0; right: 0;
-  bottom: calc(0px - var(--gap, 0px));
+  top: 0; left: 0; right: 0; bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;   /* stops a wide carousel from making the whole page scroll sideways */
   -webkit-overflow-scrolling: touch;
@@ -125,7 +123,7 @@ h3 {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
-  height: calc(100% + var(--gap, 0px));
+  height: 100%;
   object-fit: cover;
   object-position: center top;
   pointer-events: none;

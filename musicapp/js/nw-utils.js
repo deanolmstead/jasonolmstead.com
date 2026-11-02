@@ -18,23 +18,16 @@ $(function () {
   var stack = [HOME];
   var $doc = $(document);
 
-  /* VIEWPORT GAP FIX: in the iOS home-screen app the layout can come out shorter than the screen (about the height of the
-     status bar). Measure it and expose it to CSS as --gap. Zero in Safari and on desktop.
-     DEBUG_VIEWPORT shows a small green readout top-right so you can read the numbers off the phone; set it to false when done. */
+  /* VIEWPORT READOUT (debug): small green box top-right showing the numbers iOS reports, so you can screenshot them.
+     If "gap" is not 0 in the home-screen app, iOS sized the layout short (see notes). Set DEBUG_VIEWPORT = false when done. */
   var DEBUG_VIEWPORT = true;
   function fitGap() {
-    var gap = 0, sa = !!window.navigator.standalone;
-    if (sa) {
-      var portrait = window.innerHeight >= window.innerWidth;
-      var full = portrait ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
-      gap = Math.min(100, Math.max(0, Math.round(full - window.innerHeight)));
-    }
-    document.documentElement.style.setProperty('--gap', gap + 'px');
-    if (DEBUG_VIEWPORT) {
-      var $d = $('#vp-debug');
-      if (!$d.length) $d = $('<div id="vp-debug"></div>').attr('style', 'position:fixed;top:calc(env(safe-area-inset-top) + 2px);right:6px;z-index:99999;font:10px/1.3 monospace;color:#0f0;background:rgba(0,0,0,.6);padding:3px 5px;border-radius:4px;pointer-events:none').appendTo('body');
-      $d.html('inner ' + window.innerWidth + 'x' + window.innerHeight + '<br>screen ' + screen.width + 'x' + screen.height + '<br>gap ' + gap + ' standalone ' + sa);
-    }
+    if (!DEBUG_VIEWPORT) return;
+    var sa = !!window.navigator.standalone;
+    var gap = sa ? Math.round(Math.max(screen.width, screen.height) - window.innerHeight) : 0;
+    var $d = $('#vp-debug');
+    if (!$d.length) $d = $('<div id="vp-debug"></div>').attr('style', 'position:fixed;top:calc(env(safe-area-inset-top) + 2px);right:6px;z-index:99999;font:10px/1.3 monospace;color:#0f0;background:rgba(0,0,0,.6);padding:3px 5px;border-radius:4px;pointer-events:none').appendTo('body');
+    $d.html('inner ' + window.innerWidth + 'x' + window.innerHeight + '<br>screen ' + screen.width + 'x' + screen.height + '<br>gap ' + gap + ' standalone ' + sa);
   }
   fitGap();
   $(window).on('resize orientationchange pageshow', fitGap);
