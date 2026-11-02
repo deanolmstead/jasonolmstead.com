@@ -34,11 +34,11 @@ $(function () {
   /* screens */
   var current = null, scrollAt = {};
   function show(name, restore) {
+    $('[data-screen="' + name + '"] [data-carousel]').each(function () { this.scrollLeft = 0; });$('[data-screen]').prop('hidden', true);
     var $target = $('[data-screen="' + name + '"]');
     if (!$target.length) { console.warn('NW: no screen named "' + name + '"'); return; }
     if (current) scrollAt[current] = $('.app').scrollTop();
-    if (current) $('[data-screen="' + current + '"] [data-carousel]').each(function () { $(this).data('nwLeft', this.scrollLeft); }); /* CAROUSEL: remember sideways position */
-    $('[data-screen]').prop('hidden', true);
+    if (current) $('[data-screen="' + current + '"] [data-carousel]').each(function () { $(this).data('nwLeft', this.scrollLeft); }); /* CAROUSEL: remember sideways position */    
     $target.prop('hidden', false);
     $('.app').scrollTop(restore ? (scrollAt[name] || 0) : 0);
     $target.find('[data-carousel]').each(function () { this.scrollLeft = restore ? ($(this).data('nwLeft') || 0) : 0; }); /* CAROUSEL */

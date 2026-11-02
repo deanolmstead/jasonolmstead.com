@@ -19,6 +19,33 @@ html, body {
   -webkit-user-select: none; user-select: none;
 }
 
+/* ---- headers ---- */
+h1 {
+    font-size: 26px;
+    line-height: 26px;
+    font-weight: 700;    
+    letter-spacing: -1px;
+    text-transform: lowercase;
+}
+h3 {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .5);
+    margin: 0;
+}
+
+/* ---- section headers ---- */
+.section-header {
+    margin-top: 30px;
+}
+.section-header h1 {
+    margin: 2px 0 20px 14px;    
+}
+.section-header:first-of-type {
+    margin-top: 0;
+}
 /* ---- nav ---- */
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0;
@@ -95,8 +122,13 @@ html, body {
   height: 100vh;  
   position: fixed;
 }
-.home .slice {
+.home .slice,
+.library .slice,
+.discovery .slice {
   padding: 0 20px;
+}
+.home .slice:last-of-type {
+    padding-bottom: 22%;
 }
 .slice .section-discovery-rings {
   position: absolute;
@@ -107,6 +139,7 @@ html, body {
   max-width: 1310px;
 }
 .slice.scroll-stations[data-carousel] .strip { max-width: 1310px; }
+.slice.scroll-spinning[data-carousel] .strip { max-width: 620px; }
 
 /* ---- intro animation ---- */
 .home.intro {
@@ -155,3 +188,5 @@ html, body {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
+/* ---- intro animation ---- */
+.rings-all { margin-top: 10%; }
