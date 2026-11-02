@@ -117,7 +117,7 @@ h3 {
   padding: 0 var(--pad);
 }
 .bg-fixed {
-  background-image: url('../img/bg_default.jpg');
+  background: url('../img/bg_default.jpg') center top / cover no-repeat; 
   width: 100vw;
   height: 100vh;  
   position: fixed;
