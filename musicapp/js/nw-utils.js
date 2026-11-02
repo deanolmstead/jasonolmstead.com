@@ -27,7 +27,29 @@ $(function () {
     var gap = sa ? Math.round(Math.max(screen.width, screen.height) - window.innerHeight) : 0;
     var $d = $('#vp-debug');
     if (!$d.length) $d = $('<div id="vp-debug"></div>').attr('style', 'position:fixed;top:calc(env(safe-area-inset-top) + 2px);right:6px;z-index:99999;font:10px/1.3 monospace;color:#0f0;background:rgba(0,0,0,.6);padding:3px 5px;border-radius:4px;pointer-events:none').appendTo('body');
-    $d.html('inner ' + window.innerWidth + 'x' + window.innerHeight + '<br>screen ' + screen.width + 'x' + screen.height + '<br>gap ' + gap + ' standalone ' + sa);
+    var vv = window.visualViewport ? Math.round(window.visualViewport.height) : '-';
+    $d.html('inner ' + window.innerWidth + 'x' + window.innerHeight + '<br>screen ' + screen.width + 'x' + screen.height + '<br>visual ' + vv + ' client ' + document.documentElement.clientHeight + '<br>gap ' + gap + ' standalone ' + sa);
+    probes();
+  }
+
+  /* PROBES (debug): colored bars that show which kinds of positioning can paint in the strip at the bottom.
+     A red = fixed, bottom:0   B blue = fixed, placed at the screen's bottom edge   C green = absolute, placed at the screen's bottom edge
+     right-edge bars: magenta = 100lvh tall, cyan = 100dvh, orange = 100svh. Screenshot the phone and send it over. Remove with DEBUG_PROBES = false. */
+  var DEBUG_PROBES = true;
+  function probes() {
+    if (!DEBUG_PROBES || $('#vp-probes').length) return;
+    var H = Math.max(screen.width, screen.height);
+    function bar(label, style, bg) {
+      return $('<div></div>').attr('style', 'z-index:99998;pointer-events:none;font:9px/14px monospace;color:#000;overflow:hidden;white-space:nowrap;' + style + 'background:' + bg).text(label);
+    }
+    var $w = $('<div id="vp-probes"></div>').appendTo('body');
+    $w.append(bar('A fixed bottom:0', 'position:fixed;left:0;width:30%;bottom:0;height:14px;', '#f55'));
+    $w.append(bar('C abs top:' + (H - 14), 'position:absolute;left:35%;width:30%;top:' + (H - 14) + 'px;height:14px;', '#5d5'));
+    $w.append(bar('B fixed top:' + (H - 14), 'position:fixed;left:70%;width:30%;top:' + (H - 14) + 'px;height:14px;', '#59f'));
+    $w.append(bar('', 'position:fixed;top:0;right:0;width:5px;height:100lvh;', 'magenta'));
+    $w.append(bar('', 'position:fixed;top:0;right:8px;width:5px;height:100dvh;', 'cyan'));
+    $w.append(bar('', 'position:fixed;top:0;right:16px;width:5px;height:100svh;', 'orange'));
+    document.body.style.minHeight = H + 'px';   /* lets probe C sit inside the document */
   }
   fitGap();
   $(window).on('resize orientationchange pageshow', fitGap);
