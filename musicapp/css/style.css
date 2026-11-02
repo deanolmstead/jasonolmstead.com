@@ -11,13 +11,13 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body {
   margin: 0;
-  height: 100vh;
-  height: 100dvh;
   color: var(--text);
   font-family: 'Outfit', system-ui, sans-serif;
   overscroll-behavior: none;
   -webkit-user-select: none; user-select: none;
 }
+html { height: 100%; background: #2b2f36; }
+body { min-height: 100%; }
 /* ---- headers ---- */
 h1 {
     font-size: 26px;
@@ -47,7 +47,7 @@ h3 {
 }
 /* ---- nav ---- */
 .nav {
-  position: fixed; left: 0; right: 0; bottom: 0;
+  position: fixed; left: 0; right: 0; bottom: calc(0px - var(--gap, 0px));   /* GAP FIX: --gap is set by nw-utils.js */
   max-width: 480px; margin: 0 auto;
   padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   opacity: 0;
@@ -61,8 +61,11 @@ h3 {
    Opt in to side spacing with .pad (text) or .inset (slices).
    Top spacing belongs to each screen (see .home). */
 .app {
-  height: 100vh;
-  height: 100dvh;
+  /* GAP FIX: pinned to the edges (not 100vh/100dvh). --gap is the height iOS leaves uncovered at the bottom in the
+     home-screen app; nw-utils.js measures it. It is 0 everywhere else, so this is a normal full-screen box. */
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  bottom: calc(0px - var(--gap, 0px));
   overflow-y: auto;
   overflow-x: hidden;   /* stops a wide carousel from making the whole page scroll sideways */
   -webkit-overflow-scrolling: touch;
@@ -119,12 +122,13 @@ h3 {
   padding: 0 var(--pad);
 }
 .bg-fixed {
-  background: url('../img/bg_default.jpg') center top / cover no-repeat;
   position: fixed;
-  top: 0; left: 0; right: 0;
-  bottom: calc(0px - var(--gap, 0px));
-  height: 100vh;
-  width: 100vw;  
+  top: 0; left: 0;
+  width: 100%;
+  height: calc(100% + var(--gap, 0px));
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
   z-index: -1;
 }
 .home .slice,
