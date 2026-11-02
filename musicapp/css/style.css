@@ -195,5 +195,6 @@ h3 {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
-/* ---- intro animation ---- */
+/* ---- library ---- */
 .rings-all { margin-top: 10%; }
+.library-spinning { width: 75% }
