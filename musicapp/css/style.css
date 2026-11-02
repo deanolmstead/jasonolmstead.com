@@ -6,7 +6,7 @@
   --pill: #454950;
   --pad: 20px;
   --home-fade-in: fade-in 1s 3.5s ease-in-out forwards; 
-  --top: calc(env(safe-area-inset-top) + 70px);
+  --top: calc(env(safe-area-inset-top) + 10px);
 }
 [hidden] { display: none !important; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
