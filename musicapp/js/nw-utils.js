@@ -93,6 +93,7 @@ $(function () {
     $target.prop('hidden', false);
     $('.app').scrollTop(restore ? (scrollAt[name] || 0) : 0);
     $target.find('[data-carousel]').each(function () { this.scrollLeft = restore ? ($(this).data('nwLeft') || 0) : 0; }); /* CAROUSEL */
+    $target.find('[data-carousel]').trigger('nw:pips');   /* PIPS: refresh the dots after the position is restored */
     current = name;
     document.body.setAttribute('data-view', stack[0]);   /* parent tab: home, library or discovery */
     document.body.setAttribute('data-page', name);       /* the exact screen you're on */    
@@ -194,6 +195,24 @@ $(function () {
       }
     }
     if (img.complete && img.naturalWidth) size(); else $(img).one('load', size);
+  });
+
+  /* PIPS: a .section-header with a .pips row drives the carousel that comes right after it. The active pip is picked from how
+     far that carousel has scrolled (start = first pip, end = last pip), so it works for any card widths. One <i> per card.
+     Markup: <div class="slice section-header"> ... <div class="pips"><i class="on"></i><i></i>...</div> ... </div>
+             <div class="slice" data-carousel> ... </div> */
+  $('.section-header').each(function () {
+    var $pips = $(this).find('.pips i');
+    var $car = $(this).nextAll('[data-carousel]').first();
+    if (!$pips.length || !$car.length) return;
+    function update() {
+      var el = $car.get(0), max = el.scrollWidth - el.clientWidth;
+      var i = max > 0 ? Math.round(el.scrollLeft / max * ($pips.length - 1)) : 0;
+      $pips.removeClass('on').eq(i).addClass('on');
+    }
+    $car.on('scroll nw:pips', update);          /* nw:pips is fired by show() when a screen comes back */
+    $car.find('img').one('load', update);       /* strip width is known once the image has loaded */
+    update();
   });
 
   /* intro: plays once, then gets out of the way */
