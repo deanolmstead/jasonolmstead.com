@@ -38,15 +38,32 @@
       <!-- CAROUSEL: data-carousel makes this slice swipe left/right. The image must be exported wider than the
            screen (extra cards off to the right). Optional: data-card="N" snaps to every N pt (card width + gap). -->
       <div class="slice section-header">
-        <h3>Connected</h3>
-        <h1>Deep Cuts</h1>
+        <div class="section-title">        
+          <h3>Connected</h3>
+          <h1>Deep Cuts</h1>
+        </div>
+        <div class="section-actions">
+          <div class="section-actions">
+          <div class="pips">
+            <i class="on"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        </div>
       </div>
       <div class="slice scroll-stations" data-carousel>
         <img src="img/section_stations.png" alt="">
       </div>
       <div class="slice section-header">
-        <h3>Same Label</h3>
-        <h1>Same Era</h1>
+        <div class="section-title">        
+          <h3>Same Label</h3>
+          <h1>Same Era</h1>
+        </div>
+        <div class="section-actions">
+        </div>
+      </div>        
       </div>      
       <div class="slice">
         <img src="img/section_samelabel.png" alt="">
@@ -55,20 +72,36 @@
         <img src="img/section_mixtapes.png" alt="">
       </div> -->
       <div class="slice section-header">
-        <h3>Pulling</h3>
-        <h1>The Thread</h1>
+        <div class="section-title">        
+          <h3>Pulling</h3>
+          <h1>The Thread</h1>
+        </div>
+        <div class="section-actions">
+          <div class="pips">
+            <i class="on"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+      </div>        
       </div>
       <div class="slice" data-carousel>
         <img src="img/section_thread.png" alt="">
       </div>
       <div class="slice section-header">
-        <h3>What You've</h3>
-        <h1>Been Spinning</h1>
-      </div>      
+          <div class="section-title">
+            <h3>What You've</h3>
+            <h1>Been Spinning</h1>
+          </div>
+          <div class="section-actions">
+            <img src="icons/icon_play.png" class="icon" alt="">         
+          </div>
+      </div>   
       <div class="slice scroll-spinning" data-carousel>
         <img src="img/section_spinning.png" alt="">
       </div>
-
+      </div>
     </section>
 
     <section data-screen="library" class="view library" hidden>
@@ -77,15 +110,31 @@
         <img src="img/section_library_top.png" alt="">        
       </div>      
       <div class="slice section-header">
-        <h3>What's On</h3>
-        <h1>Heavy Rotation</h1>
+        <div class="section-title">
+          <h3>What's On</h3>
+          <h1>Heavy Rotation</h1>
+        </div>
+        <div class="section-actions">
+          <div class="pips">
+            <i class="on"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>        
       </div>      
       <div class="slice scroll-stations" data-carousel>
         <img src="img/section_stations.png" alt="">
       </div>      
       <div class="slice section-header">
-        <h3>What You've</h3>
-        <h1>Been Spinning</h1>
+        <div class="section-title">        
+          <h3>What You've</h3>
+          <h1>Been Spinning</h1>
+        </div>
+        <div class="section-actions">
+          <img src="icons/icon_sort.png" class="icon" alt="">
+          <img src="icons/icon_filter.png" class="icon" alt="">         
+        </div>        
       </div>
       <div class="slice">
         <img src="img/section_library_spinning.png" alt="">
@@ -103,15 +152,33 @@
     </section>
 
   </main>
-
   <nav class="nav">
+    <div class="nav-pill">
+      <a data-tab="home">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M3 11.5 12 3l9 8.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Home</span>
+      </a>
+      <a data-tab="library">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16.2 5.6l3.9.9-3.3 13.9-3.9-.9z"/></svg>
+        <span>Library</span>
+      </a>
+      <a data-tab="discovery">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="10"/></svg>
+        <span>Discovery</span>
+      </a>
+    </div>
+    <a class="nav-search" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+    </a>
+  </nav>
+<!--   <nav class="nav">
     <div class="slice">
       <img src="img/nav_mobile.png" class="nav-mobile" alt="">
       <a class="hot" data-tab="home" style="left: 1%;bottom: 11%;width: 26%;height: 80%;"></a>
       <a class="hot" data-tab="library" style="left: 27%;bottom: 11%;width: 26%;height: 80%;"></a>
       <a class="hot" data-tab="discovery" style="left: 54%;bottom: 11%;width: 26%;height: 80%;"></a>      
     </div>
-  </nav>
+  </nav> -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/nw-utils.js"></script>
   <script src="js/hot-measure.js"></script>

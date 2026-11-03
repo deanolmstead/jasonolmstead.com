@@ -19,6 +19,10 @@ html, body {
 }
 html { height: 100%; background: #2b2f36; }
 body { min-height: 100%; }
+body[data-view="discovery"] .nav { /* nav tweaks for Discovery */ }
+body[data-view="library"] .section-header h3 { color: rgba(255,255,255,.7); }
+body[data-page="discovery"] .bg-fixed { /* only on the main Discovery screen */ }
+
 /* ---- headers ---- */
 h1 {
     font-size: 26px;
@@ -38,13 +42,33 @@ h3 {
 
 /* ---- section headers ---- */
 .section-header {
-    margin-top: 30px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.section-title {  
+  display: flex;  
+  flex-direction: column;
+}
+.section-actions {
+  display: flex;  
+  flex-direction: row;
 }
 .section-header h1 {
-    margin: 2px 0 20px 14px;    
+  margin: 2px 0 20px 14px;    
 }
 .section-header:first-of-type {
-    margin-top: 0;
+  margin-top: 0;
+}
+.section-header .icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;  
+}
+.section-header .icon:last-of-type {
+  width: 40px;
+  height: 40px;
+  margin-right: 0;
 }
 /* ---- nav ---- */
 .nav {
@@ -53,9 +77,38 @@ h3 {
   padding: 0 12px max(calc(env(safe-area-inset-bottom) - 10px), 12px);
   opacity: 0;
   animation: var(--home-fade-in);
+  display: flex; align-items: center; gap: 12px;   /* tab pill + search button */
 }
-.nav img { width: 100%; height: auto; display: block; }
-.nav .slice { margin: 0; }
+
+/* live nav: tab pill + round search button. The selected tab follows body[data-view] (set in nw-utils.js). */
+.nav-pill {
+  flex: 1; min-width: 0; display: flex; padding: 6px; border-radius: 999px;
+  background: rgba(24, 26, 33, .95);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+}
+.nav-pill a {
+  flex: 1 1 auto; min-width: 0; padding: 0 12px; height: 44px; white-space: nowrap; border-radius: 999px;   /* sized by content, so the active tab grows when its icon appears */
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: rgba(255,255,255,.7); text-decoration: none;
+  font: 500 16px/1 'Outfit', system-ui, sans-serif;
+  transition: background .25s, color .25s;
+}
+.nav .ico { display: none; width: 22px; height: 22px; flex: none; }   /* icon only on the active tab */
+body[data-view="home"]      .nav [data-tab="home"],
+body[data-view="library"]   .nav [data-tab="library"],
+body[data-view="discovery"] .nav [data-tab="discovery"] {
+  background: rgba(255,255,255,.14); color: #fff;
+}
+body[data-view="home"]      .nav [data-tab="home"] .ico,
+body[data-view="library"]   .nav [data-tab="library"] .ico,
+body[data-view="discovery"] .nav [data-tab="discovery"] .ico { display: block; }
+.nav-search {
+  flex: none; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; color: #fff;
+  background: rgba(24, 26, 33, .78);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+}
+.nav-search svg { width: 24px; height: 24px; }
 
 /* ---- app (scroll container) ----
    No side padding here, so carousels and full-screen images can run edge to edge.
@@ -102,6 +155,13 @@ h3 {
 .slice[data-carousel] .strip { position: relative; width: calc(var(--strip, 1) * 100%); }
 .slice[data-carousel] .strip img { -webkit-user-drag: none; -webkit-touch-callout: none; }
 .slice[data-carousel] .snap { position: absolute; top: 0; bottom: 0; width: 1px; scroll-snap-align: start; scroll-snap-stop: always; pointer-events: none; }
+.pips { display: flex; align-items: center; gap: 10px; }
+.pips i {
+  width: 6px; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,.35);
+  transition: width .25s ease, background .25s ease;
+}
+.pips i.on { width: 20px; background: #fff; }
 
 /* DEBUG: show tap areas. Delete or comment out before sharing with friends. */
 .hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }

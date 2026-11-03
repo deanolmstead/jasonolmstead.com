@@ -94,6 +94,8 @@ $(function () {
     $('.app').scrollTop(restore ? (scrollAt[name] || 0) : 0);
     $target.find('[data-carousel]').each(function () { this.scrollLeft = restore ? ($(this).data('nwLeft') || 0) : 0; }); /* CAROUSEL */
     current = name;
+    document.body.setAttribute('data-view', stack[0]);   /* parent tab: home, library or discovery */
+    document.body.setAttribute('data-page', name);       /* the exact screen you're on */    
   }
 
   NW.go = function (name) {
