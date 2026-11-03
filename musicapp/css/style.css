@@ -164,7 +164,7 @@ body[data-view="discovery"] .nav [data-tab="discovery"] .ico { display: block; }
 .pips i.on { width: 20px; background: #fff; }
 
 /* DEBUG: show tap areas. Delete or comment out before sharing with friends. */
-.hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }
+/*.hot { outline: 2px solid #3b8bff; background: rgba(59,139,255,.15); }*/
 
 /* ---- home ---- */
 .view {
